@@ -1,0 +1,36 @@
+Vamos a tener 2 interfaces, la de usuario y la de colaborador
+
+--------------------USER-----------------------------------------------------------------
+
+Pagina principal:  
+    About, Login y register //estilo fb 
+
+User Interfaze:
+    -Lista de etiquetas
+    -menu que tenga:
+        configuracion
+            -metodos de pago y cerrar sesion
+        Ayuda
+            -preguntas frecuentes
+            -comunicate con nosotros
+            -otros 
+        Perfil
+            -correo 
+            -contraseña 
+            -foto 
+            -nombre y apellido
+    -etiquetas
+        colaboradores ordenados por estrellas
+            -fotos 
+            -estrellas 
+            -descripcion
+            -ir al perfil 
+            -contratar
+Contratacion:
+    -foto, nombre, estrellas
+    -Chat 
+    -Llamar
+    -Localizacion
+    -métodos de pago 
+    
+        
