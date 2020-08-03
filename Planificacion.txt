@@ -32,5 +32,9 @@ Contratacion:
     -Llamar
     -Localizacion
     -métodos de pago 
+
+--------------------------------------Colaborador--------------------------------------------------------
     
-        
+Pagina principal:
+    
+    
