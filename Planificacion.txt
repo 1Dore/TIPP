@@ -35,6 +35,23 @@ Contratacion:
 
 --------------------------------------Colaborador--------------------------------------------------------
     
-Pagina principal:
-    
-    
+Registro de colaborador [nuestro, no va en la app de colaborador]
+
+Interfaz de colaborador:
+    -Pop-up 
+        *opcion de aceptar o declinar un trabajo
+    -Boton de trabajando, disponible o inactivo
+    -Listado de contratos
+    -Galeria (editable)
+
+Perfil:
+    -nombre, apellido
+    -correo
+    -telefono
+    -foto
+
+Comunicacion con usuario:
+    -Chat
+    -mapa (geolocalizacion)
+    -Telefono de User
+    -foto user
