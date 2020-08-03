@@ -54,4 +54,6 @@ Comunicacion con usuario:
     -Chat
     -mapa (geolocalizacion)
     -Telefono de User
-    -foto user
+    -foto User
+
+-------------------------------En desarrollo----------------------------------------------------------------
