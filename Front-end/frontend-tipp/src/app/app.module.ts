@@ -7,10 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatFormFieldModule, MatPrefix} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-
 
 @NgModule({
   declarations: [
@@ -22,11 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatPrefix,
-    MatInputModule,
-    MatButtonModule
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
