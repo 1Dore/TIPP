@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  abrir(){
+  abril(){
     
   }
 
