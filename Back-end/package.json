@@ -4,7 +4,8 @@
   "description": "el backend de la app tipp",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/1Dore/TIPP/issues"
   },
-  "homepage": "https://github.com/1Dore/TIPP#readme"
+  "homepage": "https://github.com/1Dore/TIPP#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.3.3"
+  }
 }
