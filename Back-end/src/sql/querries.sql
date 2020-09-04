@@ -1,7 +1,7 @@
-create table Cliente (
+create table Usuarios (
 	Nombre varchar(100),
 	Apellido varchar(100),
-	Correo varchar(100),
+	Correo varchar(100) unique,
 	u_id serial,
 	contraseña varchar(100),
 	u_foto varchar(200),
@@ -25,7 +25,7 @@ create table Contratos(
 	u_id int,
 	c_id int,
 	primary key( con_id),
-	foreign key (u_id) references cliente(u_id),
+	foreign key (u_id) references usuario(u_id),
 	foreign key (c_id) references colaborador(c_id)
 );
 
@@ -53,4 +53,6 @@ create table mensajes(
     primary key (m_id),
     foreign key (con_id) references Contratos(con_id)
 )
+
+//total de tablas 6
 
