@@ -15,6 +15,9 @@ import {MatCardModule} from '@angular/material/card';
 import { UsermenuComponent } from './components/usermenu/usermenu.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import { RegisterColaboradorComponent } from './components/register-colaborador/register-colaborador.component';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -23,6 +26,7 @@ import {MatIconModule} from '@angular/material/icon';
     LoginComponent,
     RegisterComponent,
     UsermenuComponent,
+    RegisterColaboradorComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatCardModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule, 
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
