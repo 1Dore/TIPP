@@ -12,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { UsermenuComponent } from './components/usermenu/usermenu.component';
+import {UsermenuComponent } from './components/usermenu/usermenu.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { RegisterColaboradorComponent } from './components/register-colaborador/register-colaborador.component';
