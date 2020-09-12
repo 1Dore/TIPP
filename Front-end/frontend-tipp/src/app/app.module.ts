@@ -15,7 +15,12 @@ import {MatCardModule} from '@angular/material/card';
 import {UsermenuComponent } from './components/usermenu/usermenu.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import { RegisterColaboradorComponent } from './components/register-colaborador/register-colaborador.component';
+import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
 import {HttpClientModule } from '@angular/common/http';
 
 
@@ -25,6 +30,10 @@ import {HttpClientModule } from '@angular/common/http';
     LoginComponent,
     RegisterComponent,
     UsermenuComponent,
+    RegisterColaboradorComponent,
+    LogRegMenuComponent,
+    UserSettingsComponent,
+    ColabSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +47,9 @@ import {HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatSidenavModule,
     MatIconModule,
+    MatListModule, 
     MatToolbarModule,
+    AppRoutingModule,
     HttpClientModule
   ],
   providers: [],

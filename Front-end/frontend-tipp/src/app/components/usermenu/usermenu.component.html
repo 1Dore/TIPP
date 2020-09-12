@@ -24,14 +24,17 @@
                 <div class="d-flex justify-content-around">
                     <button mat-button class="bottomcenter">About</button>
                 </div>
+                <DIv class="d-flex justify-content-around">
+                    <button mat-button><mat-icon class="center">settings</mat-icon></button>
+                </DIv>
             </mat-drawer>
         <!-- Pagina del Usuario -->
             <mat-drawer-content class="element">
-                <div class="upperbar">
-                    <button mat-button (click)="drawer.toggle()" class="topleft">
-                        <span class="material-icons">menu</span>
-                    </button>
-                </div>
+                <mat-toolbar color="primary">
+                    <a (click)="drawer.toggle()">
+                        <button mat-button><mat-icon class="center">menu</mat-icon></button>
+                      </a>
+                  </mat-toolbar>
                 <div class="d-flex justify-content-around">
                     <mat-form-field appearance="outline" class="buscador">
                         <mat-label>Buscar Colaborador</mat-label>
@@ -44,7 +47,6 @@
                 <div class="d-flex justify-content-around">
                     <div class="mapa">Mapa</div>
                 </div>
-                <div class="col"></div>
                 
                 
             </mat-drawer-content>

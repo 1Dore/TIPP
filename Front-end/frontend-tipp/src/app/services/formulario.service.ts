@@ -26,6 +26,8 @@ export class FormularioService {
     let url = dominio + '/newUsuario';
     return this.http.post(url, datos, httpHeaders);
   }
+
+  
 }
 
 

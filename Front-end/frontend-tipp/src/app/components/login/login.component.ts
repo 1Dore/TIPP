@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
     let Login:LoginFormulario = new LoginFormulario();
     Login.correo = this.LoginForm.controls.CorreoLog.value;
     Login.contraseña = this.LoginForm.controls.PasswordLog.value;
-    console.log(Login.correo);
+    console.log(Login.contraseña);
     this.formularioService.sentLogin(Login).subscribe((data) => 
     {
-      if(data.formularios.rowCount == 1){
+      if(data.formularios.message == "Insercion realizada"){
         this.router.navigateByUrl('/usermenu');
       }
       else {
