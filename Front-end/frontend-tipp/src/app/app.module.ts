@@ -18,6 +18,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { RegisterColaboradorComponent } from './components/register-colaborador/register-colaborador.component';
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     RegisterComponent,
     UsermenuComponent,
     RegisterColaboradorComponent,
+    LogRegMenuComponent,
+    UserSettingsComponent,
+    ColabSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatSidenavModule,
     MatIconModule,
     MatListModule, 
-    MatToolbarModule
+    MatToolbarModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

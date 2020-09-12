@@ -3,12 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { UsermenuComponent } from './components/usermenu/usermenu.component';
 import { RegisterColaboradorComponent } from './components/register-colaborador/register-colaborador.component';
+import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'usermenu', component: UsermenuComponent},
-  {path: "register_colab", component: RegisterColaboradorComponent}
+  {path: "register_colab", component: RegisterColaboradorComponent},
+  {path: 'TIPP_Register', component: LogRegMenuComponent},
+  {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];
 
 @NgModule({

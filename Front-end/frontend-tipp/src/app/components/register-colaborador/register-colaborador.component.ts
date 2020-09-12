@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-colaborador',
@@ -12,7 +13,7 @@ export class RegisterColaboradorComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, private router:Router) { }
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
@@ -26,8 +27,8 @@ export class RegisterColaboradorComponent implements OnInit {
 
   }
 
-  abrir(){
-    
+  abrir(ruta){
+    this.router.navigateByUrl(ruta);  
   }
     
 
