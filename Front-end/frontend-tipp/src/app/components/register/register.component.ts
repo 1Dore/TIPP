@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 
 @Component({
@@ -11,13 +12,13 @@ export class RegisterComponent implements OnInit {
 
   formulario: FormGroup;
   
-  constructor(private fb:FormBuilder, private formularioService: FormularioService) { }
+  constructor(private fb:FormBuilder, private formularioService: FormularioService, private router:Router) { }
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
       nombre:['', Validators.required],
-      Correo:['', Validators.required],
-      Password:['', Validators.required]
+      correo:['', Validators.required],
+      password:['', Validators.required]
     })
   }
 
@@ -25,8 +26,5 @@ export class RegisterComponent implements OnInit {
     
   }
 
-  abrir(){
-    
-  }
 
 }
