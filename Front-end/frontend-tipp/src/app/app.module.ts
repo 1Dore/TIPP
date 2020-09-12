@@ -21,6 +21,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
+import {HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ColabSettingsComponent } from './components/colab-settings/colab-settin
     MatIconModule,
     MatListModule, 
     MatToolbarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

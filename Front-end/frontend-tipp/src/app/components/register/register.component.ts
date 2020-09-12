@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormularioService } from 'src/app/services/formulario.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   formulario: FormGroup;
-  constructor(private fb:FormBuilder, private router:Router) { }
+  
+  constructor(private fb:FormBuilder, private formularioService: FormularioService, private router:Router) { }
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
@@ -21,7 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(){
-
+    
   }
 
   abrir(ruta:string){
