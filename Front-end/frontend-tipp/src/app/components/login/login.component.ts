@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     console.log(Login.correo);
     this.formularioService.sentLogin(Login).subscribe((data) => 
     {
-      if(data.status == 1){
+      if(data.formularios.rowCount == 1){
         this.router.navigateByUrl('/usermenu');
       }
       else {
