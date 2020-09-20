@@ -28,7 +28,6 @@ export class UsermenuComponent implements OnInit {
       string = this.name_tags.value.string;
     }
     params.set('string', string);
-    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
     this.abrir('lista_de_colaboradores?'+params.toString());
   }
 

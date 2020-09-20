@@ -30,11 +30,22 @@ export class FormularioService {
   }
 
   //-----------barra buscadora--------------------------
+  searchColaboradoresIDs(data): Observable<any>{
+    let url = dominio + 'getCollabsIDs';
+    return this.http.post(url, data, httpHeaders);
+  }
 
+  getCollabInfo(data): Observable<any>{
+    let url = dominio + 'getCollabInfo';
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getCollabTags(data): Observable<any>{
+    let url = dominio + 'getCollabTag';
+    return this.http.post(url,data, httpHeaders)
+  }
 
   //-----------buscar por categoria---------------------
-
-
 
 
 
