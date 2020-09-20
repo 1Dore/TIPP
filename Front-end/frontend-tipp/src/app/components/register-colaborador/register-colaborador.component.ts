@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
+import { ColaboradorService } from 'src/app/services/colaborador.service';
 import { FormularioService } from 'src/app/services/formulario.service';
 
 class formulario{
@@ -22,7 +23,7 @@ export class RegisterColaboradorComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private fb:FormBuilder, private router:Router, private service:FormularioService) { }
+  constructor(private fb:FormBuilder, private router:Router, private service:ColaboradorService) { }
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
