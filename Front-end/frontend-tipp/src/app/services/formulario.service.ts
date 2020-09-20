@@ -31,6 +31,14 @@ export class FormularioService {
     let url = dominio + '/newColab';
     return this.http.post(url, data, httpHeaders);
   }
+
+
+
+  // Codigo para la busqueda de colaboradores
+  searchColaboradores(data): Observable<any>{
+    let url = dominio + 'getCollabo';
+    return this.http.post(url, data, httpHeaders);
+  }
 }
 
 

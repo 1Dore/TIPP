@@ -22,7 +22,11 @@ export class ListaDeColaboradoresComponent implements OnInit {
   }
 
   buscarColaboradores(){
-    this.servicio
+    this.servicio.searchColaboradores({where: this.query}).subscribe((rows) => {
+      if(rows.formularios.rows.length > 0){
+
+      }
+    });
   }
 
   generarConsulta(){
