@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UsermenuComponent } from './components/usermenu/usermenu.component';
 import { RegisterColaboradorComponent } from './components/register-colaborador/register-colaborador.component';
 import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
+import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'usermenu', component: UsermenuComponent},
   {path: "register_colab", component: RegisterColaboradorComponent},
   {path: 'TIPP_Register', component: LogRegMenuComponent},
+  {path: 'lista_de_colaboradores', component: ListaDeColaboradoresComponent},
   {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];
 
@@ -19,3 +21,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
