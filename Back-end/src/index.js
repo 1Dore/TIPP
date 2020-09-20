@@ -1,6 +1,6 @@
 const app = require('./config/server');
-require('./app/rutas/usuarios-colabs')(app);
-require('./app/rutas/buscador')(app);
+require('./app/routs/register-login')(app);
+require('./app/routs/buscador')(app);
 
 
 app.listen(app.get("port"), () => 
