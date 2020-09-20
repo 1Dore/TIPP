@@ -54,4 +54,10 @@ export class LoginComponent implements OnInit {
     );
     this.LoginForm.reset();
   }
+
+
+  
+  abrir(ruta:string){
+    this.router.navigateByUrl(ruta);
+  }
 }

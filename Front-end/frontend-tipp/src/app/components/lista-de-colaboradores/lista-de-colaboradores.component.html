@@ -1,0 +1,24 @@
+<p class="separator"></p>
+
+<body class="back">
+
+<h1 class="title">Productos</h1>
+        <mat-card class="element" *ngFor="let producto of stringList"> 
+            <mat-card-title><h2>{{producto.nombre}}</h2></mat-card-title>
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title> Autor: {{producto.autor}}</mat-card-title>
+                <br>
+               <div><mat-card-subtitle>{{producto.tipo}}</mat-card-subtitle></div> 
+
+            </mat-card-header>
+            <mat-card-content class="img">
+                <div class="cuadrado" ></div>
+                <p>{{producto.descripcion}}</p>
+                <h3>Precio: {{producto.precio}}</h3>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-rise-button >Agregar al Carro</button>
+            </mat-card-actions>
+        </mat-card>
+</body>

@@ -22,6 +22,7 @@ import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.comp
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
 import {HttpClientModule } from '@angular/common/http';
+import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {HttpClientModule } from '@angular/common/http';
     LogRegMenuComponent,
     UserSettingsComponent,
     ColabSettingsComponent,
+    ListaDeColaboradoresComponent,
   ],
   imports: [
     BrowserModule,
