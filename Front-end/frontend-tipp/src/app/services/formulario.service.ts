@@ -16,7 +16,9 @@ export class FormularioService {
 
   constructor(private http:HttpClient) { }
 
+//---------------usuarios---------------------------
 
+//-----------loin-register---------------------------
   sentLogin(datos:LoginFormulario): Observable<any>{
     let url = dominio + '/getUsuarios';
     return this.http.post(url, datos, httpHeaders); 
@@ -27,10 +29,26 @@ export class FormularioService {
     return this.http.post(url, datos, httpHeaders);
   }
 
+  //-----------barra buscadora--------------------------
+
+
+  //-----------buscar por categoria---------------------
+
+
+
+
+
+  //----------------colaborador----------------------
+
+  //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
+    
     let url = dominio + '/newColab';
     return this.http.post(url, data, httpHeaders);
   }
+
+
+
 }
 
 

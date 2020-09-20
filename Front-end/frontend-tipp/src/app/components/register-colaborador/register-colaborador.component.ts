@@ -29,7 +29,8 @@ export class RegisterColaboradorComponent implements OnInit {
       nombre:['', Validators.required],
       correo:['', Validators.required],
       password:['', Validators.required],
-      apellido:['', Validators.required]
+      apellido:['', Validators.required],
+      Rep_password:['', Validators.required]
     })
   }
 
@@ -40,6 +41,7 @@ export class RegisterColaboradorComponent implements OnInit {
     form.nombre = this.formulario.value.nombre;
     form.correo = this.formulario.value.correo;
     form.password = this.formulario.value.password;
+    if(form.password == this.formulario.value.Rep_password) this.formulario.invalid;
     form.apellido = this.formulario.value.apellido;
 
     //---------------------------------------encriptacion-------------------------------
@@ -49,7 +51,7 @@ export class RegisterColaboradorComponent implements OnInit {
     form.password = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
     form.password = CryptoJS.SHA1(form.password).toString();
     //---------------------------------------encriptacion---------------------------------
-
+    
     
     this.service.sentColRegiser(form).subscribe(data => {
 
