@@ -18,8 +18,8 @@ export class AdminService {
   constructor( private http:HttpClient) { }
 
   loginAdmin(data): Observable<any>{
-
-    return data;
+    let url = dominio + "/getAdmin";
+    return this.http.post(url, data, httpHeaders);
   }
 
 

@@ -26,12 +26,4 @@ export class ColaboradorService {
   }
 
 
-
-  // Codigo para la busqueda de colaboradores
-  searchColaboradores(data): Observable<any>{
-    let url = dominio + 'getCollabo';
-    return this.http.post(url, data, httpHeaders);
-  }
-
-
 }
