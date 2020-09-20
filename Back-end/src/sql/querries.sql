@@ -5,7 +5,8 @@ create table Usuarios (
 	u_id serial,
 	contraseña varchar(100),
 	u_foto varchar(200),
-	primary key (u_id)
+	primary key (u_id),
+	unique(Correo)
 );
 
 create table Colaborador(
@@ -15,7 +16,17 @@ create table Colaborador(
 	c_id serial,
 	c_contraseña varchar(100),
 	c_foto varchar(200),
-	primary key (c_id)
+	primary key (c_id),
+	unique(Correo)
+);
+
+create table Administrador (
+	u_id serial,
+	Nombre varchar(100),
+	Correo varchar(100) unique,
+	contraseña varchar(100),
+	primary key (u_id),
+	unique(Correo)
 );
 
 create table Contratos(
