@@ -35,9 +35,19 @@ export class FormularioService {
 
 
   // Codigo para la busqueda de colaboradores
-  searchColaboradores(data): Observable<any>{
-    let url = dominio + 'getCollabo';
+  searchColaboradoresIDs(data): Observable<any>{
+    let url = dominio + 'getCollabsIDs';
     return this.http.post(url, data, httpHeaders);
+  }
+
+  getCollabInfo(data): Observable<any>{
+    let url = dominio + 'getCollabInfo';
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getCollabTags(data): Observable<any>{
+    let url = dominio + 'getCollabTag';
+    return this.http.post(url,data, httpHeaders)
   }
 }
 
