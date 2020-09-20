@@ -4,6 +4,8 @@ import { FormularioService } from 'src/app/services/formulario.service';
 import { DataSource } from '@angular/cdk/collections';
 import { LoginFormulario } from './LoginFormulario';
 import { Router } from '@angular/router';
+import CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-login',
@@ -26,11 +28,20 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(){
-    let Login:LoginFormulario = new LoginFormulario();
-    Login.correo = this.LoginForm.controls.CorreoLog.value;
-    Login.contraseña = this.LoginForm.controls.PasswordLog.value;
-    console.log(Login.contraseña);
-    this.formularioService.sentLogin(Login).subscribe((data) => 
+    let login:LoginFormulario = new LoginFormulario();
+
+    login.correo = this.LoginForm.controls.CorreoLog.value;
+
+        //---------------------------------------encriptacion-------------------------------
+    var passwordBytes = CryptoJS.enc.Utf16LE.parse(login.contraseña);
+    var sha1Hash = CryptoJS.SHA1(passwordBytes);
+    var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
+    login.contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
+    login.contraseña = CryptoJS.SHA1(login.contraseña).toString();
+     //---------------------------------------encriptacion---------------------------------
+
+
+    this.formularioService.sentLogin(login).subscribe((data) => 
     {
       if(data.formularios.message == "Insercion realizada"){
         this.router.navigateByUrl('/usermenu');

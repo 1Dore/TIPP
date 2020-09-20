@@ -31,9 +31,9 @@ module.exports = (app) => {
     //------------------------------------Colaboradores---------------------------------------------------
 
 
-    app.get('/getColaboradores/:correo/:contra', (req, res, next) => {
+    app.post('/getColaboradores/', (req, res, next) => {
 
-        let querry = `Select * from colaboradores where correo = '${req.params.correo}' and c_contraseña = '${req.params.contra}'`;
+        let querry = `Select * from colaborador where correo = '${req.params.correo}' and c_contraseña = '${req.params.contra}'`;
         conn.query( querry, (error, formularios, cols) => {
 
             if (error) res.json({status: 0, message: `${error}`});
@@ -45,7 +45,7 @@ module.exports = (app) => {
 
     app.post('/newColab', (req, res, next) => {
 
-        let query = `Insert into colaboradores (nombre, apellido, correo, c_contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
+        let query = `Insert into colaborador (nombre, apellido, correo, c_contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
         
         conn.query(query, (error, form, cols) => {
 

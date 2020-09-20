@@ -27,7 +27,10 @@ export class FormularioService {
     return this.http.post(url, datos, httpHeaders);
   }
 
-  
+  sentColRegiser(data):Observable<any>{
+    let url = dominio + '/newColab';
+    return this.http.post(url, data, httpHeaders);
+  }
 }
 
 
