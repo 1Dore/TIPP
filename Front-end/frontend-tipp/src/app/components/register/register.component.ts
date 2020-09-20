@@ -12,6 +12,7 @@ import { RegisterForm } from './RegisterForm';
 export class RegisterComponent implements OnInit {
 
   formulario: FormGroup;
+  pasword_igual: Boolean;
   
   constructor(private fb:FormBuilder, private formularioService: FormularioService, private router:Router) { }
 
@@ -19,11 +20,15 @@ export class RegisterComponent implements OnInit {
     this.formulario = this.fb.group({
       nombre:['', Validators.required],
       apellido:['', Validators.required],
-      correo:['', Validators.required],
-      password:['', Validators.required],
-
+      Correo:['', Validators.required],
+      Password:['', Validators.required],
+      Rep_Password:['', Validators.required]
     })
+
+    this.pasword_igual = (this.formulario.controls.Password.value == this.formulario.controls.Rep_Password.value)
   }
+
+  
 
   onSubmit(){
     let formulario:RegisterForm = new RegisterForm();
