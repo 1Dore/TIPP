@@ -25,6 +25,7 @@ import {HttpClientModule } from '@angular/common/http';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { UserCreaContratoComponent } from './components/user-crea-contrato/user-crea-contrato.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { AdminMenuComponent } from './components/admin-menu/admin-menu.component
     ListaDeColaboradoresComponent,
     AdminLoginComponent,
     AdminMenuComponent,
+    UserCreaContratoComponent,
   ],
   imports: [
     BrowserModule,
