@@ -25,7 +25,7 @@ export class ListaDeColaboradoresComponent implements OnInit {
   stringList: Array<string>;
   query:string;
   lista_collabs: Array<colaborador> = new Array<colaborador>();
-  collabs_ids: Array<number>;
+  collabs_ids: Array<number> = Array<number>();
   encontrados: boolean;
 
   constructor(private router: Router, private servicio:FormularioService ) { }

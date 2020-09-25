@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     login.correo = this.LoginForm.value.CorreoLog;
     login.contraseña = this.LoginForm.value.passwordLog;
 
-        //---------------------------------------encriptacion-------------------------------
+      //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(login.contraseña);
     var sha1Hash = CryptoJS.SHA1(passwordBytes);
     var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
