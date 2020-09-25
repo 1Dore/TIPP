@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
+import { AdminService } from 'src/app/services/admin.service';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 import { FormularioService } from 'src/app/services/formulario.service';
+import { AdminMenuComponent } from '../admin-menu/admin-menu.component';
 
 class formulario{
   nombre:String;
@@ -23,7 +26,7 @@ export class RegisterColaboradorComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private fb:FormBuilder, private router:Router, private service:ColaboradorService) { }
+  constructor(private fb:FormBuilder, private router:Router, private service:ColaboradorService, public dialogRef:MatDialogRef<AdminMenuComponent>) { }
 
   ngOnInit(): void {
     this.formulario = this.fb.group({
@@ -56,7 +59,10 @@ export class RegisterColaboradorComponent implements OnInit {
     
     this.service.sentColRegiser(form).subscribe(data => {
 
-      if (data.menssage == "Insercion realizada") alert("Se ha registrado exitosamente");
+      if (data.menssage == "Insercion realizada") {
+        alert("Se ha registrado exitosamente");
+        this.dialogRef.close();
+      }
       else alert("ha ocurrido un error");
 
     })

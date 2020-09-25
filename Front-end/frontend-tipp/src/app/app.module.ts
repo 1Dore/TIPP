@@ -25,7 +25,11 @@ import {HttpClientModule } from '@angular/common/http';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+<<<<<<< Updated upstream
 import { UserCreaContratoComponent } from './components/user-crea-contrato/user-crea-contrato.component';
+=======
+import {MatDialogModule} from '@angular/material/dialog';
+>>>>>>> Stashed changes
 
 
 @NgModule({
@@ -58,7 +62,8 @@ import { UserCreaContratoComponent } from './components/user-crea-contrato/user-
     MatListModule, 
     MatToolbarModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
