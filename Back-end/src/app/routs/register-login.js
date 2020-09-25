@@ -6,7 +6,7 @@ module.exports = (app) => {
     app.post('/getUsuarios', (req, res, next) => {
         let querry = `Select * from usuarios where correo = '${req.body.correo}' and contraseña = '${req.body.contraseña}'`;
         conn.query( querry, (error, formularios, cols) => {
-            
+            console.log(querry);
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
 

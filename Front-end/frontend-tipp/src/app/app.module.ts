@@ -24,6 +24,7 @@ import { ColabSettingsComponent } from './components/colab-settings/colab-settin
 import {HttpClientModule } from '@angular/common/http';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
     ColabSettingsComponent,
     ListaDeColaboradoresComponent,
     AdminLoginComponent,
+    AdminMenuComponent,
   ],
   imports: [
     BrowserModule,

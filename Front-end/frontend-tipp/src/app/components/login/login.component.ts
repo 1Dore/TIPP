@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     let login:LoginFormulario = new LoginFormulario();
 
-    login.correo = this.LoginForm.value.CorreoLog;
+    login.correo = this.LoginForm.value.correoLog;
     login.contraseña = this.LoginForm.value.passwordLog;
 
       //---------------------------------------encriptacion-------------------------------
@@ -42,14 +42,17 @@ export class LoginComponent implements OnInit {
     login.contraseña = CryptoJS.SHA1(login.contraseña).toString();
      //---------------------------------------encriptacion---------------------------------
 
-
+    console.log(login);
     this.formularioService.sentLogin(login).subscribe((data) => {
       console.log(data);
-      if (data.formularios.contraseña == login.contraseña){
+      console.log(login.contraseña);
+      if (data.formularios.rowCount > 0){
         alert("Inicio de sesion exitoso");
         this.router.navigateByUrl('usermenu');
       }
-
+      else {
+        alert("Datos incorrectos");
+      }
 
     });
   }

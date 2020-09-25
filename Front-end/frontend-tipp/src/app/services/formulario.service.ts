@@ -19,7 +19,8 @@ export class FormularioService {
 //---------------usuarios---------------------------
 
 //-----------loin-register---------------------------
-  sentLogin(datos:LoginFormulario): Observable<any>{
+  sentLogin(datos): Observable<any>{
+    console.log(datos);
     let url = dominio + '/getUsuarios';
     return this.http.post(url, datos, httpHeaders); 
   }
