@@ -11,11 +11,10 @@ module.exports = (app) => {
             else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
 
         });
-
     });
 
     app.post('/getCollabInfo', (req, res, next) => {
-        let query = `Select nombre, correo, c_foto, c_id From colaborador Where c_id = ${req.body.id}`;
+        let query = `Select nombre, correo, c_foto, c_id, apellido From colaborador Where c_id = ${req.body.id}`;
         conn.query( query, (error, formularios, cols) => {
             console.log(query);
             if (error) res.json({status: 0, message: `${error}`});
@@ -24,7 +23,7 @@ module.exports = (app) => {
     });
 
     app.post('/getCollabTags', (req, res, next) => {
-        let query = `Select e.e_id, e.e_nombre From etiquetas as e, relacion_etiquetas_y_colab as r Where c_id = ${req.body.id}, e.e_id = r.e_id`;
+        let query = `Select e.e_id, e.e_nombre From etiquetas as e, relacion_etiquetas_y_colab as r Where r.c_id = ${req.body.id}, e.e_id = r.e_id`;
         conn.query( query, (error, formularios, cols) => {
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
