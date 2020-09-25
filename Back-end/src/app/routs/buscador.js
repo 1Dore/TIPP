@@ -4,10 +4,9 @@ const { response } = require('../../config/server');
 module.exports = (app) => {
 
     app.post('/getCollabsIDs', (req, res, next) => {
-        let querry = 
-        `select distinct c.c_id from colaborador as col, etiquetas as e where '${req.body.where}'`;
+        let querry =  `select distinct c_id from colaborador`;
         conn.query( querry, (error, formularios, cols) => {
-            
+            console.log(querry);
             if (error) res.json({status: 0, message: `${error}`});  
             else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
 

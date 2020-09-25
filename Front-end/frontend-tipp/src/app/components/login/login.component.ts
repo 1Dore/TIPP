@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     let login:LoginFormulario = new LoginFormulario();
 
-    login.correo = this.LoginForm.controls.CorreoLog.value;
+    login.correo = this.LoginForm.value.CorreoLog;
+    login.contraseña = this.LoginForm.value.passwordLog;
 
         //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(login.contraseña);

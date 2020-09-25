@@ -37,8 +37,9 @@ export class RegisterComponent implements OnInit {
 
     formulario.nombre = this.formulario.value.nombre;
     formulario.apellido = this.formulario.value.apellido;
-    formulario.correo = this.formulario.value.correo;
-
+    formulario.correo = this.formulario.value.Correo;
+    formulario.contraseña = this.formulario.value.Password;
+    console.log(formulario);
 
     //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(formulario.contraseña);
