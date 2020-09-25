@@ -41,7 +41,7 @@ export class FormularioService {
   }
 
   getCollabTags(data): Observable<any>{
-    let url = dominio + 'getCollabTag';
+    let url = dominio + 'getCollabTags';
     return this.http.post(url,data, httpHeaders)
   }
 
