@@ -5,6 +5,7 @@ import { DataSource } from '@angular/cdk/collections';
 import { LoginFormulario } from './LoginFormulario';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -42,20 +43,16 @@ export class LoginComponent implements OnInit {
      //---------------------------------------encriptacion---------------------------------
 
 
-    this.formularioService.sentLogin(login).subscribe((data) => 
-    {
-      if(data.formularios.message == "Insercion realizada"){
-        this.router.navigateByUrl('/usermenu');
+    this.formularioService.sentLogin(login).subscribe((data) => {
+      console.log(data);
+      if (data.formularios.contraseña == login.contraseña){
+        alert("Inicio de sesion exitoso");
+        this.router.navigateByUrl('usermenu');
       }
-      else {
-        alert("Correo o contraseña incorrectos");
-      }
-    }
 
-    );
-    this.LoginForm.reset();
+
+    });
   }
-
 
   
   abrir(ruta:string){

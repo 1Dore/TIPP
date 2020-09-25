@@ -11,7 +11,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'usermenu', component: UsermenuComponent},
-  {path: "register_colab", component: RegisterColaboradorComponent},
+  {path: 'register_colab', component: RegisterColaboradorComponent},
   {path: 'TIPP_Register', component: LogRegMenuComponent},
   {path: 'lista_de_colaboradores', component: ListaDeColaboradoresComponent},
   {path: 'admin-mode', component: AdminLoginComponent},

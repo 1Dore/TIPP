@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 import { RegisterForm } from './RegisterForm';
-import { CryptoJS } from 'crypto-js';
+import CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     formulario.apellido = this.formulario.value.apellido;
     formulario.correo = this.formulario.value.Correo;
     formulario.contraseña = this.formulario.value.Password;
-    console.log(formulario);
+    
 
     //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(formulario.contraseña);
