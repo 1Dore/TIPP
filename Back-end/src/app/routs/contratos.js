@@ -4,10 +4,10 @@ const { response } = require('../../config/server');
 module.exports = (app) => {
 
     app.post('/newContrato', (req, res, next) => {
-        let querry =  `select distinct col.c_id from colaborador as col, etiquetas as e where ${req.body.where}`;
+        let querry =  `Insert into contratos (f_init, f_end, u_id, c_id) values (${req.body.inicio}, ${req.body.fin}, ${req.body.u_id}, ${req.body.c_id})`;
         conn.query( querry, (error, formularios, cols) => {
             if (error) res.json({status: 0, message: `${error}`});  
-            else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
+            else res.json({status: 1, message: "Se creo un contrato satisfactoriamente", formularios});
 
         });
 

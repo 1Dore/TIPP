@@ -43,9 +43,10 @@ export class AdminLoginComponent implements OnInit {
         login.password = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
         login.password = CryptoJS.SHA1(login.password).toString();
         //---------------------------------------encriptacion---------------------------------
+        console.log(login);
         
     this.service.loginAdmin(login).subscribe(data => {
-
+      console.log(data);
       if (data.message == "Se obtvo informacion satisfactoriamente del formulario"){
         alert("Login exitoso");
         //this.router.navigateByUrl(ruta);
