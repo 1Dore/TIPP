@@ -25,11 +25,9 @@ import {HttpClientModule } from '@angular/common/http';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
-<<<<<<< Updated upstream
 import { UserCreaContratoComponent } from './components/user-crea-contrato/user-crea-contrato.component';
-=======
 import {MatDialogModule} from '@angular/material/dialog';
->>>>>>> Stashed changes
+import { AdminCreateTagsComponent } from './components/admin-create-tags/admin-create-tags.component';
 
 
 @NgModule({
@@ -46,6 +44,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     AdminLoginComponent,
     AdminMenuComponent,
     UserCreaContratoComponent,
+    AdminCreateTagsComponent,
   ],
   imports: [
     BrowserModule,

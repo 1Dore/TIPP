@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from 'src/app/services/admin.service';
+import { AdminCreateTagsComponent } from '../admin-create-tags/admin-create-tags.component';
 import { RegisterColaboradorComponent } from '../register-colaborador/register-colaborador.component';
 
 @Component({
@@ -17,6 +18,12 @@ export class AdminMenuComponent implements OnInit {
 
   newColaborador(){
     const diologRef = this.diolog.open(RegisterColaboradorComponent, {
+      width: '50%',
+    })
+  }
+
+  newEtiqueta(){
+    const diologRef = this.diolog.open(AdminCreateTagsComponent, {
       width: '50%',
     })
   }

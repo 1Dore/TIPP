@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 <div class="col-6">
-                                    <button (click)="openEmisor()" mat-button>
+                                    <button (click)="" mat-button>
                                         <img mat-card-image src="assets/img/emisor.png">
                                     </button>
                                 </div>
@@ -37,15 +37,14 @@
                             </div>
                             <div class="row">
                                 <mat-list role="list">
-                                    <div  *ngFor="let emisor of emisores">
+                                    <div  >
                                         <mat-list-item role="listitem">
                                             <div class="container">
                                                 <div class="row">
-                                                    Nombre: {{emisor.compania}}
                                                 </div>
                                             </div>
-                                            <button mat-icon-button (click)="changeEmisor(emisor.e_id, emisor.e_ip, emisor.compania)"> <mat-icon>edit</mat-icon> </button>
-                                            <button mat-icon-button (click)="eliminarEmisor(emisor.e_id)"> <mat-icon>clear</mat-icon> </button>  
+                                            <button mat-icon-button > <mat-icon>edit</mat-icon> </button>
+                                            <button mat-icon-button > <mat-icon>clear</mat-icon> </button>  
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
                                     </div>
@@ -71,15 +70,15 @@
                             </div>
                             <div class="row">
                                 <mat-list role="list">
-                                    <div  *ngFor="let courier of couriers">
+                                    <div  >
                                         <mat-list-item role="listitem">
                                             <div class="container">
                                                 <div class="row">
                                                     Nombre: {{courier.c_nombre}}
                                                 </div>
                                             </div>
-                                            <button mat-icon-button (click)="changeCourier(courier.c_id, courier.c_ip, courier.c_nombre)"> <mat-icon>edit</mat-icon> </button>
-                                            <button mat-icon-button (click)="eliminarCourier(courier.c_id)"> <mat-icon>clear</mat-icon> </button>  
+                                            <button mat-icon-button > <mat-icon>edit</mat-icon> </button>
+                                            <button mat-icon-button > <mat-icon>clear</mat-icon> </button>  
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
                                     </div>

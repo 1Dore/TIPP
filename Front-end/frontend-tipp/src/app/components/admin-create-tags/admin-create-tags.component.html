@@ -1,0 +1,22 @@
+<div mat-dialog-content>
+    <div class="container">
+      <h1 class="title">Crear Etiqueta</h1>
+  
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  
+        <!-----------------------------Nombre------------------------->
+        <mat-form-field class="element">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName='nombre' placeholder="Nombre">
+        </mat-form-field>
+      <!-----------------------------apellido------------------------->
+        <mat-form-field class="element">
+          <mat-label>Descripcion</mat-label>
+          <input type="text" matInput formControlName='descripcion' placeholder="Descripcion">
+        </mat-form-field>
+  
+        <section>
+          <button [disabled] = "formulario.invalid" mat-raised-button type="submit" color="accent" class="element">Registrar</button>
+        </section>
+      </form>
+    </div>
