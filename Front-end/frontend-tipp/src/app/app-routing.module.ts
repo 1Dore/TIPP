@@ -6,6 +6,7 @@ import { RegisterColaboradorComponent } from './components/register-colaborador/
 import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { UsuarioContratoComponent } from './components/usuario-contrato/usuario-contrato.component';
 
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'TIPP_Register', component: LogRegMenuComponent},
   {path: 'lista_de_colaboradores', component: ListaDeColaboradoresComponent},
   {path: 'admin-mode', component: AdminLoginComponent},
+  {path: 'admin-mode/menu', component: AdminMenuComponent},
   {path: 'contrato', component: UsuarioContratoComponent},
   {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];

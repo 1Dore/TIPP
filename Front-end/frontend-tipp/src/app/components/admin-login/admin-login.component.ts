@@ -49,7 +49,7 @@ export class AdminLoginComponent implements OnInit {
       console.log(data);
       if (data.message == "Se obtvo informacion satisfactoriamente del formulario"){
         alert("Login exitoso");
-        //this.router.navigateByUrl(ruta);
+        this.abrir('admin-mode/menu')
       }
       else alert("No se ha encontrado al usuario");
 
