@@ -13,14 +13,14 @@
 
         <mat-form-field class="element">
             <mat-label>Correo</mat-label>
-            <input type="email" matInput placeholder="Ex. ejemplo@email.com" formControlName="correoLog" id="correolog">
+            <input type="text" matInput placeholder="Ex. ejemplo@email.com" formControlName="correoLog" id="correolog" 
+            pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" >
         </mat-form-field>
 
         <mat-form-field class="element">
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName='passwordLog' id="passwordlog">
         </mat-form-field>
-        
             <button [disabled] = "LoginForm.invalid" mat-raised-button type="submit" color="accent">Registrar</button>
       </form>
 

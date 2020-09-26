@@ -21,13 +21,22 @@ export class FormularioService {
 //-----------loin-register---------------------------
   sentLogin(datos): Observable<any>{
     console.log(datos);
-    let url = dominio + '/getUsuarios';
+    let url = dominio + 'getUsuarios';
     return this.http.post(url, datos, httpHeaders); 
   }
 
   sentRegister(datos): Observable<any>{
-    let url = dominio + '/newUsuario';
+    let url = dominio + 'newUsuario';
     return this.http.post(url, datos, httpHeaders);
+  }
+
+  isLogin() {
+    let islog = localStorage.getItem("isLogin") === "valido";
+    return islog;
+  }
+
+  loged(){
+    localStorage.setItem("isLogin", "valido");
   }
 
   //-----------barra buscadora--------------------------

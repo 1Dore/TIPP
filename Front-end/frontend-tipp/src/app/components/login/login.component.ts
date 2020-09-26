@@ -48,7 +48,10 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if (data.formularios.rowCount > 0){
         login.id = data.formularios.rows[0].u_id;
+        localStorage.setItem('loggedUser', login.correo);
         localStorage.setItem("id", ""+login.id);
+        this.formularioService.loged();
+        this.formularioService.isLogin();
         alert("Inicio de sesion exitoso");
         this.router.navigateByUrl('usermenu');
       }

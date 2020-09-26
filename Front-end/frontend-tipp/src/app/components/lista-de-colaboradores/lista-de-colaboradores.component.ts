@@ -139,7 +139,12 @@ export class ListaDeColaboradoresComponent implements OnInit {
   }
 
   nextContrato(contrato:Contrato){
-
+    this.servicio.newContrato(contrato).subscribe(data => {
+      if (data.message == "Se creo un contrato satisfactoriamente"){
+        alert("Contrato creado");
+        this.router.navigateByUrl("user-contrato");
+      }
+    })
   }
 
 }
