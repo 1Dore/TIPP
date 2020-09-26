@@ -49,7 +49,11 @@ export class FormularioService {
   //-----------buscar por categoria---------------------
 
 
-
+  //----------Hacer un contrato ------------------------
+  newContrato(data): Observable<any>{
+    let url = dominio + 'newContrato';
+    return this.http.post(url, data, httpHeaders);
+  }
 
 }
 
