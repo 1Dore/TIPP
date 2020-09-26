@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-3"></div>
                                 <div class="col-6">
-                                    <button (click)="" mat-button>
+                                    <button (click)="newEtiqueta()" mat-button>
                                         <img mat-card-image src="assets/img/emisor.png">
                                     </button>
                                 </div>
@@ -37,10 +37,11 @@
                             </div>
                             <div class="row">
                                 <mat-list role="list">
-                                    <div  >
+                                    <div  *ngFor="let etiqueta of lista_etiquetas">
                                         <mat-list-item role="listitem">
                                             <div class="container">
                                                 <div class="row">
+                                                    {{etiqueta.e_nombre}}
                                                 </div>
                                             </div>
                                             <button mat-icon-button > <mat-icon>edit</mat-icon> </button>
@@ -67,22 +68,6 @@
                                     </button>
                                 </div>
                                 <div class="col-3"></div>
-                            </div>
-                            <div class="row">
-                                <mat-list role="list">
-                                    <div  >
-                                        <mat-list-item role="listitem">
-                                            <div class="container">
-                                                <div class="row">
-                                                    Nombre: {{courier.c_nombre}}
-                                                </div>
-                                            </div>
-                                            <button mat-icon-button > <mat-icon>edit</mat-icon> </button>
-                                            <button mat-icon-button > <mat-icon>clear</mat-icon> </button>  
-                                        </mat-list-item>
-                                        <mat-divider></mat-divider>
-                                    </div>
-                                </mat-list>
                             </div>
                         </div>
                     </mat-card>

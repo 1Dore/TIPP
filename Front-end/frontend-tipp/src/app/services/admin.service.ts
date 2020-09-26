@@ -22,5 +22,14 @@ export class AdminService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  newEtiqueta(data): Observable<any> {
+    let url = dominio + "newEtiquetas";
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getAllEtiquetas(): Observable<any> {
+    let url = dominio + "getAllEtiquetas";
+    return this.http.post(url, httpHeaders);
+  }
 
 }

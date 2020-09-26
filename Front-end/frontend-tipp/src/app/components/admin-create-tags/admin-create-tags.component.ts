@@ -4,6 +4,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { AdminService } from 'src/app/services/admin.service';
 import { AdminMenuComponent } from '../admin-menu/admin-menu.component';
 
+class etiqueta{
+  nombre: string;
+  descripcion: string;
+}
+
 @Component({
   selector: 'app-admin-create-tags',
   templateUrl: './admin-create-tags.component.html',
@@ -23,6 +28,20 @@ export class AdminCreateTagsComponent implements OnInit {
   }
 
   onSubmit(){
+    let new_etiqueta: etiqueta = new etiqueta;
+    new_etiqueta.nombre = this.form_etiqueta.value.nombre;
+    new_etiqueta.descripcion = this.form_etiqueta.value.descripcion;
+
+    console.log(this.form_etiqueta.value.nombre);
+
+    this.service.newEtiqueta(new_etiqueta).subscribe((respuesta) => {
+      if(respuesta.status = 0){
+        alert("Error al intentar crear la etiqueta \n" + "Error:" + respuesta.message);
+      }else{
+        alert(respuesta.message);
+        this.dialogRef.close();
+      }
+    });
 
   }
 

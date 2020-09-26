@@ -2,7 +2,7 @@
     <div class="container">
       <h1 class="title">Crear Etiqueta</h1>
   
-      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <form [formGroup]="form_etiqueta" (ngSubmit)="onSubmit()">
   
         <!-----------------------------Nombre------------------------->
         <mat-form-field class="element">
@@ -16,7 +16,7 @@
         </mat-form-field>
   
         <section>
-          <button [disabled] = "formulario.invalid" mat-raised-button type="submit" color="accent" class="element">Registrar</button>
+          <button [disabled] = "form_etiqueta.invalid" mat-raised-button type="submit" color="accent" class="element">Registrar</button>
         </section>
       </form>
     </div>
