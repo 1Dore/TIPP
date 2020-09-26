@@ -18,6 +18,11 @@ class colaborador{
   foto: string;
   correo: string;
 }
+class Contrato{
+  u_id:Number;
+  c_id:Number;
+  inicio:String;
+}
 
 @Component({
   selector: 'app-lista-de-colaboradores',
@@ -120,6 +125,21 @@ export class ListaDeColaboradoresComponent implements OnInit {
       }
       
     });
+  }
+
+  contratar(id){
+    //aqui obtendria los datos del card
+    let contrato = new Contrato();
+    contrato.c_id = id;
+    contrato.u_id = Number(localStorage.getItem('id'));
+    //aqui iria un servicio para obtener la hora del servidor
+
+    this.nextContrato(contrato);
+    //que dentro iria una función que manda a llamar al contrato
+  }
+
+  nextContrato(contrato:Contrato){
+
   }
 
 }

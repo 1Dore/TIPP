@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
 
     login.correo = this.LoginForm.value.correoLog;
     login.contraseña = this.LoginForm.value.passwordLog;
+    login.id = 0;
 
       //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(login.contraseña);
@@ -42,11 +43,12 @@ export class LoginComponent implements OnInit {
     login.contraseña = CryptoJS.SHA1(login.contraseña).toString();
      //---------------------------------------encriptacion---------------------------------
 
-    console.log(login);
+
     this.formularioService.sentLogin(login).subscribe((data) => {
       console.log(data);
-      console.log(login.contraseña);
       if (data.formularios.rowCount > 0){
+        login.id = data.formularios.rows[0].u_id;
+        localStorage.setItem("id", ""+login.id);
         alert("Inicio de sesion exitoso");
         this.router.navigateByUrl('usermenu');
       }
