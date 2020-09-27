@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormularioService } from 'src/app/services/formulario.service';
 
 @Component({
   selector: 'app-usermenu',
@@ -10,13 +11,16 @@ import { Router } from '@angular/router';
 export class UsermenuComponent implements OnInit {
   name_tags: FormGroup
 
-  constructor(private router: Router, private fb: FormBuilder) { }
-
+  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
+  userDisplayName = '';
   ngOnInit(): void {
     this.name_tags = this.fb.group({
       string: [""],
     });
+    this.userDisplayName = localStorage.getItem('loggedUser');
   }
+
+
 
 
   buscarColaboradores(){
@@ -33,6 +37,10 @@ export class UsermenuComponent implements OnInit {
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  
+  }
+  
+  irA(ruta){
+    this.router.navigateByUrl(ruta);
   }
     
 }
