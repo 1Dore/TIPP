@@ -11,7 +11,7 @@ import { FormularioService } from 'src/app/services/formulario.service';
 export class UsermenuComponent implements OnInit {
   name_tags: FormGroup
 
-  constructor(private router: Router, private fb: FormBuilder, private auth:FormularioService) { }
+  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
   userDisplayName = '';
   ngOnInit(): void {
     this.name_tags = this.fb.group({
@@ -37,6 +37,10 @@ export class UsermenuComponent implements OnInit {
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  
+  }
+  
+  irA(ruta){
+    this.router.navigateByUrl(ruta);
   }
     
 }

@@ -61,7 +61,13 @@ export class FormularioService {
   //----------Hacer un contrato ------------------------
   newContrato(data): Observable<any>{
     let url = dominio + 'newContrato';
+    console.log("service " + data.fecha_inicio);
     return this.http.post(url, data, httpHeaders);
+  }
+
+  getFechayHora(): Observable<any>{
+    let url = dominio + 'getFyH';
+    return this.http.post(url, httpHeaders);
   }
 
 }

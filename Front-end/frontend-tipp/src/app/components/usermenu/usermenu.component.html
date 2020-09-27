@@ -16,27 +16,25 @@
                     <div class="cuadrado"></div>
                 </div>
 
-
                 <div *ngIf="auth.isLogin()">
                     <button mat-button (click)="irA('/user-page')">{{userDisplayName}}</button>
                 </div>
-
-
-                <DIv class="d-flex justify-content-around">
+                
+                <div class="d-flex justify-content-around">
                     <button mat-button>Citas</button>
-                </DIv>
+                </div>
 
                 <div class="d-flex justify-content-around">
-                    <button mat-button class="bottomcenter">About</button>
+                    <button mat-button class="center">About</button>
                 </div>
                 
-                <DIv class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around">
                     <button mat-button><mat-icon class="center">settings</mat-icon></button>
-                </DIv>
-
+                </div>
                 <div class="d-flex justify-content-around">
                     <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
                 </div>
+
 
             </mat-drawer>
         <!-- Pagina del Usuario -->
@@ -60,8 +58,6 @@
                 <div class="d-flex justify-content-around">
                     <div class="mapa">Mapa</div>
                 </div>
-                
-                
             </mat-drawer-content>
         </mat-drawer-container>
 

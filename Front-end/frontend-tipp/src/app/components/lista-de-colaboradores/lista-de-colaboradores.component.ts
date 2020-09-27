@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
@@ -21,7 +22,7 @@ class colaborador{
 class Contrato{
   u_id:Number;
   c_id:Number;
-  inicio:String;
+  fecha_inicio:String;
 }
 
 @Component({
@@ -46,12 +47,10 @@ export class ListaDeColaboradoresComponent implements OnInit {
     }else{
       this.stringList = params.get('string').split(" ");
       this.generarConsulta();
-      console.log(this.query);
+
     }
     
     this.buscarCollabsIDs();
-    console.log(this.collabs_ids);
-    console.log(this.collabs_ids.length);
   }
 
   buscarCollabsIDs(){
@@ -67,14 +66,12 @@ export class ListaDeColaboradoresComponent implements OnInit {
         this.encontrados = false;
       }
     });
-    console.log(temp.length);
     this.collabs_ids = temp;
   }
 
   getCollabInfo(id: number){
     let temp: colaborador = new colaborador();
     this.servicio.getCollabInfo({id: id}).subscribe((rows) => {
-      console.log(rows);
       rows.formularios.rows.forEach((info) => {
         temp.id = id;
         temp.nombre = info.nombre;
@@ -85,7 +82,6 @@ export class ListaDeColaboradoresComponent implements OnInit {
         this.lista_collabs.push(temp);
       });
     });
-    console.log(this.lista_collabs);
   }
 
   getCollabTags(id: number){
@@ -129,13 +125,15 @@ export class ListaDeColaboradoresComponent implements OnInit {
 
   contratar(id){
     //aqui obtendria los datos del card
-    let contrato = new Contrato();
-    contrato.c_id = id;
-    contrato.u_id = Number(localStorage.getItem('id'));
-    //aqui iria un servicio para obtener la hora del servidor
-
-    this.nextContrato(contrato);
-    //que dentro iria una función que manda a llamar al contrato
+    this.servicio.getFechayHora().subscribe(data => {
+      console.log(data);
+      let contrato = new Contrato();
+      contrato.c_id = id; //id del colaborador
+      contrato.u_id = Number(localStorage.getItem('id')); //id del usuario
+      let fecha_inicio = new Date(data.formularios.rows[0].fyh);
+      contrato.fecha_inicio = String(fecha_inicio);
+      this.nextContrato(contrato);
+    });
   }
 
   nextContrato(contrato:Contrato){

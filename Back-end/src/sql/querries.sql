@@ -1,20 +1,24 @@
 create table Usuarios (
+	u_id serial,
 	Nombre varchar(100),
 	Apellido varchar(100),
 	Correo varchar(100) unique,
-	u_id serial,
 	contraseña varchar(100),
+	total_contratos integer,
+	total_estrellas integer,
 	u_foto varchar(200),
 	primary key (u_id),
 	unique(Correo)
 );
 
 create table Colaborador(
+	c_id serial,
 	Nombre varchar(100),
 	Apellido varchar(100),
 	Correo varchar(100),
-	c_id serial,
 	c_contraseña varchar(100),
+	total_contratos integer,
+	total_estrellas integer,
 	c_foto varchar(200),
 	primary key (c_id),
 	unique(Correo)
@@ -35,6 +39,7 @@ create table Contratos(
 	con_id serial,
 	u_id int,
 	c_id int,
+	direccion varchar(250),
 	primary key( con_id),
 	foreign key (u_id) references usuario(u_id),
 	foreign key (c_id) references colaborador(c_id)
