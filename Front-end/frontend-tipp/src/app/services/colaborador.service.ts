@@ -21,14 +21,14 @@ export class ColaboradorService {
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
     
-    let url = dominio + '/newColab';
+    let url = dominio + 'newColab';
     return this.http.post(url, data, httpHeaders);
   }
   
   // Obtener todas la etiquetas para el registro
   getEtiquetas(): Observable<any> {
-    let url = dominio + '/getEtiquetas';
-    return this.http.post(url, httpHeaders);
+    let url = dominio + 'getEtiquetas';
+    return this.http.get(url, httpHeaders);
   };
 
   // Obtener ID de un correo en especifico 
@@ -39,7 +39,7 @@ export class ColaboradorService {
 
   //Linkear las etiquetas con el colaborador
   setCollabTags(data): Observable<any> {
-    let url = dominio + '/setTagsForCollab';
+    let url = dominio + 'setTagsForCollab';
     return this.http.post(url, data, httpHeaders);
   };
 

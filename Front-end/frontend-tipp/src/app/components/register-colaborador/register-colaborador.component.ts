@@ -42,7 +42,8 @@ export class RegisterColaboradorComponent implements OnInit {
       password:['', Validators.required],
       apellido:['', Validators.required],
       Rep_password:['', Validators.required]
-    })
+    });
+    this.getEtiquetas();
   }
 
   onSubmit(){
@@ -74,11 +75,12 @@ export class RegisterColaboradorComponent implements OnInit {
       else alert("ha ocurrido un error");
 
     })
-
+    this.seleccionarEtiquetas = true;
   }
 
   getEtiquetas(){
     this.service.getEtiquetas().subscribe((rows) => {
+      console.log(rows);
       if(rows.status === 1){
         rows.formularios.rows.forEach(etiqueta => {
           let temp: Etiqueta = new Etiqueta();
