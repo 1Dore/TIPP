@@ -51,7 +51,7 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/getEtiquetas', (res, next) => {
+    app.get('/getEtiquetas', (req, res) => {
         let query = `Select * From etiquetas`;
 
         conn.query(query, (error, formularios, cols) => {
@@ -64,13 +64,15 @@ module.exports = (app) => {
         let query = `Insert Into relacion_etiquetas_y_colab(c_id, e_id) values (${req.body.c_id}, ${req.body.e_id})`;
 
         conn.query(query, (error, form, cols) => {
-            if(error) res.estatus(500).json({status: 0, message:"No se pudo insentar la relacion"});
+            console.log(query);
+            console.log(error);
+            if(error) res.json({status: 0, message:"No se pudo insentar la relacion"});
             else res.json({status: 1, message:"Insercion Exitosa"});
         });
     });
 
-    app.post('/getCollabIdByEmail', (req, res, next) => {
-        let query = `Select c_id Where correo = '${req.body.correo}'`;
+    app.post('/getCollabIdByEmail', (req, res) => {
+        let query = `Select c_id from colaborador Where correo = '${req.body.correo}'`;
 
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: "no exite un id el cual tenga ese correo"});
