@@ -51,7 +51,7 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/getEtiquetas', (res, next) => {
+    app.get('/getEtiquetas', (req, res, next) => {
         let query = `Select * From etiquetas`;
 
         conn.query(query, (error, formularios, cols) => {
@@ -70,7 +70,7 @@ module.exports = (app) => {
     });
 
     app.post('/getCollabIdByEmail', (req, res, next) => {
-        let query = `Select c_id Where correo = '${req.body.correo}'`;
+        let query = `Select c_id From colaborador Where correo = '${req.body.correo}'`;
 
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: "no exite un id el cual tenga ese correo"});

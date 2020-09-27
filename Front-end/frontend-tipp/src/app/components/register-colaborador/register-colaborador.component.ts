@@ -43,7 +43,23 @@ export class RegisterColaboradorComponent implements OnInit {
       apellido:['', Validators.required],
       Rep_password:['', Validators.required]
     });
-    this.getEtiquetas();
+    this.service.getEtiquetas().subscribe((rows) => {
+      console.log(rows);
+      if(rows.status === 1){
+        let listat = new Array<Etiqueta>();
+        rows.formularios.rows.forEach(etiqueta => {
+          let temp: Etiqueta = new Etiqueta();
+          temp.e_id = etiqueta.e_id;
+          temp.e_nombre = etiqueta.e_nombre;
+          temp.descripcion = temp.descripcion;
+          listat.push(temp);
+        });
+        this.etiqueta_list = listat;
+        console.log(this.etiqueta_list);
+        console.log("--");
+        console.log(listat);
+      }
+    });
   }
 
   onSubmit(){
@@ -70,7 +86,6 @@ export class RegisterColaboradorComponent implements OnInit {
 
       if (data.menssage == "Insercion realizada") {
         alert("Se ha registrado exitosamente");
-        this.dialogRef.close();
       }
       else alert("ha ocurrido un error");
 
@@ -91,13 +106,22 @@ export class RegisterColaboradorComponent implements OnInit {
         });
       }
     })
+    
+    
   }
 
-  setCollabTags(){
+  setCollabTags(arreglo){
+    console.log(this.correo);
     this.service.getIdByEmail({correo: this.correo}).subscribe((rows) => {
+      console.log(rows)
       let x = rows.formularios.rows[0].c_id;
+      arreglo.forEach(tag => {
+        this.service.setCollabTags({c_id: x, e_id: tag.e_id}).subscribe()
+      });
+      
     });
   }
+
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  
