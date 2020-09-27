@@ -15,10 +15,11 @@ module.exports = (app) => {
     })
 
     app.post('/newUsuario', (req, res, next) => {
-        let query = `Insert into Usuarios (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
-        conn.query(query, (error, form, cols) => {
-            if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
-            else res.json({status: 1, menssage: "Insercion realizada"});
+        let querry = `Insert into Usuarios (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
+        conn.query( querry, (error, formularios, cols) => {
+            console.log(querry);
+            if (error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, message: "Se creo un nuevo usuario" , formularios});
 
         });
     });
