@@ -53,7 +53,9 @@ export class RegisterComponent implements OnInit {
     
 
     this.formularioService.sentRegister(formulario).subscribe((data) => {
-      if(data.status == 1){
+      console.log(data);
+      if(data.formularios.rowCount > 0){
+        alert("Nuevo usuario Creado");
         this.router.navigateByUrl('/TIPP_Register');
       }
       else {
