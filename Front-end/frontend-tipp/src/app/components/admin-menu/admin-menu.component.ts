@@ -60,5 +60,4 @@ export class AdminMenuComponent implements OnInit {
     console.log(this.lista_etiquetas);
   }
 
-
 }

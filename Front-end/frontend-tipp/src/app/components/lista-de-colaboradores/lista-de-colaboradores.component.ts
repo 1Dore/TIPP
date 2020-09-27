@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 
@@ -21,7 +22,7 @@ class colaborador{
 class Contrato{
   u_id:Number;
   c_id:Number;
-  inicio:String;
+  hora_inicio:String;
 }
 
 @Component({
@@ -36,7 +37,7 @@ export class ListaDeColaboradoresComponent implements OnInit {
   collabs_ids: Array<id> = new Array<id>();
   encontrados: boolean;
 
-  constructor(private router: Router, private servicio:FormularioService ) { }
+  constructor(private router: Router, private servicio:FormularioService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
 

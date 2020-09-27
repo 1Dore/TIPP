@@ -15,13 +15,9 @@ module.exports = (app) => {
     })
 
     app.post('/newUsuario', (req, res, next) => {
-
         let query = `Insert into Usuarios (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
-        
         conn.query(query, (error, form, cols) => {
-
             if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
-
             else res.json({status: 1, menssage: "Insercion realizada"});
 
         });
@@ -46,13 +42,29 @@ module.exports = (app) => {
     app.post('/newColab', (req, res, next) => {
 
         let query = `Insert into colaborador (nombre, apellido, correo, c_contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.password}')`;
-        
         conn.query(query, (error, form, cols) => {
-            
-            if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
 
+            if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
             else res.json({status: 1, menssage: "Insercion realizada"});
 
+        });
+    });
+
+    app.get('/getEtiquetas', (res, next) => {
+        let query = `Select * From etiquetas`;
+
+        conn.query(query, (error, formularios, cols) => {
+            if(error) res.json({status: 0, message: "No se pudo obtener los errores"});
+            else res.json({status: 1, message:"se obtivieron etiquetas",formularios});
+        });
+    });
+
+    app.post('/setTagsForCollab', (req, res, next) => {
+        let query = `Insert Into relacion_etiquetas_y_colab(c_id, e_id) values (${req.body.c_id}, ${req.body.e_id})`;
+
+        conn.query(query, (error, form, cols) => {
+            if(error) res.estatus(500).json({status: 0, message:"No se pudo insentar la relacion"});
+            else res.json({status: 1, message:"Insercion Exitosa"});
         });
     });
 
