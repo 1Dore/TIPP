@@ -15,6 +15,12 @@ class formulario{
   apellido:String;
 }
 
+class Etiqueta{
+  e_id: number;
+  e_nombre: string;
+  descripcion: string;
+}
+
 @Component({
   selector: 'app-register-colaborador',
   templateUrl: './register-colaborador.component.html',
@@ -22,9 +28,10 @@ class formulario{
 })
 export class RegisterColaboradorComponent implements OnInit {
 
-  typesOfShoes: string[] = ['Electricista', 'Plomero/a', 'Peluquero/a', 'Chef', 'Asecino a sueldo'];
-
+  etiqueta_list: Array<Etiqueta> = new Array<Etiqueta>();
+  correo: string;
   formulario: FormGroup;
+  seleccionarEtiquetas: boolean = false;
 
   constructor(private fb:FormBuilder, private router:Router, private service:ColaboradorService, public dialogRef:MatDialogRef<AdminMenuComponent>) { }
 
@@ -44,6 +51,7 @@ export class RegisterColaboradorComponent implements OnInit {
 
     form.nombre = this.formulario.value.nombre;
     form.correo = this.formulario.value.correo;
+    this.correo = this.formulario.value.correo;
     form.password = this.formulario.value.password;
     if(form.password == this.formulario.value.Rep_password) this.formulario.invalid;
     form.apellido = this.formulario.value.apellido;
@@ -67,7 +75,26 @@ export class RegisterColaboradorComponent implements OnInit {
 
     })
 
+  }
 
+  getEtiquetas(){
+    this.service.getEtiquetas().subscribe((rows) => {
+      if(rows.status === 1){
+        rows.formularios.rows.forEach(etiqueta => {
+          let temp: Etiqueta = new Etiqueta();
+          temp.e_id = etiqueta.e_id;
+          temp.e_nombre = etiqueta.e_nombre;
+          temp.descripcion = temp.descripcion;
+          this.etiqueta_list.push(temp);
+        });
+      }
+    })
+  }
+
+  setCollabTags(){
+    this.service.getIdByEmail({correo: this.correo}).subscribe((rows) => {
+      let x = rows.formularios.rows[0].c_id;
+    });
   }
 
   abrir(ruta){

@@ -15,8 +15,8 @@ class Colaborador{
 })
 export class UserCreaContratoComponent implements OnInit {
 
-  constructor(public dialogREf: MatDialogRef<ListaDeColaboradoresComponent>, private userService:FormularioService
-              @Inject(MAT_DIALOG_DATA) public datos:emisor) { }
+  constructor(public dialogREf: MatDialogRef<ListaDeColaboradoresComponent>, private userService:FormularioService,
+              @Inject(MAT_DIALOG_DATA) public datos: Colaborador) { }
 
   ngOnInit(): void {
   }

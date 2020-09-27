@@ -24,6 +24,23 @@ export class ColaboradorService {
     let url = dominio + '/newColab';
     return this.http.post(url, data, httpHeaders);
   }
+  
+  // Obtener todas la etiquetas para el registro
+  getEtiquetas(): Observable<any> {
+    let url = dominio + '/getEtiquetas';
+    return this.http.post(url, httpHeaders);
+  };
 
+  // Obtener ID de un correo en especifico 
+  getIdByEmail(data): Observable<any> {
+    let url = dominio + 'getCollabIdByEmail';
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  //Linkear las etiquetas con el colaborador
+  setCollabTags(data): Observable<any> {
+    let url = dominio + '/setTagsForCollab';
+    return this.http.post(url, data, httpHeaders);
+  };
 
 }
