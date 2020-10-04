@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 
-class etiqueta{
+class Etiqueta{
   nombre: string;
   id: number;
 }
@@ -15,7 +15,7 @@ class id{
 class colaborador{
   id: number;
   nombre: string;
-  etiquetas: Array<etiqueta>;
+  etiquetas: Array<Etiqueta>;
   foto: string;
   correo: string;
 }
@@ -78,27 +78,22 @@ export class ListaDeColaboradoresComponent implements OnInit {
         temp.nombre += " " + info.apellido;
         temp.foto = info.c_foto;
         temp.correo = info.correo;
-        temp.etiquetas = this.getCollabTags(id);
+        temp.etiquetas = new Array<Etiqueta>();
+        this.servicio.getCollabTags({id: id}).subscribe((tags) => {
+          if(tags.formularios.rows.length > 0){
+            tags.formularios.rows.forEach((tag) => {
+              let etiqueta: Etiqueta = new Etiqueta();
+              etiqueta.nombre = tag.e_nombre;
+              etiqueta.id = tag.e_id;
+              temp.etiquetas.push(etiqueta);
+            });
+          }
+        });
         this.lista_collabs.push(temp);
       });
     });
   }
 
-  getCollabTags(id: number){
-    let temp_list: Array<etiqueta> = new Array<etiqueta>(); 
-    
-    this.servicio.getCollabTags({id: id}).subscribe((tags) => {
-      if(tags.formularios.rows.length > 0){
-        tags.formularios.rows.forEach((tag) => {
-          let temp: etiqueta = new etiqueta();
-          temp.nombre = tag.e_nombre;
-          temp.id = tag.e_id;
-          temp_list.push(temp);
-        });
-      }
-    });
-    return temp_list;
-  }
 
  getInfoFromID(){
    this.collabs_ids.forEach(id => {

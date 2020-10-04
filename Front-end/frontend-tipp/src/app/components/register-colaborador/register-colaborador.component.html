@@ -37,7 +37,7 @@
   </form>
 
   <mat-selection-list #etiquetas>
-    <mat-list-option *ngFor="let etiqueta of etiqueta_list">
+    <mat-list-option *ngFor="let etiqueta of etiqueta_list" [value] = "etiqueta.e_id">
       {{etiqueta.e_nombre}}
     </mat-list-option>
   </mat-selection-list>

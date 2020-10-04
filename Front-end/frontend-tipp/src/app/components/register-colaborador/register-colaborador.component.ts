@@ -110,13 +110,13 @@ export class RegisterColaboradorComponent implements OnInit {
     
   }
 
-  setCollabTags(arreglo){
-    console.log(this.correo);
+  setCollabTags(tags_selecionados){
+    //obtengo el id del colaborador resien creado
     this.service.getIdByEmail({correo: this.correo}).subscribe((rows) => {
-      console.log(rows)
-      let x = rows.formularios.rows[0].c_id;
-      arreglo.forEach(tag => {
-        this.service.setCollabTags({c_id: x, e_id: tag.e_id}).subscribe()
+      let col_id = rows.formularios.rows[0].c_id;
+      //segun los tags seleccionados, linkeo el id del colaborador con estas estas etiquetas
+      tags_selecionados.forEach(tag => {
+        this.service.setCollabTags({c_id: col_id, e_id: tag.value}).subscribe()
       });
       
     });

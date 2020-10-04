@@ -9,11 +9,14 @@ import { FormularioService } from 'src/app/services/formulario.service';
   styleUrls: ['./usermenu.component.scss']
 })
 export class UsermenuComponent implements OnInit {
-  name_tags: FormGroup
+  name_tags: FormGroup;
+  modo: string;
 
   constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
   userDisplayName = '';
   ngOnInit(): void {
+    this.modo = "mapa";
+
     this.name_tags = this.fb.group({
       string: [""],
     });
@@ -24,6 +27,7 @@ export class UsermenuComponent implements OnInit {
 
 
   buscarColaboradores(){
+    this.modo = "buscador";
     let string: string;
     const params = new URLSearchParams(location.search);
     if(this.name_tags.value.string === ""){
@@ -32,7 +36,11 @@ export class UsermenuComponent implements OnInit {
       string = this.name_tags.value.string;
     }
     params.set('string', string);
-    this.abrir('lista_de_colaboradores?'+params.toString());
+    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
+  }
+
+  modoMapa(){
+    this.modo = "mapa";
   }
 
   abrir(ruta){
