@@ -28,7 +28,7 @@ export class ColaboradorService {
   // Obtener todas la etiquetas para el registro
   getEtiquetas(): Observable<any> {
     let url = dominio + 'getEtiquetas';
-    return this.http.post(url, httpHeaders);
+    return this.http.get(url, httpHeaders);
   };
 
   // Obtener ID de un correo en especifico 

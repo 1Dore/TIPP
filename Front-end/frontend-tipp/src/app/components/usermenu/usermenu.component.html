@@ -52,11 +52,30 @@
                                 <button (click)="buscarColaboradores()" mat-button><mat-icon matSuffix >search</mat-icon></button>
                             </div>
                         </mat-form-field>
+                        <div *ngIF="modo == 'buscador'">
+                            
+                        </div>
                     </form>
                 </div>
-                <div class="d-flex justify-content-around">
-                    <div class="mapa">Mapa</div>
+                <div *ngIf="modo == 'mapa'">
+                    <div class="d-flex justify-content-around">
+                        <div class="mapa">Mapa</div>
+                    </div>
                 </div>
+                <div *ngIf="modo == 'buscador'">
+                    <button mat-button (click)="modoMapa()">Ver Mapa</button>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <app-lista-de-colaboradores></app-lista-de-colaboradores>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+
+                </div>
+                
             </mat-drawer-content>
         </mat-drawer-container>
 

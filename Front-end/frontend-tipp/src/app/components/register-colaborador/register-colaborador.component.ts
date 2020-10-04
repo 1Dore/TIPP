@@ -42,7 +42,24 @@ export class RegisterColaboradorComponent implements OnInit {
       password:['', Validators.required],
       apellido:['', Validators.required],
       Rep_password:['', Validators.required]
-    })
+    });
+    this.service.getEtiquetas().subscribe((rows) => {
+      console.log(rows);
+      if(rows.status === 1){
+        let listat = new Array<Etiqueta>();
+        rows.formularios.rows.forEach(etiqueta => {
+          let temp: Etiqueta = new Etiqueta();
+          temp.e_id = etiqueta.e_id;
+          temp.e_nombre = etiqueta.e_nombre;
+          temp.descripcion = temp.descripcion;
+          listat.push(temp);
+        });
+        this.etiqueta_list = listat;
+        console.log(this.etiqueta_list);
+        console.log("--");
+        console.log(listat);
+      }
+    });
   }
 
   onSubmit(){
@@ -69,16 +86,16 @@ export class RegisterColaboradorComponent implements OnInit {
 
       if (data.menssage == "Insercion realizada") {
         alert("Se ha registrado exitosamente");
-        this.dialogRef.close();
       }
       else alert("ha ocurrido un error");
 
     })
-
+    this.seleccionarEtiquetas = true;
   }
 
   getEtiquetas(){
     this.service.getEtiquetas().subscribe((rows) => {
+      console.log(rows);
       if(rows.status === 1){
         rows.formularios.rows.forEach(etiqueta => {
           let temp: Etiqueta = new Etiqueta();
@@ -89,13 +106,22 @@ export class RegisterColaboradorComponent implements OnInit {
         });
       }
     })
+    
+    
   }
 
-  setCollabTags(){
+  setCollabTags(tags_selecionados){
+    //obtengo el id del colaborador resien creado
     this.service.getIdByEmail({correo: this.correo}).subscribe((rows) => {
-      let x = rows.formularios.rows[0].c_id;
+      let col_id = rows.formularios.rows[0].c_id;
+      //segun los tags seleccionados, linkeo el id del colaborador con estas estas etiquetas
+      tags_selecionados.forEach(tag => {
+        this.service.setCollabTags({c_id: col_id, e_id: tag.value}).subscribe()
+      });
+      
     });
   }
+
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  

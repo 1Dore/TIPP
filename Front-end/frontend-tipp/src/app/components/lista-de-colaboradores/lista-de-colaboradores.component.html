@@ -16,11 +16,16 @@
                         <div class="cuadrado" ></div>                            
                     </div>
                     <div class="col-4">
-                        <p>{{collab.correo}}</p>
+                        <p>Correo: {{collab.correo}}</p>
+                        Etiquetas:
+                        <mat-list role="list">
+                            <mat-list-item *ngFor="let tag of collab.etiquetas">{{tag.nombre}}</mat-list-item>
+                        </mat-list>
                     </div>
                     <div class="col-4">
                     </div>
                 </div>
+                
             </div>
         </mat-card-content>
         <mat-card-actions>
