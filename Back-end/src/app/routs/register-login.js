@@ -6,7 +6,6 @@ module.exports = (app) => {
     app.post('/getUsuarios', (req, res, next) => {
         let querry = `Select * from usuarios where correo = '${req.body.correo}' and contraseña = '${req.body.contraseña}'`;
         conn.query( querry, (error, formularios, cols) => {
-            console.log(querry);
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
 
@@ -17,7 +16,6 @@ module.exports = (app) => {
     app.post('/newUsuario', (req, res, next) => {
         let querry = `Insert into Usuarios (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
         conn.query( querry, (error, formularios, cols) => {
-            console.log(querry);
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Se creo un nuevo usuario" , formularios});
 
@@ -64,8 +62,6 @@ module.exports = (app) => {
         let query = `Insert Into relacion_etiquetas_y_colab(c_id, e_id) values (${req.body.c_id}, ${req.body.e_id})`;
 
         conn.query(query, (error, form, cols) => {
-            console.log(query);
-            console.log(error);
             if(error) res.json({status: 0, message:"No se pudo insentar la relacion"});
             else res.json({status: 1, message:"Insercion Exitosa"});
         });

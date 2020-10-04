@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
     <mat-drawer-container class="element">
         <!-- Side Menu -->
             <mat-drawer #drawer mode="over" class="sidemenu">
@@ -39,7 +38,7 @@
             </mat-drawer>
         <!-- Pagina del Usuario -->
             <mat-drawer-content class="element">
-                <mat-toolbar color="primary">
+                <mat-toolbar class="toolbar">
                     <a (click)="drawer.toggle()">
                         <button mat-button><mat-icon class="center">menu</mat-icon></button>
                       </a>

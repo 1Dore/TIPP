@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body>
-    <div class="row">
+<body >
+    <div class="row" >
         <div class="col-2"></div>
         <div class="col-8">
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <mat-form-field class="element">
                     <mat-label>Nombre</mat-label>
-                    <input type="text" matInput formControlName='nombre' placeholder="Nombre">
+                    <input type="text" matInput formControlName='nombre' placeholder="Nombre" class="element">
                 </mat-form-field>
 
                 <mat-form-field class="element">

@@ -20,6 +20,9 @@
 .sidemenu{
     padding-left: 10px;
     padding-right: 10px;
+    background-color: #2C3E50;
+    color: #FFFFFF;
+    text-align: center;
 }
 .topleft {
     position: absolute;
@@ -49,4 +52,12 @@
     height: 50px;
     background-color: rgb(168, 223, 255);
     align-self: center;
+}
+
+.toolbar{
+    background-color:  #2C3E50;
+}
+
+.body{
+    background-color: #ABB2B9;
 }

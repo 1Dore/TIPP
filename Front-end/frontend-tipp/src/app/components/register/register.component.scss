@@ -1,13 +1,22 @@
 .element{
     width: 100%;
+    background-color: #7FB3D5;
+    color: #FBFCFC;
 }
 
 .col-8, .col-2{
-    background: lightblue;;
+    background-color: #7FB3D5;
+
 }
+
+
 .center{
     text-align: center;
     width: 40%;
     padding-left: 30%;
     padding-right: 30%;
+}
+
+.grey{
+    color: #FBFCFC;
 }
