@@ -28,6 +28,7 @@ import { AdminMenuComponent } from './components/admin-menu/admin-menu.component
 import { UserCreaContratoComponent } from './components/user-crea-contrato/user-crea-contrato.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminCreateTagsComponent } from './components/admin-create-tags/admin-create-tags.component';
+import { UserCollabChatComponent } from './components/user-collab-chat/user-collab-chat.component';
 
 
 
@@ -46,6 +47,7 @@ import { AdminCreateTagsComponent } from './components/admin-create-tags/admin-c
     AdminMenuComponent,
     UserCreaContratoComponent,
     AdminCreateTagsComponent,
+    UserCollabChatComponent,
   ],
   imports: [
     BrowserModule,
