@@ -16,13 +16,22 @@ export class ColaboradorService {
   constructor( private http:HttpClient ) { }
   
 
-    //----------------colaborador----------------------
+  //----------------colaborador----------------------
 
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
     
     let url = dominio + 'newColab';
     return this.http.post(url, data, httpHeaders);
+  }
+
+  isLogin() {
+    let islog = localStorage.getItem("isLogin") === "valido";
+    return islog;
+  }
+
+  loged(){
+    localStorage.setItem("isLogin", "valido");
   }
   
   // Obtener todas la etiquetas para el registro

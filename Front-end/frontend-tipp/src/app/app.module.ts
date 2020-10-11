@@ -19,7 +19,7 @@ import { RegisterColaboradorComponent } from './components/register-colaborador/
 import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
-import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { UserSettingsComponent } from './components/user-things/user-settings/user-settings.component';
 import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
 import {HttpClientModule } from '@angular/common/http';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
@@ -29,6 +29,8 @@ import { UserCreaContratoComponent } from './components/user-crea-contrato/user-
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminCreateTagsComponent } from './components/admin-create-tags/admin-create-tags.component';
 import { UserCollabChatComponent } from './components/user-collab-chat/user-collab-chat.component';
+import { ColabMenuComponent } from './components/colab-menu/colab-menu.component';
+import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
 
 
 
@@ -48,6 +50,9 @@ import { UserCollabChatComponent } from './components/user-collab-chat/user-coll
     UserCreaContratoComponent,
     AdminCreateTagsComponent,
     UserCollabChatComponent,
+    ColabMenuComponent,
+    UserPerfilComponent,
+
   ],
   imports: [
     BrowserModule,
