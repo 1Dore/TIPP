@@ -8,15 +8,28 @@ const dominio = environment.apiURL;
 const httpHeaders = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
+class ID{
+  id:Number 
+}
 @Injectable({
   providedIn: 'root'
 })
-
 export class FormularioService {
 
   constructor(private http:HttpClient) { }
 
 //---------------usuarios---------------------------
+  askUserData(id): Observable<any>{
+    let iD:ID = new ID();
+    iD.id = id;
+    let url = dominio + 'getUsuariosData';
+    return this.http.post(url, iD, httpHeaders);
+  }
+
+  updateUserData(data): Observable<any> {
+    let url = dominio + 'updateUserData';
+    return this.http.post(url, data, httpHeaders);
+  }
 
 //-----------loin-register---------------------------
   sentLogin(datos): Observable<any>{

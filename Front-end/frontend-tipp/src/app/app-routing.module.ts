@@ -7,6 +7,10 @@ import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.comp
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { ColabMenuComponent } from './components/colab-menu/colab-menu.component';
+import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
+import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
+import { UserSettingsComponent } from './components/user-things/user-settings/user-settings.component';
 
 
 const routes: Routes = [
@@ -17,6 +21,10 @@ const routes: Routes = [
   {path: 'lista_de_colaboradores', component: ListaDeColaboradoresComponent},
   {path: 'admin-mode', component: AdminLoginComponent},
   {path: 'admin-mode/menu', component: AdminMenuComponent},
+  {path: 'colabmenu', component: ColabMenuComponent},
+  {path: 'colabmenu/colab-settings', component: ColabSettingsComponent},
+  {path: 'usermenu/perfil', component: UserPerfilComponent},
+  {path: 'usermenu/settings', component: UserSettingsComponent},
   {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];
 
