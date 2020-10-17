@@ -1,0 +1,49 @@
+
+<div mat-dialog-content>
+  <div class="container">
+    <h1 class="title">Agregar Nuevo Colaborador</h1>
+
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+      <!-----------------------------Nombre------------------------->
+      <mat-form-field class="element">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName='nombre' placeholder="Nombre">
+      </mat-form-field>
+    <!-----------------------------apellido------------------------->
+      <mat-form-field class="element">
+        <mat-label>Apellido</mat-label>
+        <input type="text" matInput formControlName='apellido' placeholder="Apellido">
+      </mat-form-field>
+  <!-----------------------------correo------------------------->
+      <mat-form-field class="element">
+          <mat-label>Correo</mat-label>
+          <input type="email" matInput placeholder="Ex. ejemplo@email.com" formControlName="correo">
+      </mat-form-field>
+    <!-----------------------------password------------------------->
+      <mat-form-field class="element">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName='password'>
+      </mat-form-field>
+
+      <mat-form-field class="element">
+        <mat-label>Repetir Password</mat-label>
+        <input type="password" matInput formControlName='Rep_password'>
+      </mat-form-field>
+
+    <section>
+      <button [disabled] = "formulario.invalid" mat-raised-button type="submit" color="accent" class="element">Registrar</button>
+    </section>
+  </form>
+
+  <mat-selection-list #etiquetas>
+    <mat-list-option *ngFor="let etiqueta of etiqueta_list" [value] = "etiqueta.e_id">
+      {{etiqueta.e_nombre}}
+    </mat-list-option>
+  </mat-selection-list>
+  
+  <p>
+    <button [disabled]="!seleccionarEtiquetas" (click)="setCollabTags(etiquetas.selectedOptions.selected)" mat-raised-button type="submit" color="accent" class="element">Registrar</button>
+  </p>
+</div>
+  
