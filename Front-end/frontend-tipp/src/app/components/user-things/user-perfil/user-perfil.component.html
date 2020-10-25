@@ -29,7 +29,7 @@
                     </div>
                     
                     <div class="d-flex justify-content-around">
-                        <button mat-button><mat-icon class="center">settings</mat-icon></button>
+                        <button mat-button><mat-icon class="center" (click)="irA('/usermenu/settings')">settings</mat-icon></button>
                     </div>
                     <div class="d-flex justify-content-around">
                         <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
@@ -104,6 +104,13 @@
                         <div class ="row justify-content-md-center">
             
                             <button  mat-raised-button type="submit" color="accent">Update</button>
+                            
+                        </div>
+                        
+
+                        <div class ="row justify-content-md-center">
+            
+                            <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
                             
                         </div>
             

@@ -11,6 +11,7 @@ import { ColabMenuComponent } from './components/colab-menu/colab-menu.component
 import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
 import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
 import { UserSettingsComponent } from './components/user-things/user-settings/user-settings.component';
+import { UserCitasComponent } from './components/user-citas/user-citas.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'colabmenu/colab-settings', component: ColabSettingsComponent},
   {path: 'usermenu/perfil', component: UserPerfilComponent},
   {path: 'usermenu/settings', component: UserSettingsComponent},
+  {path: 'usermenu/citas', component: UserCitasComponent},
   {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];
 
@@ -33,6 +35,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
 

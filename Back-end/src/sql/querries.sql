@@ -68,7 +68,8 @@ create table mensajes(
     fecha timestamp,
     primary key (m_id),
     foreign key (con_id) references Contratos(con_id)
-)
+);
+
 
 //total de tablas 6
 

@@ -117,6 +117,7 @@ export class RegisterColaboradorComponent implements OnInit {
       //segun los tags seleccionados, linkeo el id del colaborador con estas estas etiquetas
       tags_selecionados.forEach(tag => {
         this.service.setCollabTags({c_id: col_id, e_id: tag.value}).subscribe()
+        alert("Etiquetas agregadas");
       });
       
     });

@@ -44,13 +44,17 @@
                             <button mat-button><mat-icon class="center">menu</mat-icon></button>
                           </a>
                       </mat-toolbar>
+
+                      <div class ="row justify-content-md-center">
+                          <h2>Métodos de pago</h2>
+                      </div>
             
                         <form [formGroup]="Form" (ngSubmit)="onSubmit()">
             
                             <div class ="row justify-content-md-center">
             
                                 <mat-form-field class="element">
-                                    <mat-label>Nombre</mat-label>
+                                    <mat-label>place holder</mat-label>
                                     <input type="text" matInput formControlName='nombre' id="passwordlog">
                                 </mat-form-field>
                 
@@ -59,7 +63,7 @@
                             <div class ="row justify-content-md-center">
             
                                 <mat-form-field class="element">
-                                    <mat-label>Apellido</mat-label>
+                                    <mat-label>place holder</mat-label>
                                     <input type="text" matInput formControlName='apellido' id="passwordlog" autocomplete="off">
                                 </mat-form-field>
                 
@@ -67,8 +71,12 @@
 
                         <div class ="row justify-content-md-center">
             
-                            <button  mat-raised-button type="submit" color="accent">Registrar</button>
-                            
+                            <button  mat-raised-button type="submit" color="accent">Nuevo metodo de pago</button>
+
+                            <button  mat-raised-button type="submit" color="accent">Actualizar Método de pago</button>
+
+                            <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
+
                         </div>
             
                         </form>

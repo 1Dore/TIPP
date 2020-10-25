@@ -31,6 +31,7 @@ import { AdminCreateTagsComponent } from './components/admin-create-tags/admin-c
 import { UserCollabChatComponent } from './components/user-collab-chat/user-collab-chat.component';
 import { ColabMenuComponent } from './components/colab-menu/colab-menu.component';
 import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
+import { UserCitasComponent } from './components/user-citas/user-citas.component';
 
 
 
@@ -52,6 +53,7 @@ import { UserPerfilComponent } from './components/user-things/user-perfil/user-p
     UserCollabChatComponent,
     ColabMenuComponent,
     UserPerfilComponent,
+    UserCitasComponent,
 
   ],
   imports: [
