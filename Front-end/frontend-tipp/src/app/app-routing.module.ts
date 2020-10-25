@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { UsermenuComponent } from './components/usermenu/usermenu.component';
@@ -12,6 +12,7 @@ import { ColabSettingsComponent } from './components/colab-settings/colab-settin
 import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
 import { UserSettingsComponent } from './components/user-things/user-settings/user-settings.component';
 import { UserCitasComponent } from './components/user-citas/user-citas.component';
+import { UserCollabChatComponent } from './components/user-collab-chat/user-collab-chat.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'usermenu/perfil', component: UserPerfilComponent},
   {path: 'usermenu/settings', component: UserSettingsComponent},
   {path: 'usermenu/citas', component: UserCitasComponent},
+  {path: 'user-collab/chat', component: UserCollabChatComponent},
   {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];
 
