@@ -35,6 +35,7 @@ import { UserCitasComponent } from './components/user-citas/user-citas.component
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,7 @@ import { UserCitasComponent } from './components/user-citas/user-citas.component
     UserCollabChatComponent,
     ColabMenuComponent,
     UserPerfilComponent,
-    UserCitasComponent,
+    UserCitasComponent
 
   ],
   imports: [
@@ -73,6 +74,7 @@ import { UserCitasComponent } from './components/user-citas/user-citas.component
     AppRoutingModule,
     HttpClientModule,
     MatDialogModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
