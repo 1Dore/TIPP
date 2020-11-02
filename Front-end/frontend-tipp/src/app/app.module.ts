@@ -31,8 +31,9 @@ import { AdminCreateTagsComponent } from './components/admin-create-tags/admin-c
 import { UserCollabChatComponent } from './components/user-collab-chat/user-collab-chat.component';
 import { ColabMenuComponent } from './components/colab-menu/colab-menu.component';
 import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
-
-
+import { FormsModule } from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { UserPerfilComponent } from './components/user-things/user-perfil/user-p
     ColabMenuComponent,
     UserPerfilComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,9 @@ import { UserPerfilComponent } from './components/user-things/user-perfil/user-p
     AppRoutingModule,
     HttpClientModule,
     MatDialogModule,
+    FormsModule,
+    MatCheckboxModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

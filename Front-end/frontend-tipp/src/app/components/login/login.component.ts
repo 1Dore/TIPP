@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   LoginForm:FormGroup;
   datasource:DataSource<LoginFormulario>
+  collab_mode:boolean = false;
 
   constructor(private fb:FormBuilder, private formularioService:FormularioService, private router:Router) { }
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
       correoLog:['', Validators.required],
       passwordLog:['', Validators.required]
     })
+
   }
 
 
