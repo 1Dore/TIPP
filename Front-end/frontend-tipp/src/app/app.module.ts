@@ -34,6 +34,7 @@ import { UserPerfilComponent } from './components/user-things/user-perfil/user-p
 import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { GoogleMapsModule } from '@angular/google-maps';
+import {UserCitasComponent } from './components/user-citas/user-citas.component';
 
 @NgModule({
   declarations: [
