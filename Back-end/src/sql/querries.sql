@@ -4,6 +4,7 @@ create table Usuarios (
 	Apellido varchar(100),
 	Correo varchar(100) unique,
 	contraseña varchar(100),
+	telefono integer,
 	total_contratos integer,
 	total_estrellas integer,
 	u_foto varchar(200),
@@ -17,6 +18,7 @@ create table Colaborador(
 	Apellido varchar(100),
 	Correo varchar(100),
 	c_contraseña varchar(100),
+	telefono integer,
 	total_contratos integer,
 	total_estrellas integer,
 	c_foto varchar(200),
@@ -40,6 +42,7 @@ create table Contratos(
 	u_id int,
 	c_id int,
 	direccion varchar(250),
+	estado char,
 	primary key( con_id),
 	foreign key (u_id) references usuario(u_id),
 	foreign key (c_id) references colaborador(c_id)

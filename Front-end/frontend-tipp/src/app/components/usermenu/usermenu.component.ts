@@ -19,6 +19,7 @@ class colaborador{
   foto: string;
   correo: string;
 }
+
 class Contrato{
   u_id:Number;
   c_id:Number;

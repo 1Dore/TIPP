@@ -6,6 +6,7 @@ import { LoginFormulario } from './LoginFormulario';
 import { Router } from '@angular/router';
 import CryptoJS from 'crypto-js';
 import { ThrowStmt } from '@angular/compiler';
+import { ColaboradorService } from 'src/app/services/colaborador.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   datasource:DataSource<LoginFormulario>
   collab_mode:boolean = false;
 
-  constructor(private fb:FormBuilder, private formularioService:FormularioService, private router:Router) { }
+  constructor(private fb:FormBuilder, public formularioService:FormularioService, public colaboradorService:ColaboradorService, private router:Router) { }
 
   ngOnInit(): void {
     this.LoginForm = this.fb.group({
@@ -31,19 +32,23 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit(){
+    
+    if(this.collab_mode == true){
+      this.loginColab();
+    }
+    else{
+      this.loginUser();
+    }
+
+  }
+
+  loginUser(){
     let login:LoginFormulario = new LoginFormulario();
 
     login.correo = this.LoginForm.value.correoLog;
-    login.contraseña = this.LoginForm.value.passwordLog;
+    login.contraseña = this.encriptar(this.LoginForm.value.passwordLog);
     login.id = 0;
 
-      //---------------------------------------encriptacion-------------------------------
-    var passwordBytes = CryptoJS.enc.Utf16LE.parse(login.contraseña);
-    var sha1Hash = CryptoJS.SHA1(passwordBytes);
-    var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
-    login.contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
-    login.contraseña = CryptoJS.SHA1(login.contraseña).toString();
-     //---------------------------------------encriptacion---------------------------------
 
 
     this.formularioService.sentLogin(login).subscribe((data) => {
@@ -64,6 +69,43 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  loginColab(){
+    let login:LoginFormulario = new LoginFormulario();
+
+    login.correo = this.LoginForm.value.correoLog;
+    login.contraseña = this.encriptar(this.LoginForm.value.passwordLog);
+    login.id = 0;
+
+
+
+    this.colaboradorService.sentLoginColab(login).subscribe((data) => {
+      console.log(data);
+      if (data.formularios.rowCount > 0){
+        login.id = data.formularios.rows[0].c_id;
+        localStorage.setItem('loggedUser', login.correo);
+        localStorage.setItem("id", ""+login.id);
+        this.formularioService.loged();
+        this.formularioService.isLogin();
+        alert("Inicio de sesion exitoso");
+        this.router.navigateByUrl('colabmenu');
+      }
+      else {
+        alert("Datos incorrectos");
+      }
+
+    });
+  }
+
+  encriptar(contraseña:string){
+          //---------------------------------------encriptacion-------------------------------
+    var passwordBytes = CryptoJS.enc.Utf16LE.parse(contraseña);
+    var sha1Hash = CryptoJS.SHA1(passwordBytes);
+    var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
+    contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
+    contraseña = CryptoJS.SHA1(contraseña).toString();
+     //---------------------------------------encriptacion---------------------------------
+    return contraseña;
+  }
   
   abrir(ruta:string){
     this.router.navigateByUrl(ruta);

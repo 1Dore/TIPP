@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 
+class estado{
+  id:Number
+  estado:String
+  display:String
+}
 
 @Component({
   selector: 'app-colab-menu',
@@ -12,8 +17,47 @@ export class ColabMenuComponent implements OnInit {
 
   constructor(private router:Router, public auth:ColaboradorService) { }
   userDisplayName = '';
+  datosEstado:estado;
+
   ngOnInit(): void {
+    this.datosEstado = new estado();
+    this.datosEstado.id = Number(localStorage.getItem('id'));
+    this.datosEstado.estado = '';
     this.userDisplayName = localStorage.getItem('loggedUser');
+    this.getColaboradoresEstado();
+  }
+
+  getColaboradoresEstado(){
+    this.auth.getColaboradoresEstado(this.datosEstado).subscribe(data => {
+      if(data.formularios.rows[0].estado == '' || data.formularios.rows[0].estado == null){
+        this.datosEstado.estado = "D";
+        this.datosEstado.display = "Disponible";
+      }
+      else{
+        if(data.formularios.rows[0].estado == "D"){
+          this.datosEstado.display = "Disponible";
+        }
+        else{
+          this.datosEstado.display = "Ocupado";
+        }
+        this.datosEstado.estado = data.formularios.rows[0].estado;
+      }
+    });
+  }
+
+  cambiarEstado(){
+    
+    if(this.datosEstado.estado == "D"){
+      this.datosEstado.estado = "O";
+      this.datosEstado.display = "Ocupado";
+    }
+    else{
+      this.datosEstado.estado = "D";
+      this.datosEstado.display = "Disponible";
+    }
+    this.auth.cambiarEstado(this.datosEstado).subscribe(rows => {
+      console.log(rows.message);
+    });
   }
 
   irA(ruta){
@@ -21,3 +65,5 @@ export class ColabMenuComponent implements OnInit {
   }
 
 }
+
+
