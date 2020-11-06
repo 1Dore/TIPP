@@ -1,3 +1,4 @@
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
@@ -6,6 +7,13 @@ class estado{
   id:Number
   estado:String
   display:String
+}
+
+class citas{
+  nombre:String
+  descripcion:String
+  contrato_id:Number
+  estado:String
 }
 
 @Component({
@@ -17,6 +25,7 @@ export class ColabMenuComponent implements OnInit {
 
   constructor(private router:Router, public auth:ColaboradorService) { }
   userDisplayName = '';
+  listaCitas:Array<citas> = new Array<citas>();
   datosEstado:estado;
 
   ngOnInit(): void {
@@ -25,6 +34,7 @@ export class ColabMenuComponent implements OnInit {
     this.datosEstado.estado = '';
     this.userDisplayName = localStorage.getItem('loggedUser');
     this.getColaboradoresEstado();
+    this.obtenerCitas();
   }
 
   getColaboradoresEstado(){
@@ -58,6 +68,10 @@ export class ColabMenuComponent implements OnInit {
     this.auth.cambiarEstado(this.datosEstado).subscribe(rows => {
       console.log(rows.message);
     });
+  }
+
+  obtenerCitas(){
+
   }
 
   irA(ruta){

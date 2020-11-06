@@ -5,7 +5,7 @@ module.exports = (app) => {
 
     app.post('/newContrato', (req, res, next) => {
         let date = new Date(req.body.fecha_inicio);             //creo un objeto date que recibe un string con la forma de un objeto date de ts y este lo transforma en parametros para crear un objeto Date en JS
-        let querry =  `Insert into contratos (f_init, u_id, c_id) values ($1, ${req.body.u_id}, ${req.body.c_id})`; //$1 es una forma de transformar el dato, $1 meteria a la vase de datos un DATE
+        let querry =  `Insert into contratos (f_init, u_id, c_id, estado) values ($1, ${req.body.u_id}, ${req.body.c_id}, 'E')`; //$1 es una forma de transformar el dato, $1 meteria a la vase de datos un DATE
         conn.query( querry, [date], (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});  
             else res.json({status: 1, message: "Se creo un contrato satisfactoriamente", formularios});
@@ -49,6 +49,18 @@ module.exports = (app) => {
             else res.json({status: 1, message: "Mensaje enviado satisfactoriamente", formularios});
         });
     });
+
+    //querrys para las citas
+    app.post('getCitasColab', (req, res, next) => {
+        let query = `Select * from contratos Where c_id = ${req.body.c_id} and (estado = 'A' or estado = 'E')`;
+        conn.query(query, (error, formularios, cols) => {
+            if(error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, message: "Obtecionm de los mensajes exitoso"});
+        });
+    });
+
+    
+
 
 
 }

@@ -44,6 +44,11 @@ export class ColaboradorService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  getCitas(data):Observable<any>{
+    let url = dominio+'getCitasColab';
+    return this.http.post(url, data, httpHeaders);
+  }
+
 
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
