@@ -82,7 +82,7 @@ import {MatRadioModule} from '@angular/material/radio';
     FormsModule,
     MatCheckboxModule,
     GoogleMapsModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

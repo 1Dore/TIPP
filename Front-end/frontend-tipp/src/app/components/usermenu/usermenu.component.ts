@@ -1,11 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Query, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 
 class Etiqueta{
   nombre: string;
   id: number;
+}
+
+class Ubicacion{
+  lat: number;
+  lng: number
 }
 
 class id{
@@ -18,6 +24,7 @@ class colaborador{
   etiquetas: Array<Etiqueta>;
   foto: string;
   correo: string;
+  ubicacion: Ubicacion;
 }
 
 class Contrato{
@@ -34,6 +41,11 @@ declare var google:any;
   styleUrls: ['./usermenu.component.scss']
 })
 export class UsermenuComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
+  @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
+  
+  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
+
   //cosas de google maps
   name_tags: FormGroup;
   modo: string;
@@ -42,17 +54,28 @@ export class UsermenuComponent implements OnInit {
   lista_collabs: Array<colaborador> = new Array<colaborador>();
   collabs_ids: Array<id> = new Array<id>();
   encontrados: boolean;
-  map:any;
 
   //algo necesario para comunicarnos con el hmtl para el mapa
   @ViewChild('map', {read: ElementRef, static: false}) mapRef:ElementRef;
 
-  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
-
-
   userDisplayName = '';
-
   
+  zoom = 12
+  center: google.maps.LatLngLiteral
+  options: google.maps.MapOptions = {
+    mapTypeControl: false,
+    zoomControl: true,
+    scrollwheel: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    disableDoubleClickZoom: true,
+    mapTypeId: 'roadmap',
+    maxZoom: 20,
+    minZoom: 8,
+  }
+  markers = []
+  infoContent = ''
+
   ngOnInit(): void {
     this.modo = "mapa";
     this.name_tags = this.fb.group({
@@ -63,6 +86,9 @@ export class UsermenuComponent implements OnInit {
     params.set('string', '');
     window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
     this.beginSearch();
+    
+    this.ubicacionActual();
+    this.getUbicacionColaboradores();
   }
 
   //init mapa
@@ -84,11 +110,82 @@ export class UsermenuComponent implements OnInit {
     
   }
 
+  //-----------------------  CODIGO DEL MAPA -------------------------
+
   modoMapa(){
     this.modo = "mapa";
   }
 
-  // CODIGO DE LA LISTA DE COLABORADORES
+  ubicacionActual(){
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+      console.log(this.center);
+      this.addMiposicion();
+    })
+    
+  }
+  zoomIn() {
+    if (this.zoom < this.options.maxZoom) this.zoom++
+  }
+
+  zoomOut() {
+    if (this.zoom > this.options.minZoom) this.zoom--
+  }
+
+  click(event: google.maps.MouseEvent) {
+    console.log(event)
+  }
+
+  logCenter() {
+    console.log(JSON.stringify(this.map.getCenter()))
+  }
+
+  addMiposicion() {
+    this.markers.push({
+      position: {
+        lat: this.center.lat,
+        lng: this.center.lng,
+      },
+      label: {
+        color: 'black',
+        text: "Aqui Estoy",
+      },
+      title: 'Marker title ' + (this.markers.length + 4),
+      info: 'Marker info ' + (this.markers.length + 1),
+    })
+  }
+
+  addMarcador(ubicacion: Ubicacion){
+    this.markers.push({
+      position: {
+        lat: ubicacion.lat,
+        lng: ubicacion.lng,
+      },
+      title: 'Marker title ' + (this.markers.length + 4),
+      info: 'Marker info ' + (this.markers.length + 1),
+    })
+  }
+
+  openInfo(marker: MapMarker, content) {
+    this.infoContent = content
+    this.info.open(marker)
+  }
+
+  // Ubicacion de los colaboradores
+  getUbicacionColaboradores(){
+    this.query = "col.c_id IS NOT NULL";
+    this.buscarCollabsIDs();
+    this.lista_collabs.forEach(collab => {
+      this.addMarcador(collab.ubicacion);
+    })
+  }
+
+  //--------------- FIND DEL CODIGO DEL MAPA ------------------------
+
+  //--------------- CODIGO DE LA LISTA DE COLABORADORES --------------
   
   buscarCollabsIDs(){
     let temp: Array<id> = new Array<id>();
@@ -126,6 +223,7 @@ export class UsermenuComponent implements OnInit {
                temp.etiquetas.push(etiqueta);
              });
            }
+          temp.ubicacion = info.ubicacion;
          });
          this.lista_collabs.push(temp);
        });
@@ -136,7 +234,7 @@ export class UsermenuComponent implements OnInit {
     
     const params = new URLSearchParams(window.location.search);
     if(params.get('string') == ""){
-      this.query = "col.c_id IS NOT NULL";
+      this.query = "col.c_id IS NOT NULL AND estado = 'D'";
     }else{
       this.stringList = params.get('string').split(" ");
       this.generarConsulta();
@@ -165,7 +263,7 @@ export class UsermenuComponent implements OnInit {
          this.query += ' OR col.apellido =' + '\'' + str + '\'';
          this.query += ' OR e.e_Nombre =' + '\'' + str + '\')';
        }
-       
+       this.query += "AND estado = 'D'";
      });
      console.log(this.query);
    }
@@ -193,7 +291,7 @@ export class UsermenuComponent implements OnInit {
    }
 
 
-  // FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES
+  // -------------- FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES --------------
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  

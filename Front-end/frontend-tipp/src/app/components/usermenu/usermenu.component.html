@@ -45,8 +45,8 @@
                 <mat-toolbar class="toolbar">
                     <a (click)="drawer.toggle()">
                         <button mat-button><mat-icon class="center">menu</mat-icon></button>
-                      </a>
-                  </mat-toolbar>
+                    </a>
+                </mat-toolbar>
                 <div class="d-flex justify-content-around">
                     <form [formGroup]="name_tags" class="element">
                         <mat-form-field appearance="outline" class="buscador">
@@ -56,15 +56,37 @@
                                 <button (click)="buscarColaboradores()" mat-button><mat-icon matSuffix >search</mat-icon></button>
                             </div>
                         </mat-form-field>
-                        <div *ngIF="modo == 'buscador'">
-                            
-                        </div>
                     </form>
                 </div>
                 <div *ngIf="modo == 'mapa'">
                     <div class="d-flex justify-content-around">
-                        <div >
-                            <google-map></google-map>
+                        <div class= "container">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <google-map
+                                        width="100%"
+                                        [zoom]="zoom"
+                                        [center]="center"
+                                        [options]="options"
+                                        (mapClick)="click($event)"
+                                        >
+                                        <map-marker
+                                            #markerElem
+                                            *ngFor="let marker of markers"
+                                            [position]="marker.position"
+                                            [label]="marker.label"
+                                            [title]="marker.title"
+                                            [options]="marker.options"
+                                            (mapClick)="openInfo(markerElem, marker.info)"
+                                        >
+                                        </map-marker>
+
+                                        <map-info-window>{{ infoContent }}</map-info-window>
+                                    </google-map>
+                                </div>
+                                <div class="col-1"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -61,3 +61,18 @@
 .body{
     background-color: #ABB2B9;
 }
+.mat-list{
+    height: 100px;
+    max-height: 100px;
+}
+.chatbox{
+    width: 100%;
+}
+.messagebox{
+    max-height: 300px;
+    overflow: auto;
+}
+.chatInputText{
+    width: calc(100% - 100px);
+    padding-left: 70px;
+}
