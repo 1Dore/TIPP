@@ -14,6 +14,8 @@ class citas{
   descripcion:String
   contrato_id:Number
   estado:String
+  u_id:Number
+  telefono:String
 }
 
 @Component({
@@ -71,7 +73,36 @@ export class ColabMenuComponent implements OnInit {
   }
 
   obtenerCitas(){
+    let temp:citas = new citas();
+    this.auth.getCitas(this.datosEstado).subscribe(data => {
+      console.log(data);
+      data.formularios.rows.forEach((info) => {
+        temp.contrato_id = info.con_id;
+        temp.estado = info.estado;
+        temp.nombre = "";
+        temp.u_id = info.u_id;
+      });
 
+      this.auth.getUsuarioData(temp).subscribe(data => {
+
+        temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
+
+        temp.telefono = data.formularios.rows[0].telefono;
+
+      });
+      this.listaCitas.push(temp);
+    });
+
+    console.log(this.listaCitas);
+  }
+
+  getUsuarioData(data){
+    let nombre:String;
+    let telefono:String;
+
+    let lista = [nombre, telefono];
+    console.log(lista);
+    return lista;
   }
 
   irA(ruta){

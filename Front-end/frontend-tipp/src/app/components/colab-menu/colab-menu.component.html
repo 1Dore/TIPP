@@ -38,6 +38,9 @@
                     <a (click)="drawer.toggle()">
                         <button mat-button><mat-icon class="center">menu</mat-icon></button>
                     </a>
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
                     <div class ="row justify-content-md-center" >
                         <button  mat-raised-button type="submit" color="accent" class = "spacer" (click)="cambiarEstado()">{{datosEstado.display}}</button>
                     </div>
@@ -50,7 +53,7 @@
                 </mat-toolbar>
                 <div class="col-1"></div>
                 <div class="col-10">
-                    <mat-card>
+                    <mat-card *ngFor="let infoCita of listaCitas">
                         <mat-card-title><h2> Cita </h2></mat-card-title>
                         <mat-card-content class="img">
                             <div class="container">
@@ -59,12 +62,12 @@
                                         <div class="cuadrado" ></div>                            
                                     </div>
                                     <div class="col-4">
-                                        <p>Nombre del cliente: </p>
+                                        <p>Nombre del cliente: {{infoCita.nombre}}</p>
                                         Descripcion:
                                         <mat-list role="list">
-                                            <mat-list-item >nombre</mat-list-item>
-                                            <mat-list-item >contrato id</mat-list-item>
-                                            <mat-list-item >estado</mat-list-item>
+                                            <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
+                                            <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
+                                            <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>
                                         </mat-list>
                                     </div>
                                     <div class="col-4">

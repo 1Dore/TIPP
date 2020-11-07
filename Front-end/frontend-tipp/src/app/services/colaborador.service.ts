@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_transform';
 
 const dominio = environment.apiURL;
 const httpHeaders = {
@@ -46,6 +47,13 @@ export class ColaboradorService {
 
   getCitas(data):Observable<any>{
     let url = dominio+'getCitasColab';
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getUsuarioData(data):Observable<any>{
+    console.log("esta es mi data: ");
+    console.log(data);
+    let url = dominio+'getUsuarioNombre';
     return this.http.post(url, data, httpHeaders);
   }
 

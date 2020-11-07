@@ -63,20 +63,10 @@ export class UsermenuComponent implements OnInit {
     params.set('string', '');
     window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
     this.beginSearch();
-    this.initMap();
   }
 
   //init mapa
-  initMap(): void{
-    let location = new google.maps.LatLng(14.553979, -90.459848);
-    const options = {
-      center: location,
-      zoom: 15,
-      disableDefaultUI: true
-    }
 
-    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-  }
 
 
   buscarColaboradores(){

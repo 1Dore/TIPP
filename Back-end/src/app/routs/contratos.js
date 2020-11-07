@@ -34,15 +34,15 @@ module.exports = (app) => {
     });
 
     //Querys para el Chat Chat 
-    app.post('getMessages', (req, res, next) => {
+    app.post('/getMessages', (req, res, next) => {
         let query = `Select * from mensajes  Where con_id = ${req.body.con_id}`;
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
-            else res.json({status: 1, message: "Obtecionm de los mensajes exitoso"});
+            else res.json({status: 1, message: "Obtecion de los mensajes exitoso"});
         });
     });
 
-    app.post('sendMessage', (req, res, next) => {
+    app.post('/sendMessage', (req, res, next) => {
         let querry = `Insert into mensajes (con_id, sendBy, content, fecha) Values (${req.body.con_id}, '${req.body.emisor}', '${req.body.content}', '${req.body.fecha}')`;
         conn.query( querry, [date], (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});  
@@ -51,11 +51,11 @@ module.exports = (app) => {
     });
 
     //querrys para las citas
-    app.post('getCitasColab', (req, res, next) => {
-        let query = `Select * from contratos Where c_id = ${req.body.c_id} and (estado = 'A' or estado = 'E')`;
+    app.post('/getCitasColab', (req, res, next) => {
+        let query = `Select * from contratos Where c_id = ${req.body.id} and (estado = 'A' or estado = 'E')`;
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
-            else res.json({status: 1, message: "Obtecionm de los mensajes exitoso"});
+            else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
         });
     });
 
