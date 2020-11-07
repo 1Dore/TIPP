@@ -1,0 +1,72 @@
+.contenedor{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: centerx;
+    align-self: center;
+}
+.buscador{
+    width: 100%;
+    padding-left: 25%;
+    padding-right: 25%;
+    align-items: centerx;
+    align-self: center;
+
+}
+.element{
+    width: 100%;
+    height: 100%;
+}
+.sidemenu{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #2C3E50;
+    color: #FFFFFF;
+    text-align: center;
+}
+.topleft {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 18px;
+}
+.bottomcenter{
+    position: absolute;
+    bottom: 8px;
+    font-size: 18px;
+}
+.mapa{
+    width: 45%;
+    height: 500px;
+    background-color: gray;
+}
+.cuadrado{
+    width: 180px;
+    height: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: gray;
+}
+.upperbar{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(168, 223, 255);
+    align-self: center;
+}
+
+.toolbar{
+    background-color:  #2C3E50;
+}
+
+.body{
+    background-color: #ABB2B9;
+}
+
+.mat-radio-button {
+    margin-left: 16px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
