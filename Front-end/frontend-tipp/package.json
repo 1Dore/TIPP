@@ -27,6 +27,7 @@
     "crypto-js": "^4.0.0",
     "crypto.js": "^2.0.2",
     "google-maps": "^4.3.3",
+    "ng-chat": "^3.0.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -75,7 +75,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatDialogModule,
     FormsModule,
     MatCheckboxModule,
-    GoogleMapsModule
+    GoogleMapsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

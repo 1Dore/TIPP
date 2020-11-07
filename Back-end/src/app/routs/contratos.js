@@ -33,9 +33,27 @@ module.exports = (app) => {
 
     });
 
-    //Querys para el Chat Chat 
+    app.post('/getContratosForUser', (req, res, next) => {
+        let query = `Select * From Contratos Where u_id = ${req.body.u_id}`;
+
+        conn.query(query, (error, formularios, cols) => {
+            if (error) res.json({status: 0, message: `Error al buscar contratos: ${error}`});
+            else res.json({status: 1, message: "Contratos Obtenidos", formularios});
+        });
+    });
+
+    app.post('/getCitasForCollab', (req, res, next) => {
+        let query = `Select * From Contratos Where c_id = ${req.body.c_id}`;
+
+        conn.query(query, (error, formularios, cols) => {
+            if (error) res.json({status: 0, message: `Error al buscar contratos: ${error}`});
+            else res.json({status: 1, message: "Contratos Obtenidos", formularios});
+        });
+    });
+
+    //Querys para el Chat
     app.post('getMessages', (req, res, next) => {
-        let query = `Select * from mensajes  Where con_id = ${req.body.con_id}`;
+        let query = `Select * From mensajes  Where con_id = ${req.body.con_id} ORDER BY fecha`;
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Obtecionm de los mensajes exitoso"});

@@ -9,8 +9,6 @@
     <span>
       
       <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
-
-        <mat-checkbox [(ngModel)]="collab_mode">Soy Colaborador</mat-checkbox>
         <mat-form-field class="element">
             <mat-label>Correo</mat-label>
             <input type="text" matInput placeholder="Ex. ejemplo@email.com" formControlName="correoLog" id="correolog" 

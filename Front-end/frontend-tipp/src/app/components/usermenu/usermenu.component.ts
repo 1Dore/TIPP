@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 
@@ -31,6 +32,11 @@ class Contrato{
   styleUrls: ['./usermenu.component.scss']
 })
 export class UsermenuComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
+  @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
+  
+  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
+
   name_tags: FormGroup;
   modo: string;
   stringList: Array<string>;
@@ -39,8 +45,24 @@ export class UsermenuComponent implements OnInit {
   collabs_ids: Array<id> = new Array<id>();
   encontrados: boolean;
 
-  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
   userDisplayName = '';
+  
+  zoom = 12
+  center: google.maps.LatLngLiteral
+  options: google.maps.MapOptions = {
+    mapTypeControl: false,
+    zoomControl: true,
+    scrollwheel: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    disableDoubleClickZoom: true,
+    mapTypeId: 'roadmap',
+    maxZoom: 20,
+    minZoom: 8,
+  }
+  markers = []
+  infoContent = ''
+
   ngOnInit(): void {
     this.modo = "mapa";
 
@@ -52,6 +74,8 @@ export class UsermenuComponent implements OnInit {
     params.set('string', '');
     window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
     this.beginSearch();
+    
+    this.ubicacionActual();
   }
 
   buscarColaboradores(){
@@ -69,11 +93,60 @@ export class UsermenuComponent implements OnInit {
     
   }
 
+  //-----------------------  CODIGO DEL MAPA -------------------------
+
   modoMapa(){
     this.modo = "mapa";
   }
 
-  // CODIGO DE LA LISTA DE COLABORADORES
+  ubicacionActual(){
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.center = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+      console.log(this.center);
+      this.addMiposicion();
+    })
+    
+  }
+  zoomIn() {
+    if (this.zoom < this.options.maxZoom) this.zoom++
+  }
+
+  zoomOut() {
+    if (this.zoom > this.options.minZoom) this.zoom--
+  }
+
+  click(event: google.maps.MouseEvent) {
+    console.log(event)
+  }
+
+  logCenter() {
+    console.log(JSON.stringify(this.map.getCenter()))
+  }
+
+  addMiposicion() {
+    this.markers.push({
+      position: {
+        lat: this.center.lat,
+        lng: this.center.lng,
+      },
+      label: {
+        color: 'black',
+        text: "Aqui Estoy",
+      },
+      title: 'Marker title ' + (this.markers.length + 4),
+      info: 'Marker info ' + (this.markers.length + 1),
+    })
+  }
+
+  openInfo(marker: MapMarker, content) {
+    this.infoContent = content
+    this.info.open(marker)
+  }
+
+  //--------------- CODIGO DE LA LISTA DE COLABORADORES --------------
   
   buscarCollabsIDs(){
     let temp: Array<id> = new Array<id>();
