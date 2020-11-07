@@ -8,10 +8,14 @@ import { ListaDeColaboradoresComponent } from './components/lista-de-colaborador
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { ColabMenuComponent } from './components/colab-menu/colab-menu.component';
-import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
+import { ColabSettingsComponent } from './components/colab-things/colab-settings/colab-settings.component';
 import { UserPerfilComponent } from './components/user-things/user-perfil/user-perfil.component';
 import { UserSettingsComponent } from './components/user-things/user-settings/user-settings.component';
+import { UserCitasComponent } from './components/user-citas/user-citas.component';
 import { UserCollabChatComponent } from './components/user-collab-chat/user-collab-chat.component';
+import { ColabPerfilComponent } from './components/colab-things/colab-perfil/colab-perfil.component';
+
+
 
 
 const routes: Routes = [
@@ -26,7 +30,10 @@ const routes: Routes = [
   {path: 'colabmenu/colab-settings', component: ColabSettingsComponent},
   {path: 'usermenu/perfil', component: UserPerfilComponent},
   {path: 'usermenu/settings', component: UserSettingsComponent},
+  {path: 'usermenu/citas', component: UserCitasComponent},
   {path: 'user-collab/chat', component: UserCollabChatComponent},
+  {path: 'colab-menu/perfil', component: ColabPerfilComponent},
+  {path: 'colab-menu/settings', component: ColabSettingsComponent},
   {path: '**', redirectTo: "TIPP_Register", pathMatch:"full"}
 ];
 
@@ -35,6 +42,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-
 

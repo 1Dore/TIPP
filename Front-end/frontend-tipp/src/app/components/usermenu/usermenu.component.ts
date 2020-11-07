@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Router } from '@angular/router';
@@ -20,11 +20,14 @@ class colaborador{
   foto: string;
   correo: string;
 }
+
 class Contrato{
   u_id:Number;
   c_id:Number;
   fecha_inicio:String;
 }
+
+declare var google:any;
 
 @Component({
   selector: 'app-usermenu',
@@ -37,6 +40,7 @@ export class UsermenuComponent implements OnInit {
   
   constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
 
+  //cosas de google maps
   name_tags: FormGroup;
   modo: string;
   stringList: Array<string>;
@@ -44,6 +48,9 @@ export class UsermenuComponent implements OnInit {
   lista_collabs: Array<colaborador> = new Array<colaborador>();
   collabs_ids: Array<id> = new Array<id>();
   encontrados: boolean;
+
+  //algo necesario para comunicarnos con el hmtl para el mapa
+  @ViewChild('map', {read: ElementRef, static: false}) mapRef:ElementRef;
 
   userDisplayName = '';
   
@@ -65,7 +72,6 @@ export class UsermenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.modo = "mapa";
-
     this.name_tags = this.fb.group({
       string: [""],
     });
@@ -76,7 +82,21 @@ export class UsermenuComponent implements OnInit {
     this.beginSearch();
     
     this.ubicacionActual();
+    this.initMap();
   }
+
+  //init mapa
+  initMap(): void{
+    let location = new google.maps.LatLng(14.553979, -90.459848);
+    const options = {
+      center: location,
+      zoom: 15,
+      disableDefaultUI: true
+    }
+
+    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+  }
+
 
   buscarColaboradores(){
     this.modo = "buscador";

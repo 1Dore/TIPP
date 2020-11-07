@@ -20,7 +20,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { LogRegMenuComponent } from './components/log-reg-menu/log-reg-menu.component';
 import { UserSettingsComponent } from './components/user-things/user-settings/user-settings.component';
-import { ColabSettingsComponent } from './components/colab-settings/colab-settings.component';
+import { ColabSettingsComponent } from './components/colab-things/colab-settings/colab-settings.component';
 import {HttpClientModule } from '@angular/common/http';
 import { ListaDeColaboradoresComponent } from './components/lista-de-colaboradores/lista-de-colaboradores.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
@@ -34,6 +34,10 @@ import { UserPerfilComponent } from './components/user-things/user-perfil/user-p
 import { FormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { GoogleMapsModule } from '@angular/google-maps';
+import {UserCitasComponent } from './components/user-citas/user-citas.component';
+import { ColabPerfilComponent } from './components/colab-things/colab-perfil/colab-perfil.component';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -53,6 +57,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     UserCollabChatComponent,
     ColabMenuComponent,
     UserPerfilComponent,
+    UserCitasComponent,
+    ColabPerfilComponent
 
 
   ],
@@ -76,6 +82,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     FormsModule,
     MatCheckboxModule,
     GoogleMapsModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

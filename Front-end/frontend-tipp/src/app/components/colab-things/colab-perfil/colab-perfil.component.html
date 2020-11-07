@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>TIPP</title>
+</head>
+<body>
+
+    <mat-drawer-container class="element">
+        <!-- Side Menu -->
+            <mat-drawer #drawer mode="over" class="sidemenu">
+                <div class="d-flex justify-content-around">
+                    <div class="cuadrado"></div>
+                </div>
+
+                <div *ngIf="auth.isLogin()">
+                    <button mat-button (click)="irA('/colabmenu')">{{userDisplayName}}</button>
+                </div>
+
+                <div class="d-flex justify-content-around">
+                    <button mat-button class="center">About</button>
+                </div>
+                
+                <div class="d-flex justify-content-around">
+                    <button mat-button><mat-icon class="center">settings</mat-icon></button>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
+                </div>
+            </mat-drawer>
+
+            <!-- el menú como tal -->
+
+            <mat-drawer-content>
+                <mat-toolbar class="toolbar">
+                    <a (click)="drawer.toggle()">
+                        <button mat-button><mat-icon class="center">menu</mat-icon></button>
+                      </a>
+                  </mat-toolbar>
+
+                  <div class="container">
+            
+                    <div class ="row justify-content-md-center">
+                        <div class="mapa">Foto</div>
+                    </div>
+        
+                    <form [formGroup]="UserForm" (ngSubmit)="onSubmit()">
+        
+                        <div class ="row justify-content-md-center">
+        
+                            <mat-form-field class="element">
+                                <mat-label>Nombre</mat-label>
+                                <input type="text" matInput formControlName='nombre' id="passwordlog">
+                            </mat-form-field>
+            
+                        </div>
+        
+                        <div class ="row justify-content-md-center">
+        
+                            <mat-form-field class="element">
+                                <mat-label>Apellido</mat-label>
+                                <input type="text" matInput formControlName='apellido' id="passwordlog" autocomplete="off">
+                            </mat-form-field>
+            
+                        </div>
+        
+                    <div class ="row justify-content-md-center">
+        
+                        <mat-form-field class="element">
+                            <mat-label>Correo</mat-label>
+                            <input type="text" matInput placeholder="Ex. ejemplo@email.com" formControlName="correo" id="correolog" 
+                            pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" >
+                        </mat-form-field>
+                        
+                    </div>
+        
+                
+                
+                    <div class ="row justify-content-md-center">
+        
+                        <mat-form-field class="element">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput formControlName='password' id="passwordlog">
+                        </mat-form-field>
+        
+                    </div>
+                            
+                    <div class ="row justify-content-md-center">
+        
+                        <mat-form-field class="element">
+                            <mat-label>Telefono</mat-label>
+                            <input type="text" matInput formControlName='telefono' id="passwordlog">
+                        </mat-form-field>
+        
+                    </div>
+
+                    <div class ="row justify-content-md-center">
+                        <button  mat-raised-button type="submit" color="accent">Update</button>
+                    </div>
+                    
+
+                    <div class ="row justify-content-md-center">
+                        <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/colabmenu")'>Regresar</button>
+                    </div>
+        
+                    </form>
+        
+                </div>
+
+
+            </mat-drawer-content>
+
+        
+        </mat-drawer-container>
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>                
+</body>
+</html>

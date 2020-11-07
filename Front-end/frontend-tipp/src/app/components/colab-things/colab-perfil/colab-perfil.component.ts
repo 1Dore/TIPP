@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormularioService } from 'src/app/services/formulario.service';
+import { ColaboradorService } from 'src/app/services/colaborador.service';
 import CryptoJS from 'crypto-js';
 
-class userData{
+class ColabData{
   nombre:String
   apellido:String
   telefono:String
@@ -14,18 +14,24 @@ class userData{
 }
 
 @Component({
-  selector: 'app-user-perfil',
-  templateUrl: './user-perfil.component.html',
-  styleUrls: ['./user-perfil.component.scss']
+  selector: 'app-colab-perfil',
+  templateUrl: './colab-perfil.component.html',
+  styleUrls: ['./colab-perfil.component.scss']
 })
-export class UserPerfilComponent implements OnInit {
+
+
+export class ColabPerfilComponent implements OnInit {
+
   UserForm:FormGroup
-  data:userData
-  constructor(private form:FormBuilder, private router:Router, public auth:FormularioService) { }
+  data:ColabData
+
+  constructor(private form:FormBuilder, public auth:ColaboradorService, private router:Router) { }
   userDisplayName = '';
 
+
   ngOnInit(): void {
-    this.data = new userData();
+
+    this.data = new ColabData();
     let id = Number(localStorage.getItem('id'));
     let con = false;
 
@@ -37,15 +43,14 @@ export class UserPerfilComponent implements OnInit {
       telefono:['', Validators.required]
     });
 
-    this.auth.askUserData(id).subscribe(data => {
+    this.auth.askColabData(id).subscribe(data => {
 
       this.data.nombre = data.formularios.rows[0].nombre;
       this.data.apellido = data.formularios.rows[0].apellido;
       this.data.correo = data.formularios.rows[0].correo;
       this.data.telefono = data.formularios.rows[0].telefono;
-      this.data.contraseña = data.formularios.rows[0].contraseña;
-      
-      
+      this.data.contraseña = data.formularios.rows[0].c_contraseña;
+
       this.UserForm.setValue({
         correo:this.data.correo,
         password:"Espacio",
@@ -54,21 +59,16 @@ export class UserPerfilComponent implements OnInit {
         telefono:this.data.telefono
       });
 
-
-
-
     });
-
 
     console.log(this.UserForm.value.password)
     this.userDisplayName = localStorage.getItem('loggedUser');
+
   }
 
-
-
   onSubmit(){
-    console.log(this.data);
-    let datos:userData = new userData();
+
+    let datos:ColabData = new ColabData();
     datos.nombre = this.UserForm.value.nombre;
     datos.apellido = this.UserForm.value.apellido;
     datos.correo = this.UserForm.value.correo;
@@ -79,18 +79,14 @@ export class UserPerfilComponent implements OnInit {
     if (this.UserForm.value.password == "Espacio"){
       datos.contraseña = this.data.contraseña;
     }
+
     else{
       datos.contraseña = this.UserForm.value.password;
-      //---------------------------------------encriptacion-------------------------------
-      var passwordBytes = CryptoJS.enc.Utf16LE.parse(datos.contraseña);
-      var sha1Hash = CryptoJS.SHA1(passwordBytes);
-      var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
-      datos.contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
-      datos.contraseña = CryptoJS.SHA1(datos.contraseña).toString();
-       //---------------------------------------encriptacion---------------------------------
+      datos.contraseña = this.encriptar(datos.contraseña);
     }
+    console.log(datos);
 
-    this.auth.updateUserData(datos).subscribe(data => {
+    this.auth.updateColabData(datos).subscribe(data => {
 
       if(data.message == "Datos de usuario Actualizados") alert("Datos actualizados satisfactoriamete");
       else {
@@ -99,6 +95,17 @@ export class UserPerfilComponent implements OnInit {
 
     });
 
+  }
+
+  encriptar(contraseña:String){
+      //---------------------------------------encriptacion-------------------------------
+      var passwordBytes = CryptoJS.enc.Utf16LE.parse(contraseña);
+      var sha1Hash = CryptoJS.SHA1(passwordBytes);
+      var sha1HashToBase64 = sha1Hash.toString(CryptoJS.enc.Base64);
+      contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
+      contraseña = CryptoJS.SHA1(contraseña).toString();
+       //---------------------------------------encriptacion---------------------------------
+    return contraseña;
   }
 
   abrir(ruta){

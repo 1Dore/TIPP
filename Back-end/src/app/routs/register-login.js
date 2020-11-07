@@ -28,7 +28,7 @@ module.exports = (app) => {
 
     app.post('/getColaboradores/', (req, res, next) => {
 
-        let querry = `Select * from colaborador where correo = '${req.params.correo}' and c_contraseña = '${req.params.password}'`;
+        let querry = `Select * from colaborador where correo = '${req.body.correo}' and c_contraseña = '${req.body.contraseña}'`;
         conn.query( querry, (error, formularios, cols) => {
 
             if (error) res.json({status: 0, message: `${error}`});
@@ -75,6 +75,8 @@ module.exports = (app) => {
             else res.json({status: 1, formularios})
         })
     });
+
+    app.post('')
 
     //--------------------ADMIN--------------------------------------
     app.post('/getAdmin', (req, res, next) => {

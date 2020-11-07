@@ -4,27 +4,35 @@
 
     <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
     <span color="primary">Welcome to TIPP</span>
-    <span class="spacer"></span>
+    <span class = "spacer"></span>
 
     <span>
+      <section>
+        <mat-checkbox [(ngModel)]="collab_mode">Soy Colaborador</mat-checkbox>
+      </section>
+    </span>
+
+    <span>
+
       
       <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field class="element">
+
+
+        <mat-form-field>
             <mat-label>Correo</mat-label>
             <input type="text" matInput placeholder="Ex. ejemplo@email.com" formControlName="correoLog" id="correolog" 
             pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" >
         </mat-form-field>
 
-        <mat-form-field class="element">
+        <mat-form-field>
             <mat-label>Password</mat-label>
             <input type="password" matInput formControlName='passwordLog' id="passwordlog">
         </mat-form-field>
             <button [disabled] = "LoginForm.invalid" mat-raised-button type="submit" color="accent">Iniciar Sesisón</button>
       </form>
 
-
-
     </span>
+
 
   </mat-toolbar>
 

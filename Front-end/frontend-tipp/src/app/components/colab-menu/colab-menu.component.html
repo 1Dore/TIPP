@@ -16,11 +16,7 @@
                 </div>
 
                 <div *ngIf="auth.isLogin()">
-                    <button mat-button (click)="irA('/user-page')">{{userDisplayName}}</button>
-                </div>
-                
-                <div class="d-flex justify-content-around">
-                    <button mat-button>Citas</button>
+                    <button mat-button (click)="irA('/colab-menu/perfil')">{{userDisplayName}}</button>
                 </div>
 
                 <div class="d-flex justify-content-around">
@@ -33,9 +29,56 @@
                 <div class="d-flex justify-content-around">
                     <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
                 </div>
-
-
             </mat-drawer>
+
+            <!-- el menú como tal -->
+
+            <mat-drawer-content>
+                <mat-toolbar class="toolbar">
+                    <a (click)="drawer.toggle()">
+                        <button mat-button><mat-icon class="center">menu</mat-icon></button>
+                    </a>
+                    <div class ="row justify-content-md-center" >
+                        <button  mat-raised-button type="submit" color="accent" class = "spacer" (click)="cambiarEstado()">{{datosEstado.display}}</button>
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <button  mat-raised-button type="submit" color="accent" class = "spacer" (click)="obtenerCitas()">Refresh</button>
+                    </div>
+                </mat-toolbar>
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <mat-card>
+                        <mat-card-title><h2> Cita </h2></mat-card-title>
+                        <mat-card-content class="img">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="cuadrado" ></div>                            
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Nombre del cliente: </p>
+                                        Descripcion:
+                                        <mat-list role="list">
+                                            <mat-list-item >nombre</mat-list-item>
+                                            <mat-list-item >contrato id</mat-list-item>
+                                            <mat-list-item >estado</mat-list-item>
+                                        </mat-list>
+                                    </div>
+                                    <div class="col-4">
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+
+            </mat-drawer-content>
+
+        
         </mat-drawer-container>
 
 

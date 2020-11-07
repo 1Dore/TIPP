@@ -4,6 +4,7 @@ require('./app/routs/buscador')(app);
 require('./app/routs/admin')(app);
 require('./app/routs/contratos')(app);
 require('./app/routs/usuario')(app);
+require('./app/routs/colaboradores')(app);
 
 
 app.listen(app.get("port"), () => 

@@ -7,6 +7,9 @@ const dominio = environment.apiURL;
 const httpHeaders = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
+class iD{
+  id:Number
+}
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +19,48 @@ export class ColaboradorService {
   constructor( private http:HttpClient ) { }
   
 
-  //----------------colaborador----------------------
+  //----------------colaborador------------------------
+  askColabData(data):Observable<any>{ 
+    let id = new iD();
+    id.id = data;
+    let url = dominio + 'getColaboradoresData';
+    return this.http.post(url, id, httpHeaders);
+  }
+
+  updateColabData(data):Observable<any>{
+    let url = dominio + 'updateColaboradorData';
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  cambiarEstado(data):Observable<any>{
+    let url = dominio+'cambiarEstadoColab';
+    console.log(data);
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getColaboradoresEstado(data):Observable<any>{
+    let url = dominio+'getColaboradoresEstado';
+    console.log(data);
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getCitas(data):Observable<any>{
+    let url = dominio+'getCitasColab';
+    return this.http.post(url, data, httpHeaders);
+  }
+
 
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
     
     let url = dominio + 'newColab';
     return this.http.post(url, data, httpHeaders);
+  }
+
+  sentLoginColab(datos): Observable<any>{
+    console.log(datos);
+    let url = dominio + 'getColaboradores';
+    return this.http.post(url, datos, httpHeaders); 
   }
 
   isLogin() {

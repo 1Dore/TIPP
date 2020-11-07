@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>TIPP</title>
+    <script defer async 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_rCBrWnTOHvv0d2TvE4LqXNs9zOn6Uko&callback=initMap&libraries=&v=weekly">
+    </script>
+      
 </head>
 <body>
 
@@ -86,6 +90,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!--  Aqui empieza el buscador -->
                 <div *ngIf="modo == 'buscador'">
                     <button mat-button (click)="modoMapa()">Ver Mapa</button>
                     <div class="container">
@@ -124,7 +130,9 @@
                     </div>
 
                 </div>
-                
+                <!--  Aqui termina el buscador -->
+                <div #map id="map"></div>
+
             </mat-drawer-content>
     </mat-drawer-container>
 
