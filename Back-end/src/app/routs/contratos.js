@@ -79,7 +79,6 @@ module.exports = (app) => {
 
     app.post('/getCitasUser', (req, res, next) => {
         let query = `Select * from contratos Where u_id = ${req.body.id} and (estado = 'A' or estado = 'E')`;
-        console.log(query);
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
