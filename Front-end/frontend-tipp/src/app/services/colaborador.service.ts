@@ -49,6 +49,12 @@ export class ColaboradorService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  //Agregar Ubicacion
+  setUbicacionActual(data): Observable<any>{
+    let url = dominio + "setMyPosition";
+    return this.http.post(url, data, httpHeaders); 
+  }
+
 
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
@@ -89,5 +95,7 @@ export class ColaboradorService {
     let url = dominio + 'setTagsForCollab';
     return this.http.post(url, data, httpHeaders);
   };
+
+
 
 }

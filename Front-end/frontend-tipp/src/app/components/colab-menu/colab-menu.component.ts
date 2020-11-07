@@ -28,6 +28,8 @@ export class ColabMenuComponent implements OnInit {
   listaCitas:Array<citas> = new Array<citas>();
   datosEstado:estado;
 
+  center: google.maps.LatLngLiteral;
+
   ngOnInit(): void {
     this.datosEstado = new estado();
     this.datosEstado.id = Number(localStorage.getItem('id'));
@@ -78,6 +80,17 @@ export class ColabMenuComponent implements OnInit {
     this.router.navigateByUrl(ruta);
   }
 
+  //Guardar Ubicacion
+  guardarUbicacion(){
+    let ubicacion;
+    navigator.geolocation.getCurrentPosition((position) => {
+      ubicacion = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+    });
+    this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion)});
+  }
 }
 
 

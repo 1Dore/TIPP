@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Query, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Router } from '@angular/router';
@@ -7,6 +7,11 @@ import { FormularioService } from 'src/app/services/formulario.service';
 class Etiqueta{
   nombre: string;
   id: number;
+}
+
+class Ubicacion{
+  lat: number;
+  lng: number
 }
 
 class id{
@@ -19,6 +24,7 @@ class colaborador{
   etiquetas: Array<Etiqueta>;
   foto: string;
   correo: string;
+  ubicacion: Ubicacion;
 }
 
 class Contrato{
@@ -82,6 +88,7 @@ export class UsermenuComponent implements OnInit {
     this.beginSearch();
     
     this.ubicacionActual();
+    this.getUbicacionColaboradores();
     this.initMap();
   }
 
@@ -161,10 +168,32 @@ export class UsermenuComponent implements OnInit {
     })
   }
 
+  addMarcador(ubicacion: Ubicacion){
+    this.markers.push({
+      position: {
+        lat: ubicacion.lat,
+        lng: ubicacion.lng,
+      },
+      title: 'Marker title ' + (this.markers.length + 4),
+      info: 'Marker info ' + (this.markers.length + 1),
+    })
+  }
+
   openInfo(marker: MapMarker, content) {
     this.infoContent = content
     this.info.open(marker)
   }
+
+  // Ubicacion de los colaboradores
+  getUbicacionColaboradores(){
+    this.query = "col.c_id IS NOT NULL";
+    this.buscarCollabsIDs();
+    this.lista_collabs.forEach(collab => {
+      this.addMarcador(collab.ubicacion);
+    })
+  }
+
+  //--------------- FIND DEL CODIGO DEL MAPA ------------------------
 
   //--------------- CODIGO DE LA LISTA DE COLABORADORES --------------
   
@@ -204,6 +233,7 @@ export class UsermenuComponent implements OnInit {
                temp.etiquetas.push(etiqueta);
              });
            }
+          temp.ubicacion = info.ubicacion;
          });
          this.lista_collabs.push(temp);
        });
@@ -214,7 +244,7 @@ export class UsermenuComponent implements OnInit {
     
     const params = new URLSearchParams(window.location.search);
     if(params.get('string') == ""){
-      this.query = "col.c_id IS NOT NULL";
+      this.query = "col.c_id IS NOT NULL AND estado = 'D'";
     }else{
       this.stringList = params.get('string').split(" ");
       this.generarConsulta();
@@ -243,7 +273,7 @@ export class UsermenuComponent implements OnInit {
          this.query += ' OR col.apellido =' + '\'' + str + '\'';
          this.query += ' OR e.e_Nombre =' + '\'' + str + '\')';
        }
-       
+       this.query += "AND estado = 'D'";
      });
      console.log(this.query);
    }
@@ -271,7 +301,7 @@ export class UsermenuComponent implements OnInit {
    }
 
 
-  // FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES
+  // -------------- FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES --------------
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  

@@ -68,14 +68,14 @@ a
                                 </mat-card>
                             </mat-card-content>
                             <mat-card-actions>
-                                <form [formGroup]="mensaje">
+                                <form [formGroup]="mensajeForm">
                                     <mat-form-field appearance="outline" class="chatInputText">
                                         <mat-label>Escriba su mensaje aqui</mat-label>
                                         <div class="d-flex justify-content-around">
                                             <input matInput placeholder="Buscar" > 
                                         </div>
                                     </mat-form-field>
-                                    <button [disabled] = "mensaje.validator()" (click)="enviarmensaje()" mat-button><mat-icon matSuffix>search</mat-icon></button>
+                                    <button [disabled] = "mensajeForm.invalid" (click)="enviarmensaje()" mat-button><mat-icon matSuffix>search</mat-icon></button>
                                 </form>
                             </mat-card-actions>
                         </mat-card>

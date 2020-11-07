@@ -38,6 +38,14 @@ module.exports = (app) => {
         });
     });
 
+    app.post('setMyPosition', (req, res, next) => {
+        let query = `Update colaborador set ubicacion = '${req.body.ubicacion}' where c_id = ${req.body.id}`;
+        conn.query(query, (err, formularios, cols) => {
+            if (err) res.json({status: 0, message: `${err}`});  
+            else res.json({status: 1, message: "Ubicacion ha sido actualizada", formularios});
+        });
+    })
+
 
 }
 
