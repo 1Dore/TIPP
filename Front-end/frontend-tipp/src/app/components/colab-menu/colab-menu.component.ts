@@ -77,11 +77,10 @@ export class ColabMenuComponent implements OnInit {
   }
 
   obtenerCitas(){
-    let temp:citas = new citas();
+
     this.auth.getCitas(this.datosEstado).subscribe(data => {
-      console.log(data);
       data.formularios.rows.forEach((info) => {
- 
+        let temp:citas = new citas();
         if(data.formularios.rowCount > 0){
           this.citas = true;
           temp.contrato_id = info.con_id;
@@ -106,6 +105,7 @@ export class ColabMenuComponent implements OnInit {
 
     console.log(this.listaCitas);
   }
+
 
   getUsuarioData(data){
     let nombre:String;
