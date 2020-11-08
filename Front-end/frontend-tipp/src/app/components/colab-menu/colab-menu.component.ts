@@ -40,6 +40,7 @@ export class ColabMenuComponent implements OnInit {
     this.userDisplayName = localStorage.getItem('loggedUser');
     this.getColaboradoresEstado();
     this.obtenerCitas();
+    this.guardarUbicacion();
   }
 
   getColaboradoresEstado(){
@@ -80,8 +81,8 @@ export class ColabMenuComponent implements OnInit {
     this.auth.getCitas(this.datosEstado).subscribe(data => {
       console.log(data);
       data.formularios.rows.forEach((info) => {
-
-        if(info.formularios.rowCount > 0){
+ 
+        if(data.formularios.rowCount > 0){
           this.citas = true;
           temp.contrato_id = info.con_id;
           temp.estado = info.estado;
