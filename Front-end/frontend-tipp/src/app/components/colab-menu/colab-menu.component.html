@@ -48,13 +48,45 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                     <div>
-                        <button  mat-raised-button type="submit" color="accent" class = "spacer" (click)="obtenerCitas()">Refresh</button>
+                        <button  mat-raised-button type="submit" color="accent" class = "spacer" (click)="obtenerCitasNuevas()">Refresh</button>
                     </div>
                 </mat-toolbar>
                 <div class="col-1"></div>
 
                 <div class="col-10"  *ngIf ="citas">
-                    <mat-card *ngFor="let infoCita of listaCitas">
+                    <h2>Citas nuevas</h2>
+                    <mat-card *ngFor="let infoCita of listaCitasNuevas">
+                        <mat-card-title><h2> Cita </h2></mat-card-title>
+                        <mat-card-content class="img">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="cuadrado" ></div>                            
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Nombre del cliente: {{infoCita.nombre}}</p>
+                                        Descripcion:
+                                        <mat-list role="list">
+                                            <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
+                                            <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
+                                            <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>
+                                        </mat-list>
+                                    </div>
+                                    <div class="col-4">
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button (click) = "cambiarEstadoCita('A', infoCita.contrato_id)">Aceptar</button>
+                            <button mat-button (click) = "cambiarEstadoCita('R', infoCita.contrato_id)">Rechazar</button>
+                        </mat-card-actions>
+                    </mat-card>
+
+
+                    <!--   //////------Citas aceptadas------//////    -->
+                    <h2>Citas agendadas</h2>
+                    <mat-card *ngFor="let infoCita of listaCitasAgendadas">
                         <mat-card-title><h2> Cita </h2></mat-card-title>
                         <mat-card-content class="img">
                             <div class="container">
@@ -80,18 +112,19 @@
                             <button mat-button class="bottomcenter" (click)="irAlChat(infoCita.contrato_id, infoCita.u_id)">Chat</button>
                         </mat-card-actions>
                     </mat-card>
+
                 </div>
 
                 <div class= "col-10" *ngIf = "!citas">
                     <div class="container">
-                        <div class="row row justify-content-center">
+                        <div class="row justify-content-center">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
-                        <div class="row row justify-content-around">
+                        <div class="row justify-content-around">
                             &nbsp;&nbsp;&nbsp;
-                            <h2>No hay Citas para mostrar</h2>
+                            <h2>No hay Citas nuevas para mostrar</h2>
                         </div>
-                        <div class="row row justify-content-center">
+                        <div class="row justify-content-center">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </div>
                     </div>

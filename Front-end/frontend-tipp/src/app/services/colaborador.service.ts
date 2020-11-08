@@ -39,14 +39,25 @@ export class ColaboradorService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  cambiarEstadoCita(data):Observable<any>{
+    let url = dominio+'cambiarEstadoCitaColab';
+    console.log(data);
+    return this.http.post(url, data, httpHeaders);
+  }
+
   getColaboradoresEstado(data):Observable<any>{
     let url = dominio+'getColaboradoresEstado';
     console.log(data);
     return this.http.post(url, data, httpHeaders);
   }
 
-  getCitas(data):Observable<any>{
-    let url = dominio+'getCitasColab';
+  getCitasNuevas(data):Observable<any>{
+    let url = dominio+'getCitasColabNuevas';
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  getCitasAgendadas(data):Observable<any>{
+    let url = dominio+'getCitasColabAgendadas';
     return this.http.post(url, data, httpHeaders);
   }
 
