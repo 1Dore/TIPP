@@ -98,22 +98,30 @@
                         <div class="row">
                             <div class="col-1"></div>
                             <div class="col-10" style="display: flex; float: left; padding-left: 2px;">
-                                <mat-card class ="elementB" *ngFor ="let collab of lista_collabs" style="flex: 1 1 auto;">
-                                    <mat-card-header>
-                                        <mat-card-title>{{collab.nombre}}</mat-card-title>
-                                        <mat-card-subtitle>{{collab.correo}}</mat-card-subtitle>
-                                    </mat-card-header>
-                                    <img mat-card-image src="{{placeHolder}}" class="cuadrado">
-                                    <mat-card-content>
-                                        Etiquetas:
-                                            <mat-list role="list">
-                                                <mat-list-item *ngFor="let tag of collab.etiquetas">{{tag.nombre}}</mat-list-item>
-                                            </mat-list>
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button mat-button>Contratar</button>
-                                    </mat-card-actions>
-                                </mat-card>
+                                <div class="container">
+                                    <ng-container *ngFor ="let collabs of lista_collabs">
+                                        <div class="row">
+                                            <ng-container *ngFor ="let collab of collabs">
+                                                    <mat-card class ="elementB" style="flex: 1 1 auto;">
+                                                        <mat-card-header>
+                                                            <mat-card-title>{{collab.nombre}}</mat-card-title>
+                                                            <mat-card-subtitle>{{collab.correo}}</mat-card-subtitle>
+                                                        </mat-card-header>
+                                                        <img mat-card-image src="{{placeHolder}}" class="cuadrado">
+                                                        <mat-card-content>
+                                                            Etiquetas:
+                                                                <mat-list role="list">
+                                                                    <mat-list-item *ngFor="let tag of collab.etiquetas">{{tag.nombre}}</mat-list-item>
+                                                                </mat-list>
+                                                        </mat-card-content>
+                                                        <mat-card-actions>
+                                                            <button mat-button>Contratar</button>
+                                                        </mat-card-actions>
+                                                    </mat-card>
+                                            </ng-container>
+                                        </div>
+                                    </ng-container>
+                                </div>
                             </div>
                             <div class="col-1"></div>
                         </div>

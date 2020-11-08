@@ -51,9 +51,12 @@ export class UsermenuComponent implements OnInit {
   modo: string;
   stringList: Array<string>;
   query:string;
-  lista_collabs: Array<colaborador> = new Array<colaborador>();
+  lista_collabs: Array<Array<colaborador>> = new Array<Array<colaborador>>();
+  lista_temp: Array<colaborador> = new Array<colaborador>();
   collabs_ids: Array<id> = new Array<id>();
   encontrados: boolean;
+
+  limitador: number = 0;
 
   //algo necesario para comunicarnos con el hmtl para el mapa
   @ViewChild('map', {read: ElementRef, static: false}) mapRef:ElementRef;
@@ -178,8 +181,10 @@ export class UsermenuComponent implements OnInit {
   getUbicacionColaboradores(){
     this.query = "col.c_id IS NOT NULL";
     this.buscarCollabsIDs();
-    this.lista_collabs.forEach(collab => {
-      this.addMarcador(collab.ubicacion);
+    this.lista_collabs.forEach(collabs => {
+      collabs.forEach(collab => {
+        this.addMarcador(collab.ubicacion);
+      })
     })
   }
 
@@ -193,19 +198,21 @@ export class UsermenuComponent implements OnInit {
        
        if(rows.formularios.rows.length > 0){
          this.encontrados = true;
+         this.lista_collabs = new Array<Array<colaborador>>();
          rows.formularios.rows.forEach((id) => {
            this.getCollabInfo(Number(id.c_id));
          });
+         console.log(this.lista_collabs);
        }else{
          this.encontrados = false;
-         this.lista_collabs = new Array<colaborador>();
+         this.lista_collabs = new Array<Array<colaborador>>();
        }
      });
      this.collabs_ids = temp;
    }
  
    getCollabInfo(id: number){
-    this.lista_collabs = new Array<colaborador>();
+    
      let temp: colaborador = new colaborador();
      this.auth.getCollabInfo({id: id}).subscribe((rows) => {
        rows.formularios.rows.forEach((info) => {
@@ -226,7 +233,21 @@ export class UsermenuComponent implements OnInit {
            }
           temp.ubicacion = info.ubicacion;
          });
-         this.lista_collabs.push(temp);
+         
+         if(this.limitador == 0){
+          this.lista_temp.push(temp);
+          this.lista_collabs.push(this.lista_temp);
+          this.limitador++;
+         }else if(this.limitador == 1){
+           this.lista_collabs[this.lista_collabs.length-1].push(temp);
+           this.limitador++;
+         }
+         else {
+          this.lista_collabs[this.lista_collabs.length-1].push(temp);
+          this.lista_temp = new Array<colaborador>();
+          this.limitador = 0;
+         }
+         
        });
      });
    }
