@@ -129,7 +129,7 @@ export class ColabMenuComponent implements OnInit {
         lng: position.coords.longitude,
       }
     });
-    this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion)});
+    this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion)}).subscribe();
   }
 
     irAlChat(contrato_id: number, c_id: number){
