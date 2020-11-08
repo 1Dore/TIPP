@@ -41,7 +41,7 @@ export class UserCollabChatComponent implements OnInit {
   receptor: Usuario = new Usuario();
   contrato_id: number;
 
-
+  traerMensajes;
 
   constructor(private router: Router, public userService: FormularioService, private fb: FormBuilder,
               public collabService: ColaboradorService, public chatService: ChatService) { }
@@ -67,9 +67,12 @@ export class UserCollabChatComponent implements OnInit {
 
     this.obtenerMensajes();
 
-    setInterval(() => {
+    this.traerMensajes = setInterval(() => {
       this.obtenerMensajes(); 
-    }, 5000);
+    }, 3000);
+  }
+  ngOnDestroy() {
+    clearInterval(this.traerMensajes);
   }
 
   obtenerMensajes() {
