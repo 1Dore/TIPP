@@ -100,6 +100,9 @@ export class UserCitasComponent implements OnInit {
     console.log(this.listaCitas);
   }
 
+  irAlChat(contrato_id: number, c_id: number){
+    this.irA('/user-collab/chat?con_id=' + contrato_id + '&c_id=' + c_id);
+  }
 
   irA(ruta){
     this.router.navigateByUrl(ruta);

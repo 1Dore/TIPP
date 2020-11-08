@@ -22,15 +22,15 @@ export class ChatService {
     return this.http.post(url, data, httpHeaders);
   }
   getCitasbyUser(data): Observable<any> {
-    let url = dominio + "/getCitasForUser";
+    let url = dominio + "getCitasForUser";
     return this.http.post(url, data, httpHeaders)
   }
   getMensajes(data): Observable<any> {
-    let url = dominio + "/getMessage";
+    let url = dominio + "getMessages";
     return this.http.post(url, data, httpHeaders);
   }
   sendMensajes(data): Observable<any>{
-    let url = dominio + "/sendMessage";
+    let url = dominio + "sendMessage";
     return this.http.post(url, data, httpHeaders);
   }
 }

@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
         login.id = data.formularios.rows[0].u_id;
         localStorage.setItem('loggedUser', login.correo);
         localStorage.setItem("id", ""+login.id);
+        localStorage.setItem("user_type", "user");
         this.formularioService.loged();
         this.formularioService.isLogin();
         alert("Inicio de sesion exitoso");
@@ -84,6 +85,7 @@ export class LoginComponent implements OnInit {
         login.id = data.formularios.rows[0].c_id;
         localStorage.setItem('loggedUser', login.correo);
         localStorage.setItem("id", ""+login.id);
+        localStorage.setItem("user_type", "collab");
         this.formularioService.loged();
         this.formularioService.isLogin();
         alert("Inicio de sesion exitoso");

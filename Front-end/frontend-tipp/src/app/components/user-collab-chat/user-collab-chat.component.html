@@ -55,16 +55,17 @@
                                 Con el que chateo
                             </mat-card-header>
                             <mat-card-content class="messagebox">
-                                <mat-card >
-                                    <ng-container>
-                                            <textarea style="width: 100%; resize: none; border: none;" disabled rows="6">
-Mensaje
-a
-a
-a
-a
-                                            </textarea>
+                                <mat-card *ngFor="let mensaje of mensajeList">
+                                    <ng-container *ngIf="mensaje.emisor == emisor.tipo">
+                                        <textarea  style="width: 100%; resize: none; border: none; align-content: center;" disabled>
+{{mensaje.content}}
+                                        </textarea>
                                     </ng-container>
+                                    <ng-container *ngIf="mensaje.emisor == receptor.tipo">
+                                        <textarea  style="width: 100%; resize: none; border: none;" disabled>
+{{mensaje.content}}                                            
+                                        </textarea>
+                                </ng-container>
                                 </mat-card>
                             </mat-card-content>
                             <mat-card-actions>
@@ -72,7 +73,7 @@ a
                                     <mat-form-field appearance="outline" class="chatInputText">
                                         <mat-label>Escriba su mensaje aqui</mat-label>
                                         <div class="d-flex justify-content-around">
-                                            <input matInput placeholder="Buscar" > 
+                                            <input matInput placeholder="Buscar" formControlName="string"> 
                                         </div>
                                     </mat-form-field>
                                     <button [disabled] = "mensajeForm.invalid" (click)="enviarmensaje()" mat-button><mat-icon matSuffix>search</mat-icon></button>

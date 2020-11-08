@@ -131,6 +131,11 @@ export class ColabMenuComponent implements OnInit {
     });
     this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion)});
   }
+
+    irAlChat(contrato_id: number, c_id: number){
+    this.irA('/user-collab/chat?con_id=' + contrato_id + '&c_id=' + c_id);
+  }
+
 }
 
 
