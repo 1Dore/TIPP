@@ -45,7 +45,7 @@ export class UsermenuComponent implements OnInit {
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
   
   constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
-
+  placeHolder;
   //cosas de google maps
   name_tags: FormGroup;
   modo: string;
