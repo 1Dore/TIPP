@@ -71,13 +71,32 @@ module.exports = (app) => {
     });
 
     //querrys para las citas
-    app.post('/getCitasColab', (req, res, next) => {
-        let query = `Select * from contratos Where c_id = ${req.body.id} and (estado = 'A' or estado = 'E')`;
+    app.post('/getCitasColabNuevas', (req, res, next) => {
+        let query = `Select * from contratos Where c_id = ${req.body.id} and estado = 'E'`;
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
         });
     });
+
+    app.post('/getCitasColabAgendadas', (req, res, next) => {
+        let query = `Select * from contratos Where c_id = ${req.body.id} and estado = 'A'`;
+        conn.query(query, (error, formularios, cols) => {
+            if(error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
+        });
+    });
+
+    app.post('/cambiarEstadoCitaColab', (req,res,next) => {
+        let querry = `update contratos set estado = '${req.body.estado}' where con_id = ${req.body.id}`;
+        console.log(querry);
+        console.log(querry);
+        conn.query(querry, (err, formularios, cols) => {
+            if (err) res.json({status: 0, message: `${err}`});  
+            else res.json({status: 1, message: "Datos de usuario Actualizados", formularios});
+        });
+    });
+    
 
     app.post('/getCitasUser', (req, res, next) => {
         let query = `Select * from contratos Where u_id = ${req.body.id} and (estado = 'A' or estado = 'E')`;

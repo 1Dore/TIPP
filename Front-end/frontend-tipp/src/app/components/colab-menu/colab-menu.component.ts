@@ -4,7 +4,7 @@ import { throwMatDuplicatedDrawerError } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 
-class estado{
+class Estado{
   id:Number
   estado:String
   display:String
@@ -19,6 +19,7 @@ class citas{
   telefono:String
 }
 
+
 @Component({
   selector: 'app-colab-menu',
   templateUrl: './colab-menu.component.html',
@@ -28,19 +29,22 @@ export class ColabMenuComponent implements OnInit {
 
   constructor(private router:Router, public auth:ColaboradorService) { }
   userDisplayName = '';
-  listaCitas:Array<citas> = new Array<citas>();
-  datosEstado:estado;
+  listaCitasNuevas:Array<citas> = new Array<citas>();
+  listaCitasAgendadas:Array<citas> = new Array<citas>();
+  datosEstado:Estado;
   citas = true;
+  aceptado = false;
 
   center: google.maps.LatLngLiteral;
 
   ngOnInit(): void {
-    this.datosEstado = new estado();
+    this.datosEstado = new Estado();
     this.datosEstado.id = Number(localStorage.getItem('id'));
     this.datosEstado.estado = '';
     this.userDisplayName = localStorage.getItem('loggedUser');
     this.getColaboradoresEstado();
-    this.obtenerCitas();
+    this.obtenerCitasNuevas();
+    this.obtenerCitasAgendadas();
     this.guardarUbicacion();
   }
 
@@ -77,10 +81,20 @@ export class ColabMenuComponent implements OnInit {
     });
   }
 
-  obtenerCitas(){
+  cambiarEstadoCita(estado, id){
+    let temp:Estado = new Estado();
+    temp.id = id;
+    temp.estado = estado;
+    this.auth.cambiarEstadoCita(temp).subscribe(data => {
+      console.log(data.message);
+    });
 
+  }
+
+  obtenerCitasNuevas(){
+    let tempCitas:Array<citas> = new Array<citas>(); 
     //obtengo las citas que tiene el colaborador asignaads
-    this.auth.getCitas( {id:this.datosEstado.id} ).subscribe(data => {
+    this.auth.getCitasNuevas( {id:this.datosEstado.id} ).subscribe(data => {
 
       data.formularios.rows.forEach(info => {
         
@@ -92,19 +106,7 @@ export class ColabMenuComponent implements OnInit {
           temp.contrato_id = info.con_id;
 
           //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
-          if(info.estado == "E"){
-            temp.estado = "Enviado";
-          }
-          else if(info.estado == "R"){
-            temp.estado = "Rechazado";
-          }
-          else if(info.estado == "C"){
-            temp.estado = "Completado";
-          }
-          else{
-            temp.estado = "Aceptado";
-          }
-
+          temp.estado = this.getEstado(info.estado);
           temp.nombre = "";
           temp.u_id = info.u_id;
 
@@ -118,7 +120,49 @@ export class ColabMenuComponent implements OnInit {
 
           });
 
-          this.listaCitas.push(temp);
+          tempCitas.push(temp);
+
+        }
+
+      });
+
+    });
+
+    this.listaCitasNuevas = tempCitas;
+
+  }
+
+
+  obtenerCitasAgendadas(){
+
+    //obtengo las citas que tiene el colaborador asignaads
+    this.auth.getCitasAgendadas( {id:this.datosEstado.id} ).subscribe(data => {
+
+      data.formularios.rows.forEach(info => {
+        
+        let temp:citas = new citas();
+
+        if (data.formularios.rowCount > 0){
+
+          this.citas = true;
+          temp.contrato_id = info.con_id;
+
+          //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
+          temp.estado = this.getEstado(info.estado);
+          temp.nombre = "";
+          temp.u_id = info.u_id;
+
+          //busco el nombre, apellid, tags, telefono del usuario
+          this.auth.getUsuarioData( { u_id: info.u_id } ).subscribe(data => {
+
+            //me permite desplegar el nombre completo y no pelearme en unir 2 campos de la lista
+            temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
+
+            temp.telefono = data.formularios.rows[0].telefono;
+
+          });
+
+          this.listaCitasAgendadas.push(temp);
 
         }
 
@@ -129,6 +173,8 @@ export class ColabMenuComponent implements OnInit {
   }
 
 
+
+
   getUsuarioData(data){
     let nombre:String;
     let telefono:String;
@@ -136,6 +182,24 @@ export class ColabMenuComponent implements OnInit {
     let lista = [nombre, telefono];
     console.log(lista);
     return lista;
+  }
+
+  //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
+  getEstado(estado){
+    let temp;
+    if(estado == "E"){
+      temp = "Enviado";
+    }
+    else if(estado == "R"){
+      temp = "Rechazado";
+    }
+    else if(estado == "C"){
+      temp = "Completado";
+    }
+    else{
+      temp = "Aceptado";
+    }
+    return temp;
   }
 
   irA(ruta){
