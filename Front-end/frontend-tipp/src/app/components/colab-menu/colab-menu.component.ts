@@ -1,5 +1,6 @@
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 import { Component, OnInit } from '@angular/core';
+import { throwMatDuplicatedDrawerError } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 
@@ -78,32 +79,53 @@ export class ColabMenuComponent implements OnInit {
 
   obtenerCitas(){
 
-    this.auth.getCitas(this.datosEstado).subscribe(data => {
-      data.formularios.rows.forEach((info) => {
+    //obtengo las citas que tiene el colaborador asignaads
+    this.auth.getCitas( {id:this.datosEstado.id} ).subscribe(data => {
+
+      data.formularios.rows.forEach(info => {
+        
         let temp:citas = new citas();
-        if(data.formularios.rowCount > 0){
+
+        if (data.formularios.rowCount > 0){
+
           this.citas = true;
           temp.contrato_id = info.con_id;
-          temp.estado = info.estado;
+
+          //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
+          if(info.estado == "E"){
+            temp.estado = "Enviado";
+          }
+          else if(info.estado == "R"){
+            temp.estado = "Rechazado";
+          }
+          else if(info.estado == "C"){
+            temp.estado = "Completado";
+          }
+          else{
+            temp.estado = "Aceptado";
+          }
+
           temp.nombre = "";
           temp.u_id = info.u_id;
-  
-          this.auth.getUsuarioData(temp).subscribe(data => {
-  
-            temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
-    
-            temp.telefono = data.formularios.rows[0].telefono;
-    
-          });
-          this.listaCitas.push(temp);
-        }
-        
-      });
 
+          //busco el nombre, apellid, tags, telefono del usuario
+          this.auth.getUsuarioData( { u_id: info.u_id } ).subscribe(data => {
+
+            //me permite desplegar el nombre completo y no pelearme en unir 2 campos de la lista
+            temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
+
+            temp.telefono = data.formularios.rows[0].telefono;
+
+          });
+
+          this.listaCitas.push(temp);
+
+        }
+
+      });
 
     });
 
-    console.log(this.listaCitas);
   }
 
 
