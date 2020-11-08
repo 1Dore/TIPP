@@ -29,6 +29,7 @@ export class ColabMenuComponent implements OnInit {
   userDisplayName = '';
   listaCitas:Array<citas> = new Array<citas>();
   datosEstado:estado;
+  citas = true;
 
   center: google.maps.LatLngLiteral;
 
@@ -79,20 +80,27 @@ export class ColabMenuComponent implements OnInit {
     this.auth.getCitas(this.datosEstado).subscribe(data => {
       console.log(data);
       data.formularios.rows.forEach((info) => {
-        temp.contrato_id = info.con_id;
-        temp.estado = info.estado;
-        temp.nombre = "";
-        temp.u_id = info.u_id;
+
+        if(info.formularios.rowCount > 0){
+          this.citas = true;
+          temp.contrato_id = info.con_id;
+          temp.estado = info.estado;
+          temp.nombre = "";
+          temp.u_id = info.u_id;
+  
+          this.auth.getUsuarioData(temp).subscribe(data => {
+  
+            temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
+    
+            temp.telefono = data.formularios.rows[0].telefono;
+    
+          });
+          this.listaCitas.push(temp);
+        }
+        
       });
 
-      this.auth.getUsuarioData(temp).subscribe(data => {
 
-        temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
-
-        temp.telefono = data.formularios.rows[0].telefono;
-
-      });
-      this.listaCitas.push(temp);
     });
 
     console.log(this.listaCitas);

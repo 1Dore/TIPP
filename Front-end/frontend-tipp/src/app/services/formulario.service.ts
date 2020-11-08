@@ -33,20 +33,16 @@ export class FormularioService {
 
   getCitas(data):Observable<any> {
     let url = dominio + 'getCitasUser';
-    console.log(data);
     return this.http.post(url, data, httpHeaders);
   }
 
   getColabData(data):Observable<any>{
-    console.log("esta es mi data: ");
-    console.log(data);
     let url = dominio+'getColabNombre';
     return this.http.post(url, data, httpHeaders);
   }
 
 //-----------loin-register---------------------------
   sentLogin(datos): Observable<any>{
-    console.log(datos);
     let url = dominio + 'getUsuarios';
     return this.http.post(url, datos, httpHeaders); 
   }

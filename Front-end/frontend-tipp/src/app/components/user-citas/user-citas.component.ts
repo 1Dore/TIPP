@@ -34,7 +34,7 @@ export class UserCitasComponent implements OnInit {
   constructor(private router:Router, public auth:FormularioService) { }
   listaCitas:Array<citas> = new Array<citas>();
   datosEstado:estado;
-
+  citas = false;
 
   ngOnInit(): void {
     this.datosEstado = new estado();
@@ -45,45 +45,58 @@ export class UserCitasComponent implements OnInit {
 
 
   obtenerCitas(){
-    let temp:citas = new citas();
+
 
 
     this.auth.getCitas(this.datosEstado).subscribe(data => {
-      console.log("data de getCitas: ")
-      console.log(data);
-      data.formularios.rows.forEach((info) => {
-        temp.contrato_id = info.con_id;
-        temp.estado = info.estado;
-        temp.nombre = "";
-        temp.c_id = info.c_id;
-      });
 
-      this.auth.getColabData(temp).subscribe(data => {
-        console.log("data de getColabData: ")
-        console.log(data);
-        temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
-
-        temp.telefono = data.formularios.rows[0].telefono;
-        temp.etiquetas = new Array<Etiqueta>();
-
-
-        this.auth.getCollabTags({id:temp.c_id}).subscribe((tags) => {
-          if(tags.formularios.rows.length > 0){
-            tags.formularios.rows.forEach((tag) => {
-              let etiqueta: Etiqueta = new Etiqueta();
-              etiqueta.nombre = tag.e_nombre;
-              etiqueta.id = tag.e_id;
-              temp.etiquetas.push(etiqueta);
-            });
+      if(data.formularios.rowCount > 0){
+        let temp:citas = new citas();
+        this.citas = true;
+        data.formularios.rows.forEach((info) => {
+          temp.contrato_id = info.con_id;
+          if(info.estado == "E"){
+            temp.estado = "Enviado";
           }
+          else if(info.estado == "R"){
+            temp.estado = "Rechazado";
+          }
+          else if(info.estado == "C"){
+            temp.estado = "Completado";
+          }
+          else{
+            temp.estado = "Aceptado";
+          }
+          
+          temp.nombre = "";
+          temp.c_id = info.c_id;
+        
+          this.auth.getColabData(temp).subscribe(data => {
+            temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
+    
+            temp.telefono = data.formularios.rows[0].telefono;
+            temp.etiquetas = new Array<Etiqueta>();
+    
+    
+            this.auth.getCollabTags({id:temp.c_id}).subscribe((tags) => {
+              if(tags.formularios.rows.length > 0){
+                tags.formularios.rows.forEach((tag) => {
+                  let etiqueta: Etiqueta = new Etiqueta();
+                  etiqueta.nombre = tag.e_nombre;
+                  etiqueta.id = tag.e_id;
+                  temp.etiquetas.push(etiqueta);
+                });
+              }
+            });
+    
+          });
+          console.log(temp);
+          this.listaCitas.push(temp);
         });
+      }
 
 
-
-      });
-      this.listaCitas.push(temp);
     });
-
     console.log(this.listaCitas);
   }
 

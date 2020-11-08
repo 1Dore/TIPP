@@ -52,7 +52,8 @@
                     </div>
                 </mat-toolbar>
                 <div class="col-1"></div>
-                <div class="col-10">
+
+                <div class="col-10"  *ngIf ="citas">
                     <mat-card *ngFor="let infoCita of listaCitas">
                         <mat-card-title><h2> Cita </h2></mat-card-title>
                         <mat-card-content class="img">
@@ -78,6 +79,20 @@
                     </mat-card>
                 </div>
 
+                <div class= "col-10">
+                    <div class="container">
+                        <div class="row row justify-content-center">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="row row justify-content-around">
+                            &nbsp;&nbsp;&nbsp;
+                            <h2>No hay Citas para mostrar</h2>
+                        </div>
+                        <div class="row row justify-content-center">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
 
             </mat-drawer-content>
 

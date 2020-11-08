@@ -53,15 +53,17 @@ module.exports = (app) => {
 
     //Querys para el Chat
     app.post('/getMessages', (req, res, next) => {
-        let query = `Select * From mensajes  Where con_id = ${req.body.con_id} ORDER BY fecha`;
+        let query = `Select * From mensajes  Where con_id = ${req.body.con_id} ORDER BY m_id`;
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
-            else res.json({status: 1, message: "Obtecion de los mensajes exitoso"});
+            else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
         });
     });
 
     app.post('/sendMessage', (req, res, next) => {
-        let querry = `Insert into mensajes (con_id, sendBy, content, fecha) Values (${req.body.con_id}, '${req.body.emisor}', '${req.body.content}', '${req.body.fecha}')`;
+        let date = req.body.fecha;
+        let querry = `Insert into mensajes (con_id, sendBy, content, fecha) Values (${req.body.con_id}, '${req.body.emisor}', '${req.body.content}', $1)`;
+        console.log(querry);
         conn.query( querry, [date], (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});  
             else res.json({status: 1, message: "Mensaje enviado satisfactoriamente", formularios});
