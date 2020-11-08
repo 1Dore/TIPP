@@ -198,6 +198,7 @@ export class UsermenuComponent implements OnInit {
          });
        }else{
          this.encontrados = false;
+         this.lista_collabs = new Array<colaborador>();
        }
      });
      this.collabs_ids = temp;
@@ -254,17 +255,30 @@ export class UsermenuComponent implements OnInit {
      let primero:boolean = true;
      this.stringList.forEach(str => {
        if(primero){
-         this.query = '(col.nombre =' + '\'' + str + '\'';
-         this.query += ' OR col.apellido =' + '\'' + str + '\'';
-         this.query += ' OR e.e_Nombre =' + '\'' + str + '\')';
+         this.query = '(col.nombre LIKE ' + '\'%' + str + '%\'';
+         this.query += ' OR col.apellido LIKE ' + '\'%' + str + '%\'';
+         this.query += ' OR e.e_Nombre LIKE ' + '\'%' + str + '%\'';
+         this.query += ' OR col.nombre LIKE ' + '\'' + str + '%\'';
+         this.query += ' OR col.apellido LIKE ' + '\'' + str + '%\'';
+         this.query += ' OR e.e_Nombre LIKE ' + '\'' + str + '%\'';
+         this.query += ' OR col.nombre LIKE ' + '\'%' + str + '\'';
+         this.query += ' OR col.apellido LIKE ' + '\'%' + str + '\'';
+         this.query += ' OR e.e_Nombre LIKE ' + '\'%' + str + '\')';
          primero = false;
        }else{
-         this.query += ' AND (OR col.nombre =' + '\'' + str + '\'';
-         this.query += ' OR col.apellido =' + '\'' + str + '\'';
-         this.query += ' OR e.e_Nombre =' + '\'' + str + '\')';
+         this.query += ' AND (col.nombre LIKE ' + '\'%' + str + '%\'';
+         this.query += ' OR col.apellido LIKE ' + '\'%' + str + '%\'';
+         this.query += ' OR e.e_Nombre LIKE ' + '\'%' + str + '%\'';
+         this.query += ' OR col.nombre LIKE ' + '\'' + str + '%\'';
+         this.query += ' OR col.apellido LIKE ' + '\'' + str + '%\'';
+         this.query += ' OR e.e_Nombre LIKE ' + '\'' + str + '%\'';
+         this.query += ' OR col.nombre LIKE ' + '\'%' + str + '\'';
+         this.query += ' OR col.apellido LIKE ' + '\'%' + str + '\'';
+         this.query += ' OR e.e_Nombre LIKE ' + '\'%' + str + '\')';
        }
-       this.query += "AND estado = 'D'";
+       
      });
+     this.query += " AND estado = 'D'";
      console.log(this.query);
    }
  
