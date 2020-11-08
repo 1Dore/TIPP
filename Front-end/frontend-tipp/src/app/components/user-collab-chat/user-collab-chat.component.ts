@@ -42,6 +42,7 @@ export class UserCollabChatComponent implements OnInit {
   contrato_id: number;
 
 
+
   constructor(private router: Router, public userService: FormularioService, private fb: FormBuilder,
               public collabService: ColaboradorService, public chatService: ChatService) { }
 
@@ -65,20 +66,25 @@ export class UserCollabChatComponent implements OnInit {
     this.contrato_id = Number(params.get('con_id'));
 
     this.obtenerMensajes();
+
+    setInterval(() => {
+      this.obtenerMensajes(); 
+    }, 5000);
   }
 
   obtenerMensajes() {
-    
+    let mensajeList_temp: Array<Mensaje> = new Array<Mensaje>();
     this.chatService.getMensajes({con_id: this.contrato_id}).subscribe(mensajes => {
       console.log(mensajes.formularios.rows);
       mensajes.formularios.rows.forEach(mensaje => {
         let temp: Mensaje = new Mensaje();
         temp.content = mensaje.content;
-        temp.emisor = mensaje.sendBy == true;
+        temp.emisor = String(mensaje.sendby) == "true";
         temp.fecha = mensaje.fecha;
         temp.con_id = mensaje.con_id;
-        this.mensajeList.push(temp);
+        mensajeList_temp.push(temp);
       });
+      this.mensajeList = mensajeList_temp;
       console.log(this.mensajeList)
     })
     
@@ -128,7 +134,5 @@ export class UserCollabChatComponent implements OnInit {
   }
 
   // Cosas que copie y pegue
-
-
 
 }

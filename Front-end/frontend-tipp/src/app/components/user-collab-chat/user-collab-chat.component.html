@@ -57,7 +57,7 @@
                             <mat-card-content class="messagebox">
                                 <mat-card *ngFor="let mensaje of mensajeList">
                                     <ng-container *ngIf="mensaje.emisor == emisor.tipo">
-                                        <textarea  style="width: 100%; resize: none; border: none; align-content: center;" disabled>
+                                        <textarea  style="width: 100%; resize: none; border: none; text-align: right;" disabled>
 {{mensaje.content}}
                                         </textarea>
                                     </ng-container>
