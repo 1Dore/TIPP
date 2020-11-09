@@ -42,11 +42,15 @@
             </mat-drawer>
         <!-- Pagina del Usuario -->
             <mat-drawer-content class="element">
+
+                <!-- barra de menu -->
                 <mat-toolbar class="toolbar">
-                    <a (click)="drawer.toggle()">
+                    <div (click)="drawer.toggle()">
                         <button mat-button><mat-icon class="center">menu</mat-icon></button>
-                    </a>
+                    </div>
                 </mat-toolbar>
+
+                <!-- buscador -->
                 <div class="d-flex justify-content-around">
                     <form [formGroup]="name_tags" class="element">
                         <mat-form-field appearance="outline" class="buscador">
@@ -58,19 +62,16 @@
                         </mat-form-field>
                     </form>
                 </div>
-                <div *ngIf="modo == 'mapa'">
-                    <div class="d-flex justify-content-around">
-                        <div class= "container">
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-10">
+
+                <!-- mapa -->
+                <div *ngIf="modo == 'mapa'" class = "element">
                                     <google-map
                                         width="100%"
                                         [zoom]="zoom"
                                         [center]="center"
                                         [options]="options"
                                         (mapClick)="click($event)"
-                                        >
+                                    >
                                         <map-marker
                                             #markerElem
                                             *ngFor="let marker of markers"
@@ -81,14 +82,8 @@
                                             (mapClick)="openInfo(markerElem, marker.info)"
                                         >
                                         </map-marker>
-
                                         <map-info-window>{{ infoContent }}</map-info-window>
                                     </google-map>
-                                </div>
-                                <div class="col-1"></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!--  Aqui empieza el buscador -->

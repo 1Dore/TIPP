@@ -13,7 +13,7 @@ module.exports = (app) => {
     });
 
     app.post('/getCollabInfo', (req, res, next) => {
-        let query = `Select nombre, correo, c_foto, c_id, apellido From colaborador Where c_id = ${req.body.id}`;
+        let query = `Select nombre, correo, c_foto, c_id, apellido, ubicacion From colaborador Where c_id = ${req.body.id}`;
         conn.query( query, (error, formularios, cols) => {
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
