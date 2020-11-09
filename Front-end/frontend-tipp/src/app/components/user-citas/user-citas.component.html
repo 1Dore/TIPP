@@ -44,7 +44,9 @@
                     </mat-toolbar>
                     <div class="col-1"></div>
                     <div class="col-10" *ngIf = "citas">
-                        <mat-card *ngFor="let infoCita of listaCitas" >
+                        <h2>&nbsp;&nbsp;</h2>
+                        <h2>Citas Enviadas</h2>
+                        <mat-card *ngFor="let infoCita of listaCitasEnviadas" >
                             <mat-card-title><h2> Cita </h2></mat-card-title>
                             <mat-card-content class="img">
                                 <div class="container">
@@ -62,15 +64,45 @@
                                                 <mat-list-item *ngFor="let etiqueta of infoCita.etiquetas">ocupacion: {{etiqueta.nombre}}</mat-list-item>
                                             </mat-list>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-2" >
                                         </div>
                                     </div>
                                 </div>
                             </mat-card-content>
-                            <mat-card-actions>
-                                <button mat-button class="bottomcenter" (click)="irAlChat(infoCita.contrato_id, infoCita.c_id)">Chat</button>
-                            </mat-card-actions>
+
                         </mat-card>
+                        <h2 >&nbsp;&nbsp;</h2>
+                        <h2>Citas Aceptadas</h2>
+                        <mat-card *ngFor="let infoCita of listaCitasAceptadas" >
+                            <mat-card-title><h2> Cita </h2></mat-card-title>
+                            <mat-card-content class="img">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="cuadrado" ></div>                            
+                                        </div>
+                                        <div class="col-4">
+                                            <p>Nombre del Colaborador: {{infoCita.nombre}}</p>
+                                            Descripcion:
+                                            <mat-list role="list">
+                                                <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
+                                                <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
+                                                <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>
+                                                <mat-list-item *ngFor="let etiqueta of infoCita.etiquetas">ocupacion: {{etiqueta.nombre}}</mat-list-item>
+                                            </mat-list>
+                                        </div>
+                                        <div class="col-2" >
+                                            <mat-card-actions >
+                                                <button mat-raised-button class="bottomcenter" (click)="irAlChat(infoCita.contrato_id, infoCita.c_id)" color="warn" >Chat</button>
+                                            </mat-card-actions>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+
+                        </mat-card>
+
+
                     </div>
                     
                     <div class= "col-10" *ngIf = "!citas">
@@ -93,6 +125,9 @@
                     </div>
                     <div class = "col-1"></div>
 
+                    <div class ="row justify-content-md-center">
+                        <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
+                    </div>
     
     
                 </mat-drawer-content>

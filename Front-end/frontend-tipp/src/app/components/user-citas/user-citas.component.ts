@@ -32,8 +32,10 @@ export class UserCitasComponent implements OnInit {
   constructor(private router:Router, public auth:FormularioService) { }
 
   //variables globales constantes
-  listaCitas:Array<Citas> = new Array<Citas>();
+  listaCitasAceptadas:Array<Citas> = new Array<Citas>();
+  listaCitasEnviadas:Array<Citas> = new Array<Citas>();
   citas = false;
+  chatBool = false;
 
   ngOnInit(): void {
     this.userDisplayName = localStorage.getItem('loggedUser');
@@ -55,18 +57,7 @@ export class UserCitasComponent implements OnInit {
           let temp:Citas = new Citas();
 
           //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
-          if(row.estado == "E"){
-            temp.estado = "Enviado";
-          }
-          else if(row.estado == "R"){
-            temp.estado = "Rechazado";
-          }
-          else if(row.estado == "C"){
-            temp.estado = "Completado";
-          }
-          else{
-            temp.estado = "Aceptado";
-          }
+          temp.estado = this.getEstado(row.estado);
 
           temp.nombre = "";
           temp.c_id = row.c_id;
@@ -99,7 +90,12 @@ export class UserCitasComponent implements OnInit {
           });
 
           console.log(temp);
-          this.listaCitas.push(temp);
+          if(temp.estado == "Aceptado"){
+            this.listaCitasAceptadas.push(temp);
+          }
+          else{
+            this.listaCitasEnviadas.push(temp);
+          }
 
         });
 
@@ -108,12 +104,33 @@ export class UserCitasComponent implements OnInit {
 
     })
 
-
-    console.log(this.listaCitas);
   }
 
   irAlChat(contrato_id: number, c_id: number){
     this.irA('/user-collab/chat?con_id=' + contrato_id + '&c_id=' + c_id);
+  }
+
+  getEstado(estado){
+    let temp;
+          //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
+          if(estado == "E"){
+            temp = "Enviado";
+
+          }
+          else if(estado == "R"){
+            temp = "Rechazado";
+
+          }
+          else if(estado == "C"){
+            temp = "Completado";
+
+          }
+          else{
+            temp = "Aceptado";
+
+          }
+
+          return temp;
   }
 
   irA(ruta){

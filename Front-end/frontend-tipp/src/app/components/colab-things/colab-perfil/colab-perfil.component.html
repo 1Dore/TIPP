@@ -10,26 +10,26 @@
 
     <mat-drawer-container class="element">
         <!-- Side Menu -->
-            <mat-drawer #drawer mode="over" class="sidemenu">
-                <div class="d-flex justify-content-around">
-                    <div class="cuadrado"></div>
-                </div>
+        <mat-drawer #drawer mode="over" class="sidemenu">
+            <div class="d-flex justify-content-around">
+                <div class="cuadrado"></div>
+            </div>
 
-                <div *ngIf="auth.isLogin()">
-                    <button mat-button (click)="irA('/colabmenu')">{{userDisplayName}}</button>
-                </div>
+            <div *ngIf="auth.isLogin()">
+                <div>{{userDisplayName}}</div>
+            </div>
 
-                <div class="d-flex justify-content-around">
-                    <button mat-button class="center">About</button>
-                </div>
-                
-                <div class="d-flex justify-content-around">
-                    <button mat-button><mat-icon class="center">settings</mat-icon></button>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
-                </div>
-            </mat-drawer>
+            <div class="d-flex justify-content-around">
+                <button mat-button class="center">About</button>
+            </div>
+            
+            <div class="d-flex justify-content-around">
+                <button mat-button><mat-icon class="center" (click)="irA('/colab-menu/perfil')">settings</mat-icon></button>
+            </div>
+            <div class="d-flex justify-content-around">
+                <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
+            </div>
+        </mat-drawer>
 
             <!-- el menú como tal -->
 
@@ -99,13 +99,12 @@
                     <div class ="row justify-content-md-center">
                         <button  mat-raised-button type="submit" color="accent">Update</button>
                     </div>
-                    
+        
+                    </form>
 
                     <div class ="row justify-content-md-center">
                         <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/colabmenu")'>Regresar</button>
                     </div>
-        
-                    </form>
         
                 </div>
 

@@ -12,7 +12,7 @@
         <!-- Side Menu -->
         
         <mat-drawer #drawer mode="over" class="sidemenu">
-            <div *ngIf="usuario">
+            <div *ngIf="emisor.tipo">
                 <div class="d-flex justify-content-around">
                     <div class="cuadrado"></div>
                 </div>
@@ -22,7 +22,7 @@
                 </div>
                 
                 <div class="d-flex justify-content-around">
-                    <button mat-button>Citas</button>
+                    <button mat-button (click) ="irA('/usermenu/citas')">Citas</button>
                 </div>
 
                 <div class="d-flex justify-content-around">
@@ -36,6 +36,27 @@
                     <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
                 </div>
 
+            </div>
+
+            <div *ngIf="!emisor.tipo">
+                <div class="d-flex justify-content-around">
+                    <div class="cuadrado"></div>
+                </div>
+
+                <div *ngIf="userService.isLogin()">
+                    <div>{{userDisplayName}}</div>
+                </div>
+
+                <div class="d-flex justify-content-around">
+                    <button mat-button class="center">About</button>
+                </div>
+                
+                <div class="d-flex justify-content-around">
+                    <button mat-button><mat-icon class="center" (click)="irA('/colab-menu/perfil')">settings</mat-icon></button>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
+                </div>
             </div>
         </mat-drawer>
         
@@ -58,12 +79,12 @@
                                 <mat-card *ngFor="let mensaje of mensajeList">
                                     <ng-container *ngIf="mensaje.emisor == emisor.tipo">
                                         <textarea  style="width: 100%; resize: none; border: none; text-align: right;" disabled>
-{{mensaje.content}}
+                                            {{mensaje.content}}
                                         </textarea>
                                     </ng-container>
                                     <ng-container *ngIf="mensaje.emisor == receptor.tipo">
                                         <textarea  style="width: 100%; resize: none; border: none;" disabled>
-{{mensaje.content}}                                            
+                                            {{mensaje.content}}                                            
                                         </textarea>
                                 </ng-container>
                                 </mat-card>
@@ -73,15 +94,29 @@
                                     <mat-form-field appearance="outline" class="chatInputText">
                                         <mat-label>Escriba su mensaje aqui</mat-label>
                                         <div class="d-flex justify-content-around">
-                                            <input matInput placeholder="Buscar" formControlName="string"> 
+                                            <input matInput placeholder="Escribe algo" formControlName="string"> 
                                         </div>
                                     </mat-form-field>
                                     <button [disabled] = "mensajeForm.invalid" (click)="enviarmensaje()" mat-button><mat-icon matSuffix>search</mat-icon></button>
                                 </form>
                             </mat-card-actions>
                         </mat-card>
+
+                        <div *ngIf="!emisor.tipo">
+                            <div class ="row justify-content-md-center">
+                                <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/colabmenu")'>Regresar</button>
+                            </div>
+                        </div>
+                        <div *ngIf="emisor.tipo">
+                            <div class ="row justify-content-md-center">
+                                <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <div class="col-1"></div>
+                    <div class="col-1">
+
+                    </div>
                 </div>
             </div>
             
