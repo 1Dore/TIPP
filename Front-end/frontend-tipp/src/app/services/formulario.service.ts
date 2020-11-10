@@ -74,7 +74,6 @@ export class FormularioService {
 
   getCollabTags(data): Observable<any>{
     let url = dominio + 'getCollabTags';
-    console.log(data);
     return this.http.post(url,data, httpHeaders)
   }
 

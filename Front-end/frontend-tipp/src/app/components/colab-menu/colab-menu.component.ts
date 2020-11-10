@@ -212,10 +212,14 @@ export class ColabMenuComponent implements OnInit {
     navigator.geolocation.getCurrentPosition((position) => {
       ubicacion = {
         lat: position.coords.latitude,
-        lng: position.coords.longitude,
+        lng: position.coords.longitude
       }
+      console.log(JSON.stringify(ubicacion));
+      this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion), id: this.datosEstado.id}).subscribe(cosas =>{
     });
-    this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion)}).subscribe();
+    
+    
+    })
   }
 
     irAlChat(contrato_id: number, c_id: number){

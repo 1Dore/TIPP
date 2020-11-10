@@ -57,6 +57,7 @@ export class UsermenuComponent implements OnInit {
   encontrados: boolean;
 
   limitador: number = 0;
+  ubicaciones;
 
   //algo necesario para comunicarnos con el hmtl para el mapa
   @ViewChild('map', {read: ElementRef, static: false}) mapRef:ElementRef;
@@ -89,27 +90,10 @@ export class UsermenuComponent implements OnInit {
     params.set('string', '');
     window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
     this.beginSearch();
-    
     this.ubicacionActual();
-    this.getUbicacionColaboradores();
-  }
-
-  //init mapa
-
-
-
-  buscarColaboradores(){
-    this.modo = "buscador";
-    let string: string;
-    const params = new URLSearchParams(location.search);
-    if(this.name_tags.value.string === ""){
-      string = "";
-    }else{
-      string = this.name_tags.value.string;
-    }
-    params.set('string', string);
-    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
-    this.beginSearch();
+    this.ubicaciones = setTimeout(() => {
+      this.getUbicacionColaboradores(); 
+    }, 3000);
     
   }
 
@@ -162,10 +146,15 @@ export class UsermenuComponent implements OnInit {
   }
 
   addMarcador(ubicacion: Ubicacion){
+    console.log(ubicacion);
     this.markers.push({
       position: {
         lat: ubicacion.lat,
         lng: ubicacion.lng,
+      },
+      label: {
+        color: 'black',
+        text: "Colaborador",
       },
       title: 'Marker title ' + (this.markers.length + 4),
       info: 'Marker info ' + (this.markers.length + 1),
@@ -179,18 +168,39 @@ export class UsermenuComponent implements OnInit {
 
   // Ubicacion de los colaboradores
   getUbicacionColaboradores(){
-    this.query = "col.c_id IS NOT NULL";
-    this.buscarCollabsIDs();
+    console.log(this.lista_collabs);
     this.lista_collabs.forEach(collabs => {
+      console.log("-");
       collabs.forEach(collab => {
+        console.log("+6");
         this.addMarcador(collab.ubicacion);
       })
     })
   }
 
+  funcion(){
+    this.beginSearch();
+    this.getUbicacionColaboradores();
+  }
+
   //--------------- FIND DEL CODIGO DEL MAPA ------------------------
 
   //--------------- CODIGO DE LA LISTA DE COLABORADORES --------------
+
+  buscarColaboradores(){
+    this.modo = "buscador";
+    let string: string;
+    const params = new URLSearchParams(location.search);
+    if(this.name_tags.value.string === ""){
+      string = "";
+    }else{
+      string = this.name_tags.value.string;
+    }
+    params.set('string', string);
+    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
+    this.beginSearch();
+    
+  }
   
   buscarCollabsIDs(){
     let temp: Array<id> = new Array<id>();
@@ -202,7 +212,6 @@ export class UsermenuComponent implements OnInit {
          rows.formularios.rows.forEach((id) => {
            this.getCollabInfo(Number(id.c_id));
          });
-         console.log(this.lista_collabs);
        }else{
          this.encontrados = false;
          this.lista_collabs = new Array<Array<colaborador>>();
@@ -231,7 +240,7 @@ export class UsermenuComponent implements OnInit {
                temp.etiquetas.push(etiqueta);
              });
            }
-          temp.ubicacion = info.ubicacion;
+          temp.ubicacion = JSON.parse(info.ubicacion);
          });
          
          if(this.limitador == 0){
@@ -250,6 +259,7 @@ export class UsermenuComponent implements OnInit {
          
        });
      });
+     this.limitador = 0;
    }
    
    beginSearch(){
