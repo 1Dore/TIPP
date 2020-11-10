@@ -23,7 +23,7 @@ module.exports = (app) => {
 
     app.post('/cambiarEstadoColab', (req,res,next) => {
         let querry = `update colaborador set estado = '${req.body.estado}' where c_id = ${req.body.id}`;
-        console.log(querry);
+
         conn.query(querry, (err, formularios, cols) => {
             if (err) res.json({status: 0, message: `${err}`});  
             else res.json({status: 1, message: "Datos de usuario Actualizados", formularios});
@@ -40,6 +40,7 @@ module.exports = (app) => {
 
     app.post('/setMyPosition', (req, res, next) => {
         let query = `Update colaborador set ubicacion = '${req.body.ubicacion}' where c_id = ${req.body.id}`;
+        console.log(query);
         conn.query(query, (err, formularios, cols) => {
             if (err) res.json({status: 0, message: `${err}`});  
             else res.json({status: 1, message: "Ubicacion ha sido actualizada", formularios});

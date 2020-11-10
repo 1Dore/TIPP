@@ -22,7 +22,8 @@ create table Colaborador(
 	total_contratos integer,
 	total_estrellas integer,
 	c_foto varchar(200),
-	primary key (c_id),
+	ubicacion varchar(200),
+	primary key (c_id)),
 	unique(Correo)
 );
 
@@ -72,6 +73,10 @@ create table mensajes(
     primary key (m_id),
     foreign key (con_id) references Contratos(con_id)
 );
+
+------- indexes ------------
+create index idx_con on mensajes("con_id");
+
 
 
 //total de tablas 6
