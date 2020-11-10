@@ -23,29 +23,31 @@ create table Colaborador(
 	total_estrellas integer,
 	c_foto varchar(200),
 	ubicacion varchar(200),
-	primary key (c_id)),
+	estado char;
+	primary key (c_id),
 	unique(Correo)
 );
 
 create table Administrador (
 	u_id serial,
 	Nombre varchar(100),
-	Correo varchar(100) unique,
+	Correo varchar(100),
 	contraseña varchar(100),
 	primary key (u_id),
 	unique(Correo)
 );
 
 create table Contratos(
+	con_id serial,
 	f_init timestamp, --timestamp format: YYYY-MM-DD HH:MM:SS
 	f_end timestamp,
-	con_id serial,
 	u_id int,
 	c_id int,
 	direccion varchar(250),
 	estado char,
+	descripcion varchar(300),
 	primary key( con_id),
-	foreign key (u_id) references usuario(u_id),
+	foreign key (u_id) references usuarios(u_id),
 	foreign key (c_id) references colaborador(c_id)
 );
 
@@ -73,6 +75,8 @@ create table mensajes(
     primary key (m_id),
     foreign key (con_id) references Contratos(con_id)
 );
+
+
 
 ------- indexes ------------
 create index idx_con on mensajes("con_id");

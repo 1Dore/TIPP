@@ -32,4 +32,14 @@ export class AdminService {
     return this.http.post(url, httpHeaders);
   }
 
+  editEtiqueta(data):Observable<any>{
+    let url = dominio + "editarEtiquetas";
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  eliminarEtiqueta(data):Observable<any>{
+    let url = dominio + "eliminarEtiqueta";
+    return this.http.post(url, data, httpHeaders);
+  }
+
 }

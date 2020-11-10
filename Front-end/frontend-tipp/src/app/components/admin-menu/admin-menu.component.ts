@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from 'src/app/services/admin.service';
 import { AdminCreateTagsComponent } from '../admin-create-tags/admin-create-tags.component';
+import { AdminEditTagComponent } from '../admin-edit-tag/admin-edit-tag.component';
 import { RegisterColaboradorComponent } from '../register-colaborador/register-colaborador.component';
 
 class Etiqueta{
@@ -35,12 +36,15 @@ export class AdminMenuComponent implements OnInit {
   newEtiqueta(){
     const diologRef = this.diolog.open(AdminCreateTagsComponent, {
       width: '40%',
+
     })
   }
 
-  editEtiqueta(id: number){
-    const diologRef = this.diolog.open(AdminCreateTagsComponent, {
+  editEtiqueta(data){
+    console.log(data);
+    const diologRef = this.diolog.open(AdminEditTagComponent, {
       width: '40%',
+      data: {id: data.e_id, nombre: data.e_nombre, descripcion: data.descripcion}
     })
   }
 
@@ -58,6 +62,12 @@ export class AdminMenuComponent implements OnInit {
       }
     });
     console.log(this.lista_etiquetas);
+  }
+
+  eliminarEtiqueta(id:Number){
+    this.adminService.eliminarEtiqueta({id: id}).subscribe(rows => {
+      alert(rows.message);
+    })
   }
 
 }

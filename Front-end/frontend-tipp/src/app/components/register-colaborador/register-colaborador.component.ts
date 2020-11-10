@@ -121,6 +121,8 @@ export class RegisterColaboradorComponent implements OnInit {
       });
       
     });
+
+    this.dialogRef.close();
   }
 
 

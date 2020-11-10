@@ -37,6 +37,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import {UserCitasComponent } from './components/user-citas/user-citas.component';
 import { ColabPerfilComponent } from './components/colab-things/colab-perfil/colab-perfil.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { AdminEditTagComponent } from './components/admin-edit-tag/admin-edit-tag.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import {MatRadioModule} from '@angular/material/radio';
     ColabMenuComponent,
     UserPerfilComponent,
     UserCitasComponent,
-    ColabPerfilComponent
+    ColabPerfilComponent,
+    AdminEditTagComponent
 
 
   ],

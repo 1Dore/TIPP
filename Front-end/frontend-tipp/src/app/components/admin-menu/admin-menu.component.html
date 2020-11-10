@@ -44,8 +44,8 @@
                                                     {{etiqueta.e_nombre}}
                                                 </div>
                                             </div>
-                                            <button mat-icon-button > <mat-icon>edit</mat-icon> </button>
-                                            <button mat-icon-button > <mat-icon>clear</mat-icon> </button>  
+                                            <button mat-icon-button (click) = "editEtiqueta(etiqueta)"> <mat-icon>edit</mat-icon> </button>
+                                            <button mat-icon-button (click) = "eliminarEtiqueta(etiqueta.e_id)"> <mat-icon>clear</mat-icon> </button>  
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
                                     </div>
