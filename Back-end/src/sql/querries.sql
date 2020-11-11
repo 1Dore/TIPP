@@ -29,11 +29,11 @@ create table Colaborador(
 );
 
 create table Administrador (
-	u_id serial,
+	a_id serial,
 	Nombre varchar(100),
 	Correo varchar(100),
 	contraseña varchar(100),
-	primary key (u_id),
+	primary key (a_id),
 	unique(Correo)
 );
 

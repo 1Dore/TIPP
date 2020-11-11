@@ -38,8 +38,14 @@ export class UserCitasComponent implements OnInit {
   chatBool = false;
 
   ngOnInit(): void {
-    this.userDisplayName = localStorage.getItem('loggedUser');
-    this.obtenerCitas();
+    if(this.auth.isLogin()){
+      this.userDisplayName = localStorage.getItem('loggedUser');
+      this.obtenerCitas();
+    }
+    else{
+      this.logOut();
+    }
+
   }
 
 
@@ -135,6 +141,11 @@ export class UserCitasComponent implements OnInit {
 
   irA(ruta){
     this.router.navigateByUrl(ruta);
+  }
+  
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
   }
 
 }

@@ -12,6 +12,7 @@
         <!-- Side Menu -->
         
         <mat-drawer #drawer mode="over" class="sidemenu">
+
             <div *ngIf="emisor.tipo">
                 <div class="d-flex justify-content-around">
                     <div class="cuadrado"></div>
@@ -33,17 +34,17 @@
                     <button mat-button><mat-icon class="center" (click)="irA('/usermenu/settings')">settings</mat-icon></button>
                 </div>
                 <div class="d-flex justify-content-around">
-                    <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
+                    <button mat-button class="bottomcenter" (click)="logOut()">Cerrar Sesión</button>
                 </div>
 
             </div>
 
-            <div *ngIf="!emisor.tipo">
+            <div *ngIf="emisor.tipo == false">
                 <div class="d-flex justify-content-around">
                     <div class="cuadrado"></div>
                 </div>
 
-                <div *ngIf="userService.isLogin()">
+                <div>
                     <div>{{userDisplayName}}</div>
                 </div>
 
@@ -55,7 +56,7 @@
                     <button mat-button><mat-icon class="center" (click)="irA('/colab-menu/perfil')">settings</mat-icon></button>
                 </div>
                 <div class="d-flex justify-content-around">
-                    <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
+                    <button mat-button class="bottomcenter" (click)="logOut()">Cerrar Sesión</button>
                 </div>
             </div>
         </mat-drawer>
@@ -102,12 +103,18 @@
                             </mat-card-actions>
                         </mat-card>
 
-                        <div *ngIf="!emisor.tipo">
+                        <div *ngIf="!emisor.tipo" class= "row justify-content-md-center">
                             <div class ="row justify-content-md-center">
                                 <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/colabmenu")'>Regresar</button>
                             </div>
+                            <div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div>
+                                <button  mat-raised-button type="submit" color="accent" (click) = 'terminarContrato("algo")'>Terminar Contrato</button>
+                            </div>
                         </div>
-                        <div *ngIf="emisor.tipo">
+                        <div class= "row justify-content-md-center" *ngIf="emisor.tipo">
                             <div class ="row justify-content-md-center">
                                 <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
                             </div>

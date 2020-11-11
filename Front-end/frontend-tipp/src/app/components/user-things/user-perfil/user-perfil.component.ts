@@ -25,43 +25,46 @@ export class UserPerfilComponent implements OnInit {
   userDisplayName = '';
 
   ngOnInit(): void {
-    this.data = new userData();
-    let id = Number(localStorage.getItem('id'));
-    let con = false;
-
-    this.UserForm = this.form.group({
-      correo:['', Validators.required],
-      password:['', Validators.required],
-      nombre:['', Validators.required],
-      apellido:['', Validators.required],
-      telefono:['', Validators.required]
-    });
-
-    this.auth.askUserData(id).subscribe(data => {
-
-      this.data.nombre = data.formularios.rows[0].nombre;
-      this.data.apellido = data.formularios.rows[0].apellido;
-      this.data.correo = data.formularios.rows[0].correo;
-      this.data.telefono = data.formularios.rows[0].telefono;
-      this.data.contraseña = data.formularios.rows[0].contraseña;
-      
-      
-      this.UserForm.setValue({
-        correo:this.data.correo,
-        password:"Espacio",
-        nombre:this.data.nombre,
-        apellido:this.data.apellido,
-        telefono:this.data.telefono
+    if(this.auth.isLogin()){
+      this.data = new userData();
+      let id = Number(localStorage.getItem('id'));
+      let con = false;
+  
+      this.UserForm = this.form.group({
+        correo:['', Validators.required],
+        password:['', Validators.required],
+        nombre:['', Validators.required],
+        apellido:['', Validators.required],
+        telefono:['', Validators.required]
       });
+  
+      this.auth.askUserData(id).subscribe(data => {
+  
+        this.data.nombre = data.formularios.rows[0].nombre;
+        this.data.apellido = data.formularios.rows[0].apellido;
+        this.data.correo = data.formularios.rows[0].correo;
+        this.data.telefono = data.formularios.rows[0].telefono;
+        this.data.contraseña = data.formularios.rows[0].contraseña;
+        
+        
+        this.UserForm.setValue({
+          correo:this.data.correo,
+          password:"Espacio",
+          nombre:this.data.nombre,
+          apellido:this.data.apellido,
+          telefono:this.data.telefono
+        });
+  
+  
+      });
+  
+      console.log(this.UserForm.value.password)
+      this.userDisplayName = localStorage.getItem('loggedUser');
+    }
+    else{
+      this.logOut();
+    }
 
-
-
-
-    });
-
-
-    console.log(this.UserForm.value.password)
-    this.userDisplayName = localStorage.getItem('loggedUser');
   }
 
 
@@ -109,4 +112,9 @@ export class UserPerfilComponent implements OnInit {
     this.router.navigateByUrl(ruta);
   }
 
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
+  }
+  
 }

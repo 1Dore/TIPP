@@ -47,8 +47,9 @@ export class AdminLoginComponent implements OnInit {
         
     this.service.loginAdmin(login).subscribe(data => {
       console.log(data);
-      if (data.message == "Se obtvo informacion satisfactoriamente del formulario"){
+      if (data.formularios.rowCount > 0){
         alert("Login exitoso");
+        this.service.loged();
         this.abrir('admin-mode/menu')
       }
       else alert("No se ha encontrado al usuario");

@@ -32,20 +32,28 @@ export class ColabMenuComponent implements OnInit {
   listaCitasNuevas:Array<citas> = new Array<citas>();
   listaCitasAgendadas:Array<citas> = new Array<citas>();
   datosEstado:Estado;
-  citas = true;
+  citas = false;
   aceptado = false;
 
   center: google.maps.LatLngLiteral;
 
   ngOnInit(): void {
-    this.datosEstado = new Estado();
-    this.datosEstado.id = Number(localStorage.getItem('id'));
-    this.datosEstado.estado = '';
-    this.userDisplayName = localStorage.getItem('loggedUser');
-    this.getColaboradoresEstado();
-    this.obtenerCitasNuevas();
-    this.obtenerCitasAgendadas();
-    this.guardarUbicacion();
+    if(this.auth.isLogin()){
+
+      this.datosEstado = new Estado();
+      this.datosEstado.id = Number(localStorage.getItem('id'));
+      this.datosEstado.estado = '';
+      this.userDisplayName = localStorage.getItem('loggedUser');
+      this.getColaboradoresEstado();
+      this.obtenerCitasNuevas();
+      this.obtenerCitasAgendadas();
+      this.guardarUbicacion();
+      if(this.listaCitasAgendadas.length > 0 && this.listaCitasAgendadas.length > 0) this.citas = true;
+
+    }
+    else{
+      this.logOut();
+    }
   }
 
   getColaboradoresEstado(){
@@ -53,6 +61,9 @@ export class ColabMenuComponent implements OnInit {
       if(data.formularios.rows[0].estado == '' || data.formularios.rows[0].estado == null){
         this.datosEstado.estado = "D";
         this.datosEstado.display = "Disponible";
+        this.auth.cambiarEstado(this.datosEstado).subscribe(rows => {
+          console.log(rows.message);
+        });
       }
       else{
         if(data.formularios.rows[0].estado == "D"){
@@ -87,6 +98,7 @@ export class ColabMenuComponent implements OnInit {
     temp.estado = estado;
     this.auth.cambiarEstadoCita(temp).subscribe(data => {
       console.log(data.message);
+      alert(this.getEstado(estado));
     });
 
   }
@@ -109,6 +121,7 @@ export class ColabMenuComponent implements OnInit {
           temp.estado = this.getEstado(info.estado);
           temp.nombre = "";
           temp.u_id = info.u_id;
+          temp.descripcion = info.descripcion;
 
           //busco el nombre, apellid, tags, telefono del usuario
           this.auth.getUsuarioData( { u_id: info.u_id } ).subscribe(data => {
@@ -121,7 +134,7 @@ export class ColabMenuComponent implements OnInit {
           });
 
           tempCitas.push(temp);
-
+          
         }
 
       });
@@ -129,6 +142,7 @@ export class ColabMenuComponent implements OnInit {
     });
 
     this.listaCitasNuevas = tempCitas;
+
 
   }
 
@@ -151,6 +165,7 @@ export class ColabMenuComponent implements OnInit {
           temp.estado = this.getEstado(info.estado);
           temp.nombre = "";
           temp.u_id = info.u_id;
+          temp.descripcion = info.descripcion;
 
           //busco el nombre, apellid, tags, telefono del usuario
           this.auth.getUsuarioData( { u_id: info.u_id } ).subscribe(data => {
@@ -222,8 +237,13 @@ export class ColabMenuComponent implements OnInit {
     })
   }
 
-    irAlChat(contrato_id: number, c_id: number){
+  irAlChat(contrato_id: number, c_id: number){
     this.irA('/user-collab/chat?con_id=' + contrato_id + '&c_id=' + c_id);
+  }
+
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
   }
 
 }

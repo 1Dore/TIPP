@@ -31,6 +31,7 @@ class Contrato{
   u_id:Number;
   c_id:Number;
   fecha_inicio:String;
+  ubicacion:String;
 }
 
 declare var google:any;
@@ -81,20 +82,28 @@ export class UsermenuComponent implements OnInit {
   infoContent = ''
 
   ngOnInit(): void {
-    this.modo = "mapa";
-    this.name_tags = this.fb.group({
-      string: [""],
-    });
-    this.userDisplayName = localStorage.getItem('loggedUser');
-    const params = new URLSearchParams(location.search);
-    params.set('string', '');
-    window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
-    this.beginSearch();
-    this.ubicacionActual();
-    this.ubicaciones = setTimeout(() => {
-      this.getUbicacionColaboradores(); 
-    }, 3000);
-    
+    if(this.auth.isLogin()){
+
+      this.modo = "mapa";
+      this.name_tags = this.fb.group({
+        string: [""],
+      });
+      this.userDisplayName = localStorage.getItem('loggedUser');
+      const params = new URLSearchParams(location.search);
+      params.set('string', '');
+      window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
+      this.beginSearch();
+      this.ubicacionActual();
+      this.ubicaciones = setTimeout(() => {
+        this.getUbicacionColaboradores(); 
+      }, 3000);
+
+    }
+    else{
+      this.logOut();
+      console.log(this.auth.isLogin());
+    }
+
   }
 
   //-----------------------  CODIGO DEL MAPA -------------------------
@@ -313,8 +322,18 @@ export class UsermenuComponent implements OnInit {
      console.log(this.query);
    }
  
+  //-------------contratos----------------------------------------
    contratar(id){
      //aqui obtendria los datos del card
+      let ubicacion;
+      navigator.geolocation.getCurrentPosition((position) => {
+      ubicacion = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+
+     
+
      this.auth.getFechayHora().subscribe(data => {
        console.log(data);
        let contrato = new Contrato();
@@ -322,8 +341,11 @@ export class UsermenuComponent implements OnInit {
        contrato.u_id = Number(localStorage.getItem('id')); //id del usuario
        let fecha_inicio = new Date(data.formularios.rows[0].fyh);
        contrato.fecha_inicio = String(fecha_inicio);
+       contrato.ubicacion = JSON.stringify(ubicacion);
        this.nextContrato(contrato);
      });
+
+    });
    }
  
    nextContrato(contrato:Contrato){
@@ -344,6 +366,11 @@ export class UsermenuComponent implements OnInit {
   
   irA(ruta){
     this.router.navigateByUrl(ruta);
+  }
+
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
   }
   
     

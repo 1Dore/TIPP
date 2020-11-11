@@ -22,6 +22,16 @@ export class AdminService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  isLogin() {
+    let islog = localStorage.getItem("isLogin") === "validoA";
+    return islog;
+  }
+
+  loged(){
+    localStorage.setItem("isLogin", "validoA");
+  }
+  
+
   newEtiqueta(data): Observable<any> {
     let url = dominio + "newEtiquetas";
     return this.http.post(url, data, httpHeaders);

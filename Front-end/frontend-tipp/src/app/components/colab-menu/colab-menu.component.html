@@ -27,7 +27,7 @@
                     <button mat-button><mat-icon class="center" (click)="irA('/colab-menu/perfil')">settings</mat-icon></button>
                 </div>
                 <div class="d-flex justify-content-around">
-                    <button mat-button class="bottomcenter" (click)="irA('/checkout')">Cerrar Sesión</button>
+                    <button mat-button class="bottomcenter" (click)="logOut()">Cerrar Sesión</button>
                 </div>
             </mat-drawer>
 
@@ -70,6 +70,9 @@
                                             <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
                                             <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
                                             <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>
+                                            <mat-list-item ><p>descripcion: 
+                                                            {{infoCita.descripcion}}</p>
+                                            </mat-list-item>
                                         </mat-list>
                                     </div>
                                     <div class="col-4">
@@ -101,6 +104,9 @@
                                             <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
                                             <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
                                             <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>
+                                            <mat-list-item ><p>descripcion: 
+                                                {{infoCita.descripcion}}</p>
+                                            </mat-list-item>
                                         </mat-list>
                                     </div>
                                     <div class="col-4">

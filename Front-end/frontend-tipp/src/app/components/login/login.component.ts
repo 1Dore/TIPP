@@ -90,6 +90,7 @@ export class LoginComponent implements OnInit {
         this.formularioService.isLogin();
         alert("Inicio de sesion exitoso");
         this.router.navigateByUrl('colabmenu');
+        this.colaboradorService.loged();
       }
       else {
         alert("Datos incorrectos");

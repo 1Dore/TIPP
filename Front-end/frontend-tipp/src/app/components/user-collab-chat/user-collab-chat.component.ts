@@ -47,30 +47,38 @@ export class UserCollabChatComponent implements OnInit {
               public collabService: ColaboradorService, public chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.mensajeForm = this.fb.group({
-      string: ["", Validators.required],
-    });
-    this.usuario = true;
-    this.userDisplayName = localStorage.getItem('loggedUser');
-    this.emisor.id = Number(localStorage.getItem('id')); //id del emisor
-    if(localStorage.getItem('user_type') == 'user') {
-      this.emisor.tipo = true;
-      this.receptor.tipo = false;
-    }
-    else {
-      this.emisor.tipo = false;
-      this.receptor.tipo = true;
-    }
-    const params = new URLSearchParams(window.location.search);
-    this.receptor.id = Number(params.get('c_id'));
-    this.contrato_id = Number(params.get('con_id'));
 
-    this.obtenerMensajes();
+    if(this.userService.isLogin() || this.collabService.isLogin()){
 
-    this.traerMensajes = setInterval(() => {
-      this.obtenerMensajes(); 
-    }, 3000);
+      this.mensajeForm = this.fb.group({
+        string: ["", Validators.required],
+      });
+      this.usuario = true;
+      this.userDisplayName = localStorage.getItem('loggedUser');
+      this.emisor.id = Number(localStorage.getItem('id')); //id del emisor
+      if(localStorage.getItem('user_type') == 'user') {
+        this.emisor.tipo = true;
+        this.receptor.tipo = false;
+      }
+      else {
+        this.emisor.tipo = false;
+        this.receptor.tipo = true;
+      }
+      const params = new URLSearchParams(window.location.search);
+      this.receptor.id = Number(params.get('c_id'));
+      this.contrato_id = Number(params.get('con_id'));
+  
+      this.obtenerMensajes();
+  
+      this.traerMensajes = setInterval(() => {
+        this.obtenerMensajes(); 
+      }, 3000);
+    }
+    else{
+      this.logOut();
+    }
   }
+
   ngOnDestroy() {
     clearInterval(this.traerMensajes);
   }
@@ -128,12 +136,23 @@ export class UserCollabChatComponent implements OnInit {
     this.chatService.sendMensajes(mensaje_a_enviar).subscribe();
   }
 
+  //-------------contratos----------------------------------------
+  terminarContrato(id){
+    
+  }
+
+
   abrir(ruta){
     this.router.navigateByUrl(ruta);  
   }
   
   irA(ruta){
     this.router.navigateByUrl(ruta);
+  }
+
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
   }
 
   // Cosas que copie y pegue

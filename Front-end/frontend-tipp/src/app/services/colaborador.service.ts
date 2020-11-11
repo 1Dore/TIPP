@@ -73,6 +73,18 @@ export class ColaboradorService {
     return this.http.post(url, data, httpHeaders); 
   }
 
+  //Terminar contrato
+
+  getFechayHora(): Observable<any>{
+    let url = dominio + 'getFyH';
+    return this.http.post(url, httpHeaders);
+  }
+
+  terminarContrato(data): Observable<any>{
+    let url = dominio + "terminarContrato";
+    return this.http.post(url, data, httpHeaders); 
+  }
+
 
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{
@@ -88,12 +100,12 @@ export class ColaboradorService {
   }
 
   isLogin() {
-    let islog = localStorage.getItem("isLogin") === "valido";
+    let islog = localStorage.getItem("isLogin") === "validoC";
     return islog;
   }
 
   loged(){
-    localStorage.setItem("isLogin", "valido");
+    localStorage.setItem("isLogin", "validoC");
   }
   
   // Obtener todas la etiquetas para el registro

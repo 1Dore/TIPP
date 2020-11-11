@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AdminCreateTagsComponent } from '../admin-create-tags/admin-create-tags.component';
 import { AdminEditTagComponent } from '../admin-edit-tag/admin-edit-tag.component';
@@ -20,11 +21,16 @@ export class AdminMenuComponent implements OnInit {
 
   lista_etiquetas: Array<Etiqueta> = new Array<Etiqueta>();
 
-  constructor(public diolog: MatDialog, private adminService: AdminService) { }
+  constructor(public diolog: MatDialog, private adminService: AdminService, private router:Router) { }
 
   ngOnInit(): void {
+    if (this.adminService.isLogin()){
+      this.getAllEtiquetas()
+    }
+    else{
+      this.router.navigateByUrl('/admin-mode');
+    }
 
-    this.getAllEtiquetas()
   }
 
   newColaborador(){
@@ -68,6 +74,11 @@ export class AdminMenuComponent implements OnInit {
     this.adminService.eliminarEtiqueta({id: id}).subscribe(rows => {
       alert(rows.message);
     })
+  }
+
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
   }
 
 }

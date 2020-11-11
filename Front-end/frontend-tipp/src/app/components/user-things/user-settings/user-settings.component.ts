@@ -15,18 +15,24 @@ export class UserSettingsComponent implements OnInit {
   userDisplayName = '';
 
   ngOnInit(): void {
-    let id = Number(localStorage.getItem('id'));
+    if(this.auth.isLogin()){
+      let id = Number(localStorage.getItem('id'));
 
+      this.Form = this.fb.group({
+        correo:['', Validators.required],
+        password:['', Validators.required],
+        nombre:['', Validators.required],
+        apellido:['', Validators.required],
+        telefono:['', Validators.required]
+      });
+  
+      this.userDisplayName = localStorage.getItem('loggedUser');
+    }
 
-    this.Form = this.fb.group({
-      correo:['', Validators.required],
-      password:['', Validators.required],
-      nombre:['', Validators.required],
-      apellido:['', Validators.required],
-      telefono:['', Validators.required]
-    });
+    else{
+      this.logOut();
+    }
 
-    this.userDisplayName = localStorage.getItem('loggedUser');
   }
 
   onSubmit(){
@@ -40,5 +46,11 @@ export class UserSettingsComponent implements OnInit {
   irA(ruta){
     this.router.navigateByUrl(ruta);
   }
+
+  logOut(){
+    localStorage.clear();
+    this.router.navigateByUrl('blabla');
+  }
+  
 
 }

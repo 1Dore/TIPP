@@ -81,11 +81,11 @@ module.exports = (app) => {
     //--------------------ADMIN--------------------------------------
     app.post('/getAdmin', (req, res, next) => {
 
-        let querry = `Select * from administrador where correo = '${req.params.correo}' and contraseña = '${req.params.password}'`;
+        let querry = `Select * from administrador where correo = '${req.body.correo}' and contraseña = '${req.body.password}'`;
         conn.query( querry, (error, formularios, cols) => {
 
             if (error) res.json({status: 0, message: `${error}`});
-            else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario"});
+            else res.json({status: 1, message: "Se obtvo informacion satisfactoriamente del formulario", formularios});
 
         });
 
