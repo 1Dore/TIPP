@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, Query, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
+import { UserCreaContratoComponent } from '../user-crea-contrato/user-crea-contrato.component';
 
 class Etiqueta{
   nombre: string;
@@ -44,7 +46,7 @@ export class UsermenuComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
   
-  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService) { }
+  constructor(private router: Router, private fb: FormBuilder, public auth:FormularioService, public dialogo: MatDialog) { }
   placeHolder;
   //cosas de google maps
   name_tags: FormGroup;
@@ -209,6 +211,7 @@ export class UsermenuComponent implements OnInit {
        if(rows.formularios.rows.length > 0){
          this.encontrados = true;
          this.lista_collabs = new Array<Array<colaborador>>();
+         this.lista_temp = new Array<colaborador>();
          rows.formularios.rows.forEach((id) => {
            this.getCollabInfo(Number(id.c_id));
          });
@@ -221,7 +224,7 @@ export class UsermenuComponent implements OnInit {
    }
  
    getCollabInfo(id: number){
-    
+
      let temp: colaborador = new colaborador();
      this.auth.getCollabInfo({id: id}).subscribe((rows) => {
        rows.formularios.rows.forEach((info) => {
@@ -312,31 +315,30 @@ export class UsermenuComponent implements OnInit {
      this.query += " AND estado = 'D'";
      console.log(this.query);
    }
- 
-   contratar(id){
-     //aqui obtendria los datos del card
-     this.auth.getFechayHora().subscribe(data => {
-       console.log(data);
-       let contrato = new Contrato();
-       contrato.c_id = id; //id del colaborador
-       contrato.u_id = Number(localStorage.getItem('id')); //id del usuario
-       let fecha_inicio = new Date(data.formularios.rows[0].fyh);
-       contrato.fecha_inicio = String(fecha_inicio);
-       this.nextContrato(contrato);
-     });
-   }
- 
-   nextContrato(contrato:Contrato){
-     this.auth.newContrato(contrato).subscribe(data => {
-       if (data.message == "Se creo un contrato satisfactoriamente"){
-         alert("Contrato creado");
-         this.router.navigateByUrl("usermenu");
-       }
-     })
-   }
 
 
   // -------------- FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES --------------
+
+  // -------------- CODIGO PARA LOS CONTRATOS ----------------
+
+  contratar(colaborador: colaborador){
+    //aqui obtendria los datos del card
+    const diologRef = this.dialogo.open(UserCreaContratoComponent, {
+      width: '80%',
+      data: colaborador,
+    })
+  }
+
+  nextContrato(contrato:Contrato){
+    this.auth.newContrato(contrato).subscribe(data => {
+      if (data.message == "Se creo un contrato satisfactoriamente"){
+        alert("Contrato creado");
+        this.router.navigateByUrl("usermenu");
+      }
+    })
+  }
+
+  // ---------- FIN DEL CODIGO DEL CODIGO DE LOS CONTRATOS --------------------
 
   abrir(ruta){
     this.router.navigateByUrl(ruta);  

@@ -1,0 +1,49 @@
+<div class="container">
+    <form [formGroup]="contenido_contrato" (ngSubmit)="contratar()">
+        <div class="row">
+            <div class="col">
+                <mat-card-header class="element">
+                    <mat-card-title>{{data.nombre}}</mat-card-title>
+                    <mat-card-subtitle>{{data.correo}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{data.foto}}" class="cuadrado" style="align-content: center;">
+                
+                <mat-card-content>
+                    
+                        <mat-list role="list">
+                            <mat-label>Etiquetas:</mat-label>
+                            <mat-list-item *ngFor="let tag of data.etiquetas">{{tag.nombre}}</mat-list-item>
+                        </mat-list>
+                </mat-card-content>
+                    <mat-card-actions>
+                        <mat-form-field class="element">
+                            <mat-label>Descripcion</mat-label>
+                            <input type="text" matInput formControlName="descripcion">
+                    </mat-form-field>
+                    <button type="submit" [disabled] = "contenido_contrato.invalid" class="mat-raised-button" >Contratar</button>
+                </mat-card-actions>
+
+            </div>
+            <div class="col">
+                <google-map
+                    width="100%"
+                    [zoom]="zoom"
+                    [center]="center"
+                    [options]="options"
+                    (mapClick)="click($event)"
+                >
+                    <map-marker
+                        #markerElem
+                        *ngFor="let marker of markers"
+                        [position]="marker.position"
+                        [label]="marker.label"
+                        [title]="marker.title"
+                        [options]="marker.options"
+                    >
+                    </map-marker>
+                    <map-info-window>{{ infoContent }}</map-info-window>
+                </google-map>
+            </div>
+        </div>
+    </form>
+</div>

@@ -5,7 +5,8 @@ module.exports = (app) => {
 
     app.post('/newContrato', (req, res, next) => {
         let date = new Date(req.body.fecha_inicio);             //creo un objeto date que recibe un string con la forma de un objeto date de ts y este lo transforma en parametros para crear un objeto Date en JS
-        let querry =  `Insert into contratos (f_init, u_id, c_id, estado) values ($1, ${req.body.u_id}, ${req.body.c_id}, 'E')`; //$1 es una forma de transformar el dato, $1 meteria a la vase de datos un DATE
+        let querry =  `Insert into contratos (f_init, u_id, c_id, estado, descripcion, direccion) values ($1, ${req.body.u_id}, '${req.body.c_id}', 'E', '${req.body.descripcion}', '${req.body.ubicacion}')`; //$1 es una forma de transformar el dato, $1 meteria a la vase de datos un DATE
+        console.log(querry)
         conn.query( querry, [date], (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});  
             else res.json({status: 1, message: "Se creo un contrato satisfactoriamente", formularios});
