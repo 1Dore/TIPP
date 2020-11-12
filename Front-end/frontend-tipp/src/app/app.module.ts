@@ -38,6 +38,7 @@ import {UserCitasComponent } from './components/user-citas/user-citas.component'
 import { ColabPerfilComponent } from './components/colab-things/colab-perfil/colab-perfil.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { AdminEditTagComponent } from './components/admin-edit-tag/admin-edit-tag.component';
+import { UserColabCalificacionComponent } from './components/user-colab-calificacion/user-colab-calificacion.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AdminEditTagComponent } from './components/admin-edit-tag/admin-edit-ta
     UserPerfilComponent,
     UserCitasComponent,
     ColabPerfilComponent,
-    AdminEditTagComponent
+    AdminEditTagComponent,
+    UserColabCalificacionComponent
 
 
   ],

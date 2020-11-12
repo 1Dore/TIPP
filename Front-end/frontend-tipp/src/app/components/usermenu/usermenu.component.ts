@@ -13,7 +13,7 @@ class Etiqueta{
 
 class Ubicacion{
   lat: number;
-  lng: number
+  lng: number;
 }
 
 class id{
@@ -335,7 +335,7 @@ export class UsermenuComponent implements OnInit {
     const diologRef = this.dialogo.open(UserCreaContratoComponent, {
       width: '80%',
       data: colaborador,
-    })
+    });
   }
 
   nextContrato(contrato:Contrato){

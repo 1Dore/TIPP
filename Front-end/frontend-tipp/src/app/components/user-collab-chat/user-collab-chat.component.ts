@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ChatService } from 'src/app/services/chat.service';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 import { FormularioService } from 'src/app/services/formulario.service';
+import { UserColabCalificacionComponent } from '../user-colab-calificacion/user-colab-calificacion.component';
 
 //${req.body.con_id}, '${req.body.emisor}', '${req.body.content}', '${req.body.fecha}')`
 class Mensaje{
@@ -19,6 +21,10 @@ class Usuario{
   tipo: boolean;
 }
 
+class Contrato{
+  id:number;
+  fecha:string;
+}
 
 @Component({
   selector: 'app-user-collab-chat',
@@ -44,7 +50,7 @@ export class UserCollabChatComponent implements OnInit {
   traerMensajes;
 
   constructor(private router: Router, public userService: FormularioService, private fb: FormBuilder,
-              public collabService: ColaboradorService, public chatService: ChatService) { }
+              public collabService: ColaboradorService, public chatService: ChatService, public dialog:MatDialog) { }
 
   ngOnInit(): void {
 
@@ -137,9 +143,28 @@ export class UserCollabChatComponent implements OnInit {
   }
 
   //-------------contratos----------------------------------------
-  terminarContrato(id){
-    
-  }
+  terminarContrato(){
+    let temp:Contrato = new Contrato();
+    temp.id = this.contrato_id;
+
+    const diologRef = this.dialog.open(UserColabCalificacionComponent, {
+      width: '40%',
+      data: {id: temp.id, CoU: this.receptor.tipo}
+    })
+
+    /*this.collabService.getFechayHora().subscribe(data => {
+
+      let tempFecha = new Date(data.formularios.rows[0].fyh);
+      temp.fecha = String(tempFecha);
+
+      this.collabService.terminarContrato(temp).subscribe(rows => {
+
+        alert(rows.message);
+
+      });
+
+    });*/
+  } 
 
 
   abrir(ruta){

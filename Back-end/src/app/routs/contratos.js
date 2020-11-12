@@ -16,10 +16,11 @@ module.exports = (app) => {
     });
 
     app.post('/terminarContrato', (req, res, next) => {
-        let querry =  `Update into contratos (f_init, u_id, c_id) values (${req.body.f_final}, ${req.body.u_id}, ${req.body.c_id})`;
-        conn.query( querry, (error, formularios, cols) => {
+        let date = new Date(req.body.fecha);
+        let querry =  `Update contratos set f_end = $1, estado = 'T' where con_id = ${req.body.id}`;
+        conn.query( querry, [date], (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});  
-            else res.json({status: 1, message: "Se creo un contrato satisfactoriamente", formularios});
+            else res.json({status: 1, message: "Se termino un contrato satisfactoriamente", formularios});
 
         });
 
@@ -106,5 +107,7 @@ module.exports = (app) => {
             else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
         });
     });
+
+    //a partir de la cita obtener los ID de los usuarios o colaboradores
 
 }
