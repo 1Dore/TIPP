@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { LoginFormulario } from '../components/login/LoginFormulario';
+
 
 const dominio = environment.apiURL;
 const httpHeaders = {
@@ -41,6 +41,16 @@ export class FormularioService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  setUbicacionActual(data): Observable<any>{
+    let url = dominio + "setMyPositionUser";
+    return this.http.post(url, data, httpHeaders); 
+  }
+
+  //Obtener Ubicacion via ID
+  getUserUbicacioByID(data): Observable<any>{
+    let url = dominio + "getUserUbicacionByID";
+    return this.http.post(url, data, httpHeaders);
+  }  
 //-----------loin-register---------------------------
   sentLogin(datos): Observable<any>{
     let url = dominio + 'getUsuarios';

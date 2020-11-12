@@ -69,8 +69,14 @@ export class ColaboradorService {
   }
   //Agregar Ubicacion
   setUbicacionActual(data): Observable<any>{
-    let url = dominio + "setMyPosition";
+    let url = dominio + "setMyPositionCollab";
     return this.http.post(url, data, httpHeaders); 
+  }
+
+  //Obtener Ubicacion via ID
+  getCollabUbicacioByID(data): Observable<any>{
+    let url = dominio + "getCollabUbicacionByID";
+    return this.http.post(url, data, httpHeaders);
   }
 
 

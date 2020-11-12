@@ -29,6 +29,24 @@ module.exports = (app) => {
         });
 
     });
+
+    app.post('/setMyPositionUser', (req, res, next) => {
+        let query = `Update usuarios set ubicacion = '${req.body.ubicacion}' where c_id = ${req.body.id}`;
+        console.log(query);
+        conn.query(query, (err, formularios, cols) => {
+            if (err) res.json({status: 0, message: `${err}`});  
+            else res.json({status: 1, message: "Ubicacion ha sido actualizada", formularios});
+        });
+    });
+
+    app.post('/getUserbUbicacionByID', (req, res, next) => {
+        let querry =  `select ubicacion from usuarios where u_id = ${req.body.id}`;
+        conn.query( querry, (error, formularios, cols) => {
+            if (error) res.json({status: 0, message: `${error}`});  
+            else res.json({status: 1, message: "Ubicaion del Colaborador obtenida", formularios});
+        });
+
+    });
     
 
 }

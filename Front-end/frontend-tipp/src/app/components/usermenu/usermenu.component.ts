@@ -61,8 +61,6 @@ export class UsermenuComponent implements OnInit {
   limitador: number = 0;
   ubicaciones;
 
-  //algo necesario para comunicarnos con el hmtl para el mapa
-  @ViewChild('map', {read: ElementRef, static: false}) mapRef:ElementRef;
 
   userDisplayName = '';
   
@@ -106,23 +104,22 @@ export class UsermenuComponent implements OnInit {
   }
 
   ubicacionActual(){
+    let ubicacion_Actual: Ubicacion = new Ubicacion();
+    let id: number;
     navigator.geolocation.getCurrentPosition((position) => {
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       }
       console.log(this.center);
+      ubicacion_Actual.lat = this.center.lat
+      ubicacion_Actual.lng = this.center.lng
+      id = Number(localStorage.getItem("id"));
+      this.auth.setUbicacionActual({ubicacion: JSON.stringify(ubicacion_Actual), id: id}).subscribe();
       this.addMiposicion();
     })
-    
-  }
-  zoomIn() {
-    if (this.zoom < this.options.maxZoom) this.zoom++
   }
 
-  zoomOut() {
-    if (this.zoom > this.options.minZoom) this.zoom--
-  }
 
   click(event: google.maps.MouseEvent) {
     console.log(event)
@@ -172,9 +169,7 @@ export class UsermenuComponent implements OnInit {
   getUbicacionColaboradores(){
     console.log(this.lista_collabs);
     this.lista_collabs.forEach(collabs => {
-      console.log("-");
       collabs.forEach(collab => {
-        console.log("+6");
         this.addMarcador(collab.ubicacion);
       })
     })
