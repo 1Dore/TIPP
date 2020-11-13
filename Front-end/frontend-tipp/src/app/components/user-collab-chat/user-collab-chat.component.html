@@ -122,9 +122,25 @@
                         
                     </div>
                     <div class="col-1">
-
+                        
                     </div>
                 </div>
+                    <google-map
+                        width="100%"
+                        [zoom]="zoom"
+                        [center]="center"
+                        [options]="options"
+                    >
+                        <map-marker
+                            #markerElem
+                            *ngFor="let marker of markers"
+                            [position]="marker.position"
+                            [label]="marker.label"
+                            [title]="marker.title"
+                            [options]="marker.options"
+                        >
+                        </map-marker>
+                    </google-map>
             </div>
             
         </mat-drawer-content>

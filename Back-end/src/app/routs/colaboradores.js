@@ -38,7 +38,7 @@ module.exports = (app) => {
         });
     });
 
-    app.post('/setMyPosition', (req, res, next) => {
+    app.post('/setMyPositionCollab', (req, res, next) => {
         let query = `Update colaborador set ubicacion = '${req.body.ubicacion}' where c_id = ${req.body.id}`;
         console.log(query);
         conn.query(query, (err, formularios, cols) => {
@@ -56,6 +56,13 @@ module.exports = (app) => {
 
     });
 
+    app.post('/getCollabUbicacionByID', (req, res, next) => {
+        let querry =  `select ubicacion from colaborador where c_id = ${req.body.id}`;
+        conn.query( querry, (error, formularios, cols) => {
+            if (error) res.json({status: 0, message: `${error}`});  
+            else res.json({status: 1, message: "Ubicaion del Colaborador obtenida", formularios});
+        });
 
+    });
 }
 
