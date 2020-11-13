@@ -91,8 +91,6 @@ module.exports = (app) => {
 
     app.post('/cambiarEstadoCitaColab', (req,res,next) => {
         let querry = `update contratos set estado = '${req.body.estado}' where con_id = ${req.body.id}`;
-        console.log(querry);
-        console.log(querry);
         conn.query(querry, (err, formularios, cols) => {
             if (err) res.json({status: 0, message: `${err}`});  
             else res.json({status: 1, message: "Datos de usuario Actualizados", formularios});
@@ -109,5 +107,29 @@ module.exports = (app) => {
     });
 
     //a partir de la cita obtener los ID de los usuarios o colaboradores
+    app.post('/getInfoContrato', (req, res, next) => {
+        let query = `Select * from contratos Where con_id = ${req.body.id}`;
+        conn.query(query, (error, formularios, cols) => {
+            if(error) res.json({status: 0, message: `${error}`});
+            else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
+        });
+    });
 
+    app.post('/calificarUsuario', (req,res,next) => {
+        let querry = `update usuarios set total_contratos = ${req.body.totalContratos} , total_estrellas = ${req.body.totalEstrellas} where u_id = ${req.body.id}`;
+        console.log(querry);
+        conn.query(querry, (err, formularios, cols) => {
+            if (err) res.json({status: 0, message: `${err}`});  
+            else res.json({status: 1, message: "Calificacion Enviada con exito"});
+        });
+    });
+
+    app.post('/calificarColab', (req,res,next) => {
+        let querry = `update colaborador set total_contratos = ${req.body.totalContratos} , total_estrellas = ${req.body.totalEstrellas} where c_id = ${req.body.id}`;
+        console.log(querry);
+        conn.query(querry, (err, formularios, cols) => {
+            if (err) res.json({status: 0, message: `${err}`});  
+            else res.json({status: 1, message: "Calificacion Enviada con exito"});
+        });
+    });
 }

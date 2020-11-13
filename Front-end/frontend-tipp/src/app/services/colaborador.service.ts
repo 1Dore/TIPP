@@ -62,8 +62,6 @@ export class ColaboradorService {
   }
 
   getUsuarioData(data):Observable<any>{
-    console.log("esta es mi data: ");
-    console.log(data);
     let url = dominio+'getUsuarioNombre';
     return this.http.post(url, data, httpHeaders);
   }
@@ -85,6 +83,10 @@ export class ColaboradorService {
     return this.http.post(url, data, httpHeaders); 
   }
 
+  calificarUsuario(data):Observable<any>{
+    let url = dominio + "calificarUsuario";
+    return this.http.post(url, data, httpHeaders);
+  }
 
   //-----------loin-register---------------------------
   sentColRegiser(data):Observable<any>{

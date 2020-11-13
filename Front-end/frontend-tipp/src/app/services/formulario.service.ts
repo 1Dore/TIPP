@@ -41,6 +41,11 @@ export class FormularioService {
     return this.http.post(url, data, httpHeaders);
   }
 
+  getContratoInfo(data):Observable<any>{
+    let url = dominio+'getColabNombre';
+    return this.http.post(url, data, httpHeaders);
+  }
+
 //-----------loin-register---------------------------
   sentLogin(datos): Observable<any>{
     let url = dominio + 'getUsuarios';

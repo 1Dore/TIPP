@@ -1,26 +1,18 @@
 <div mat-dialog-content>
     <div class="container">
       <h1 class="title">Calificacion de usuario</h1>
+      <h2>{{elCalificado.nombre}}</h2>
         <p>1 para MALO y 5 para Excelente</p>
-      <form [formGroup]="formCalificacion" (ngSubmit)="onSubmit()">
-  
-        <!-----------------------------Nombre------------------------->
-        <mat-form-field class="element">
-            <mat-label>{{elCalificado.nombre}}</mat-label>
-            <mat-radio-group    aria-label="Selecciona un opción">
 
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="calButton">
                 <mat-radio-button value="1">1</mat-radio-button>
                 <mat-radio-button value="2">2</mat-radio-button>
                 <mat-radio-button value="3">3</mat-radio-button>
                 <mat-radio-button value="4">4</mat-radio-button>
                 <mat-radio-button value="5">5</mat-radio-button>
-
-            </mat-radio-group>  
-        </mat-form-field>
-      <!-----------------------------apellido------------------------->
+            </mat-radio-group>
   
-        <section>
-          <button [disabled] = "formCalificacion.invalid" mat-raised-button type="submit" color="accent" class="element">Calificar</button>
+        <section *ngIf="data.CoU">
+          <button  mat-raised-button (click)="onSubmit()" color="accent">Calificar</button>
         </section>
-      </form>
 </div>

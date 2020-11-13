@@ -21,10 +21,6 @@ class Usuario{
   tipo: boolean;
 }
 
-class Contrato{
-  id:number;
-  fecha:string;
-}
 
 @Component({
   selector: 'app-user-collab-chat',
@@ -144,26 +140,12 @@ export class UserCollabChatComponent implements OnInit {
 
   //-------------contratos----------------------------------------
   terminarContrato(){
-    let temp:Contrato = new Contrato();
-    temp.id = this.contrato_id;
+
 
     const diologRef = this.dialog.open(UserColabCalificacionComponent, {
       width: '40%',
-      data: {id: temp.id, CoU: this.receptor.tipo}
-    })
-
-    /*this.collabService.getFechayHora().subscribe(data => {
-
-      let tempFecha = new Date(data.formularios.rows[0].fyh);
-      temp.fecha = String(tempFecha);
-
-      this.collabService.terminarContrato(temp).subscribe(rows => {
-
-        alert(rows.message);
-
-      });
-
-    });*/
+      data: {con_id: this.contrato_id, CoU: this.receptor.tipo, id: this.receptor.id}
+    });
   } 
 
 
