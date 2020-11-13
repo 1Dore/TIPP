@@ -101,6 +101,10 @@
                                         <p>Nombre del cliente: {{infoCita.nombre}}</p>
                                         Descripcion:
                                         <mat-list role="list">
+                                            <mat-list-item >
+                                                <mat-icon aria-hidden="false" aria-label="Example home icon">grade</mat-icon>
+                                                {{infoCita.estrellas}}
+                                            </mat-list-item>
                                             <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
                                             <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
                                             <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>

@@ -17,6 +17,7 @@ class citas{
   estado:String
   u_id:Number
   telefono:String
+  estrellas:number
 }
 
 
@@ -125,11 +126,14 @@ export class ColabMenuComponent implements OnInit {
 
           //busco el nombre, apellid, tags, telefono del usuario
           this.auth.getUsuarioData( { u_id: info.u_id } ).subscribe(data => {
-
+            console.log(data);
             //me permite desplegar el nombre completo y no pelearme en unir 2 campos de la lista
             temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
 
             temp.telefono = data.formularios.rows[0].telefono;
+
+            let promedio = data.formuladios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
+            temp.estrellas = promedio;
 
           });
 
@@ -174,6 +178,9 @@ export class ColabMenuComponent implements OnInit {
             temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
 
             temp.telefono = data.formularios.rows[0].telefono;
+            //sacar el promedio de estrellas estrellas = tot_estrellas / tot_contratos
+            let promedio = data.formularios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
+            temp.estrellas = promedio;
 
           });
 

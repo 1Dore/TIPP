@@ -27,6 +27,7 @@ class colaborador{
   foto: string;
   correo: string;
   ubicacion: Ubicacion;
+  estrellas:number;
 }
 
 class Contrato{
@@ -237,6 +238,20 @@ export class UsermenuComponent implements OnInit {
          temp.nombre += " " + info.apellido;
          temp.foto = info.c_foto;
          temp.correo = info.correo;
+
+
+         //obtener el promedio de las estrellas;
+         let promedio;
+         if(info.total_estrellas == null){
+           promedio = 5;
+         }
+         else{
+          promedio = info.total_estrellas / info.total_contratos;
+         }
+
+         temp.estrellas = promedio.toFixed(1);
+
+
          temp.etiquetas = new Array<Etiqueta>();
          this.auth.getCollabTags({id: id}).subscribe((tags) => {
            if(tags.formularios.rows.length > 0){

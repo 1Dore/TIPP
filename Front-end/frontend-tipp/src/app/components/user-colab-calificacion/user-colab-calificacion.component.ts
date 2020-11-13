@@ -84,7 +84,7 @@ export class UserColabCalificacionComponent implements OnInit {
   onSubmit(){
     let temp:Contrato = new Contrato();
     temp.id = this.data.con_id;
-    this.elCalificado.calificacion = this.calButton;  //calificacion que da el boton del pop-up
+    this.elCalificado.calificacion = Number(this.calButton);  //calificacion que da el boton del pop-up
     console.log(this.elCalificado);
     this.elCalificado.totalEstrellas = Number(this.elCalificado.totalEstrellas + this.elCalificado.calificacion);
     this.elCalificado.totalContratos = this.elCalificado.totalContratos + 1;
