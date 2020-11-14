@@ -61,7 +61,7 @@ export class ColabPerfilComponent implements OnInit {
         this.data.apellido = data.formularios.rows[0].apellido;
         this.data.correo = data.formularios.rows[0].correo;
         this.data.telefono = data.formularios.rows[0].telefono;
-        this.imgSrc = this.data.contraseña = data.formularios.rows[0].c_contraseña;
+        this.data.contraseña = data.formularios.rows[0].c_contraseña;
   
         this.UserForm.setValue({
           correo:this.data.correo,
@@ -71,17 +71,17 @@ export class ColabPerfilComponent implements OnInit {
           telefono:this.data.telefono
         });
 
-        if(this.data.foto == "" || this.img == null){
+        if(data.formularios.rows[0].u_foto == null){
           this.fotoForm.setValue({
             foto: this.imgSrc
           });
-          this.imgSrc = "../../../../assets/img/anonimo.jpg";
         }else{
+          this.imgSrc = this.data.foto = data.formularios.rows[0].c_foto;
           this.fotoForm.setValue({
             foto: this.data.foto
           });
-          
         }
+  
   
       });
   
