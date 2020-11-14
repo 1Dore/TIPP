@@ -13,8 +13,8 @@ module.exports = (app) => {
     });
 
     app.post('/updateColaboradorData', (req,res,next) => {
-        let querry = `update colaborador set nombre = '${req.body.nombre}', apellido = '${req.body.apellido}', correo = '${req.body.correo}'
-        , telefono = '${req.body.telefono}', c_contraseña = '${req.body.contraseña}' where c_id = ${req.body.id}`;
+        let querry = `update colaborador set nombre = '${req.body.nombre}', c_foto= '${req.body.foto}',apellido = '${req.body.apellido}', correo = '${req.body.correo}', telefono = '${req.body.telefono}', c_contraseña = '${req.body.contraseña}' where c_id = ${req.body.id}`;
+        
         conn.query(querry, (err, formularios,cols) => {
             if (err) res.json({status: 0, message: `${err}`});  
             else res.json({status: 1, message: "Datos de usuario Actualizados", formularios});

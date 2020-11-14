@@ -71,7 +71,7 @@ export class ColabPerfilComponent implements OnInit {
           telefono:this.data.telefono
         });
 
-        if(data.formularios.rows[0].u_foto == null){
+        if(data.formularios.rows[0].c_foto == null){
           this.fotoForm.setValue({
             foto: this.imgSrc
           });
@@ -119,7 +119,7 @@ export class ColabPerfilComponent implements OnInit {
     console.log(datos);
 
     if(this.imagen_elegida != null){
-      let filePath: string = `imagenes/tippers/` + datos.id + `_${this.imagen_elegida.name}`;
+      let filePath: string = `imagenes/collabs/` + datos.id + `_${this.imagen_elegida.name}`;
       let fileRef = this.storage.ref(filePath);
       this.storage.upload(filePath, this.imagen_elegida).snapshotChanges().pipe(
         finalize(() => {
