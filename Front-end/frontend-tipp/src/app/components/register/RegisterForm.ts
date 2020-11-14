@@ -3,4 +3,5 @@ export class RegisterForm{
     apellido:string;
     correo:string;
     contraseña:string;
+    foto:string;
 }

@@ -15,6 +15,7 @@ class formulario{
   apellido:String;
   total_contratos:number;
   total_estrellas:number;
+  foto: string;
 }
 
 class Etiqueta{
@@ -34,6 +35,9 @@ export class RegisterColaboradorComponent implements OnInit {
   correo: string;
   formulario: FormGroup;
   seleccionarEtiquetas: boolean = false;
+    
+  imgSrc: string = "../../../../assets/img/anonimo.jpg";
+
 
   constructor(private fb:FormBuilder, private router:Router, private service:ColaboradorService, public dialogRef:MatDialogRef<AdminMenuComponent>) { }
 
@@ -76,6 +80,7 @@ export class RegisterColaboradorComponent implements OnInit {
     form.apellido = this.formulario.value.apellido;
     form.total_contratos = 1;
     form.total_estrellas = 5;
+    form.foto = this.imgSrc;
 
     //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(form.password);

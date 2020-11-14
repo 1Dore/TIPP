@@ -55,14 +55,14 @@ export class UserCollabChatComponent implements OnInit {
 
   receptor_lugar;
   traerMensajes;
-
+  img: string;
   constructor(private router: Router, public userService: FormularioService, private fb: FormBuilder,
               public collabService: ColaboradorService, public chatService: ChatService, public dialog:MatDialog) { }
 
   ngOnInit(): void {
 
     if(this.userService.isLogin() || this.collabService.isLogin()){
-
+      this.img = localStorage.getItem("img");
       this.mensajeForm = this.fb.group({
         string: ["", Validators.required],
       });

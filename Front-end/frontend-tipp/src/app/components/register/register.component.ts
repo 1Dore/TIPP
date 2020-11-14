@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   formulario: FormGroup;
   pasword_igual: Boolean;
   
+  imgSrc: string = "../../../../assets/img/anonimo.jpg";
+
   constructor(private fb:FormBuilder, private formularioService: FormularioService, private router:Router) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class RegisterComponent implements OnInit {
     formulario.apellido = this.formulario.value.apellido;
     formulario.correo = this.formulario.value.Correo;
     formulario.contraseña = this.formulario.value.Password;
+    formulario.foto = this.imgSrc;
     
 
     //---------------------------------------encriptacion-------------------------------

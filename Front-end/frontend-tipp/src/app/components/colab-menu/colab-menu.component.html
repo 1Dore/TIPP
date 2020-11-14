@@ -12,7 +12,7 @@
         <!-- Side Menu -->
             <mat-drawer #drawer mode="over" class="sidemenu">
                 <div class="d-flex justify-content-around">
-                    <div class="cuadrado"></div>
+                    <img [src]="img" class="cuadrado">
                 </div>
 
                 <div *ngIf="auth.isLogin()">

@@ -14,7 +14,7 @@ module.exports = (app) => {
     })
 
     app.post('/newUsuario', (req, res, next) => {
-        let querry = `Insert into Usuarios (nombre, apellido, correo, contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}')`;
+        let querry = `Insert into Usuarios (nombre, apellido, correo, contraseña, u_foto) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.contraseña}', '${req.body.foto}')`;
         conn.query( querry, (error, formularios, cols) => {
             if (error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Se creo un nuevo usuario" , formularios});
@@ -40,7 +40,7 @@ module.exports = (app) => {
 
     app.post('/newColab', (req, res, next) => {
 
-        let query = `Insert into colaborador (nombre, apellido, correo, c_contraseña) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.password}')`;
+        let query = `Insert into colaborador (nombre, apellido, correo, c_contraseña, c_foto) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.password}', '${req.body.foto})`;
         conn.query(query, (error, form, cols) => {
 
             if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});

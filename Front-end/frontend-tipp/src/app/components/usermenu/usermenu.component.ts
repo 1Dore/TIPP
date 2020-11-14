@@ -65,6 +65,8 @@ export class UsermenuComponent implements OnInit {
 
 
   userDisplayName = '';
+
+  img: string;
   
   zoom = 12
   center: google.maps.LatLngLiteral
@@ -90,6 +92,7 @@ export class UsermenuComponent implements OnInit {
         string: [""],
       });
       this.userDisplayName = localStorage.getItem('loggedUser');
+      this.img = localStorage.getItem("img");
       const params = new URLSearchParams(location.search);
       params.set('string', '');
       window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);

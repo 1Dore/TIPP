@@ -13,7 +13,7 @@
             <!-- Side Menu -->
                 <mat-drawer #drawer mode="over" class="sidemenu">
                     <div class="d-flex justify-content-around">
-                        <div class="cuadrado"></div>
+                        <img [src]="img" class="cuadrado">
                     </div>
     
                     <div *ngIf="auth.isLogin()">
@@ -50,7 +50,7 @@
                       </div>
             
                         <form [formGroup]="Form" (ngSubmit)="onSubmit()">
-            
+        
                             <div class ="row justify-content-md-center">
             
                                 <mat-form-field class="element">
@@ -69,15 +69,15 @@
                 
                             </div>
 
-                        <div class ="row justify-content-md-center">
-            
-                            <button  mat-raised-button type="submit" color="accent">Nuevo metodo de pago</button>
+                            <div class ="row justify-content-md-center">
+                
+                                <button  mat-raised-button type="submit" color="accent">Nuevo metodo de pago</button>
 
-                            <button  mat-raised-button type="submit" color="accent">Actualizar Método de pago</button>
+                                <button  mat-raised-button type="submit" color="accent">Actualizar Método de pago</button>
 
-                            <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
+                                <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
 
-                        </div>
+                            </div>
             
                         </form>
             

@@ -13,7 +13,7 @@
             <!-- Side Menu -->
                 <mat-drawer #drawer mode="over" class="sidemenu">
                     <div class="d-flex justify-content-around">
-                        <div class="cuadrado"></div>
+                        <img [src]="img" class="cuadrado">
                     </div>
     
                     <div *ngIf="auth.isLogin()">
@@ -46,13 +46,19 @@
                       </mat-toolbar>
             
                     <div class="container">
-            
-                        <div class ="row justify-content-md-center">
-                            <div class="mapa">Foto</div>
-                        </div>
+
+                        <form [formGroup]="fotoForm">
+                            <div class ="row justify-content-md-center">
+                                <img [src]="imgSrc" class="mapa">
+                            </div>
+                            <div class ="row justify-content-md-center">
+                                <input type="file" accept="image/*" formControlName='foto' (change)="showPreview($event)">
+
+                            </div>
+                        </form>
             
                         <form [formGroup]="UserForm" (ngSubmit)="onSubmit()">
-            
+
                             <div class ="row justify-content-md-center">
             
                                 <mat-form-field class="element">
@@ -71,48 +77,49 @@
                 
                             </div>
             
-                        <div class ="row justify-content-md-center">
-            
-                            <mat-form-field class="element">
-                                <mat-label>Correo</mat-label>
-                                <input type="text" matInput placeholder="Ex. ejemplo@email.com" formControlName="correo" id="correolog" 
-                                pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" >
-                            </mat-form-field>
-                            
-                        </div>
-            
-                    
-                    
-                        <div class ="row justify-content-md-center">
-            
-                            <mat-form-field class="element">
-                                <mat-label>Password</mat-label>
-                                <input type="password" matInput formControlName='password' id="passwordlog">
-                            </mat-form-field>
-            
-                        </div>
+                            <div class ="row justify-content-md-center">
+                
+                                <mat-form-field class="element">
+                                    <mat-label>Correo</mat-label>
+                                    <input type="text" matInput placeholder="Ex. ejemplo@email.com" formControlName="correo" id="correolog" 
+                                    pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" >
+                                </mat-form-field>
                                 
-                        <div class ="row justify-content-md-center">
-            
-                            <mat-form-field class="element">
-                                <mat-label>Telefono</mat-label>
-                                <input type="text" matInput formControlName='telefono' id="passwordlog">
-                            </mat-form-field>
-            
-                        </div>
-
-                        <div class ="row justify-content-md-center">
-            
-                            <button  mat-raised-button type="submit" color="accent">Update</button>
-                            
-                        </div>
+                            </div>
+                
                         
+                        
+                            <div class ="row justify-content-md-center">
+                
+                                <mat-form-field class="element">
+                                    <mat-label>Password</mat-label>
+                                    <input type="password" matInput formControlName='password' id="passwordlog">
+                                </mat-form-field>
+                
+                            </div>
+                                    
+                            <div class ="row justify-content-md-center">
+                
+                                <mat-form-field class="element">
+                                    <mat-label>Telefono</mat-label>
+                                    <input type="tel" matInput formControlName='telefono' id="passwordlog" 
+                                    pattern="[0-9]{8}" >
+                                </mat-form-field>
+                
+                            </div>
 
-                        <div class ="row justify-content-md-center">
-            
-                            <button  mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
+                            <div class ="row justify-content-md-center">
+                
+                                <button [disabled]="UserForm.invalid" mat-raised-button type="submit" color="accent">Update</button>
+                                
+                            </div>
                             
-                        </div>
+
+                            <div class ="row justify-content-md-center">
+                
+                                <button mat-raised-button type="submit" color="accent" (click) = 'irA("/usermenu")'>Regresar</button>
+                                
+                            </div>
             
                         </form>
             
