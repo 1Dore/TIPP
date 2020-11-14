@@ -40,6 +40,12 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AdminEditTagComponent } from './components/admin-edit-tag/admin-edit-tag.component';
 import { UserColabCalificacionComponent } from './components/user-colab-calificacion/user-colab-calificacion.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+import { environment } from '../environments/environment'
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 
 @NgModule({
@@ -88,6 +94,10 @@ import { UserColabCalificacionComponent } from './components/user-colab-califica
     MatCheckboxModule,
     GoogleMapsModule,
     MatRadioModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    MaterialFileInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

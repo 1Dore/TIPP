@@ -36,9 +36,11 @@ export class ColabMenuComponent implements OnInit {
   aceptado = false;
 
   center: google.maps.LatLngLiteral;
+  img: string;
 
   ngOnInit(): void {
     if(this.auth.isLogin()){
+      this.img = localStorage.getItem("img");
 
       this.datosEstado = new Estado();
       this.datosEstado.id = Number(localStorage.getItem('id'));

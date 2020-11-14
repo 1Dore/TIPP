@@ -13,9 +13,10 @@ export class UserSettingsComponent implements OnInit {
 
   constructor(private router:Router, public auth:FormularioService, private fb:FormBuilder) { }
   userDisplayName = '';
-
+  img: string;
   ngOnInit(): void {
     if(this.auth.isLogin()){
+      this.img = localStorage.getItem("img");
       let id = Number(localStorage.getItem('id'));
 
       this.Form = this.fb.group({

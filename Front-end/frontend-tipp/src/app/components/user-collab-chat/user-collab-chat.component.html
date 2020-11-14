@@ -15,7 +15,7 @@
 
             <div *ngIf="emisor.tipo">
                 <div class="d-flex justify-content-around">
-                    <div class="cuadrado"></div>
+                    <img [src]="img" class="cuadrado">
                 </div>
 
                 <div *ngIf="userService.isLogin()">
@@ -41,7 +41,7 @@
 
             <div *ngIf="emisor.tipo == false">
                 <div class="d-flex justify-content-around">
-                    <div class="cuadrado"></div>
+                    <img [src]="img" class="cuadrado">
                 </div>
 
                 <div>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 import CryptoJS from 'crypto-js';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 class ColabData{
   nombre:String
@@ -11,6 +13,7 @@ class ColabData{
   correo:String
   contraseña:String
   id:Number
+  foto: string
 }
 
 @Component({
@@ -21,17 +24,25 @@ class ColabData{
 
 
 export class ColabPerfilComponent implements OnInit {
+  fotoForm: FormGroup = new FormGroup({
+    foto: new FormControl('')
+  })
+
+  imgSrc: string = "../../../../assets/img/anonimo.jpg";
+  imagen_elegida: any = null;
+
+  isSubmited: boolean = false;
 
   UserForm:FormGroup
   data:ColabData
 
-  constructor(private form:FormBuilder, public auth:ColaboradorService, private router:Router) { }
+  constructor(private form:FormBuilder, public auth:ColaboradorService, private router:Router, private storage: AngularFireStorage) { }
   userDisplayName = '';
-
+  img: string;
 
   ngOnInit(): void {
     if(this.auth.isLogin()){
-
+      this.img = localStorage.getItem("img");
       this.data = new ColabData();
       let id = Number(localStorage.getItem('id'));
       let con = false;
@@ -41,7 +52,7 @@ export class ColabPerfilComponent implements OnInit {
         password:['', Validators.required],
         nombre:['', Validators.required],
         apellido:['', Validators.required],
-        telefono:['', Validators.required]
+        telefono:['', [Validators.required, Validators.pattern("[0-9 ]{8}")]]
       });
   
       this.auth.askColabData(id).subscribe(data => {
@@ -50,7 +61,7 @@ export class ColabPerfilComponent implements OnInit {
         this.data.apellido = data.formularios.rows[0].apellido;
         this.data.correo = data.formularios.rows[0].correo;
         this.data.telefono = data.formularios.rows[0].telefono;
-        this.data.contraseña = data.formularios.rows[0].c_contraseña;
+        this.imgSrc = this.data.contraseña = data.formularios.rows[0].c_contraseña;
   
         this.UserForm.setValue({
           correo:this.data.correo,
@@ -59,6 +70,18 @@ export class ColabPerfilComponent implements OnInit {
           apellido:this.data.apellido,
           telefono:this.data.telefono
         });
+
+        if(this.data.foto == ""){
+          this.fotoForm.setValue({
+            foto: this.imgSrc
+          });
+          this.imgSrc = "../../../../assets/img/anonimo.jpg";
+        }else{
+          this.fotoForm.setValue({
+            foto: this.data.foto
+          });
+          
+        }
   
       });
   
@@ -95,14 +118,37 @@ export class ColabPerfilComponent implements OnInit {
     }
     console.log(datos);
 
-    this.auth.updateColabData(datos).subscribe(data => {
+    if(this.imagen_elegida != null){
+      let filePath: string = `imagenes/tippers/` + datos.id + `_${this.imagen_elegida.name}`;
+      let fileRef = this.storage.ref(filePath);
+      this.storage.upload(filePath, this.imagen_elegida).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            console.log(url)
+            this.imgSrc = url;
+            datos.foto = url;
+            this.auth.updateColabData(datos).subscribe(data => {
 
-      if(data.message == "Datos de usuario Actualizados") alert("Datos actualizados satisfactoriamete");
-      else {
-        console.log(data);
-        alert("A habido un error");}
+              if(data.message == "Datos de usuario Actualizados") alert("Datos actualizados satisfactoriamete");
+              else {
+                console.log(data);
+                alert("A habido un error");}
+        
+            });
+          })
+        })
+      ).subscribe();
+    }else {
+      datos.foto = this.data.foto;
+      this.auth.updateColabData(datos).subscribe(data => {
 
-    });
+        if(data.message == "Datos de usuario Actualizados") alert("Datos actualizados satisfactoriamete");
+        else {
+          console.log(data);
+          alert("A habido un error");}
+  
+      });
+    }
 
   }
 
@@ -115,6 +161,18 @@ export class ColabPerfilComponent implements OnInit {
       contraseña = CryptoJS.SHA1(contraseña).toString();
        //---------------------------------------encriptacion---------------------------------
     return contraseña;
+  }
+
+  showPreview(event){
+    if(event.target.files && event.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.imagen_elegida = event.target.files[0];
+    }else{
+      this.imgSrc = "../../../../assets/img/anonimo.jpg";
+      this.imagen_elegida = null;
+    }
   }
 
   abrir(ruta){

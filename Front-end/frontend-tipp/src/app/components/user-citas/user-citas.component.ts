@@ -36,9 +36,10 @@ export class UserCitasComponent implements OnInit {
   listaCitasEnviadas:Array<Citas> = new Array<Citas>();
   citas = false;
   chatBool = false;
-
+  img: string;
   ngOnInit(): void {
     if(this.auth.isLogin()){
+      this.img = localStorage.getItem("img");
       this.userDisplayName = localStorage.getItem('loggedUser');
       this.obtenerCitas();
     }
@@ -50,7 +51,7 @@ export class UserCitasComponent implements OnInit {
 
 
   obtenerCitas(){
-
+    
     this.auth.getCitas({ id: Number(localStorage.getItem('id')) }).subscribe(data => {
 
       if(data.formularios.rowCount > 0){

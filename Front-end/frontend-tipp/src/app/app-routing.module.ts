@@ -19,6 +19,7 @@ import { ColabPerfilComponent } from './components/colab-things/colab-perfil/col
 
 
 const routes: Routes = [
+  {path: 'usermenu/perfil', component: UserPerfilComponent},
   {path: 'login', component: LoginComponent},
   {path: 'usermenu', component: UsermenuComponent},
   {path: 'register_colab', component: RegisterColaboradorComponent},
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path: 'admin-mode/menu', component: AdminMenuComponent},
   {path: 'colabmenu', component: ColabMenuComponent},
   {path: 'colabmenu/colab-settings', component: ColabSettingsComponent},
-  {path: 'usermenu/perfil', component: UserPerfilComponent},
+  
   {path: 'usermenu/settings', component: UserSettingsComponent},
   {path: 'usermenu/citas', component: UserCitasComponent},
   {path: 'user-collab/chat', component: UserCollabChatComponent},

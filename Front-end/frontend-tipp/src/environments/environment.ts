@@ -4,7 +4,20 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://localhost:3030/"
+  
+  apiURL: "http://localhost:3030/",
+
+  firebaseConfig : {
+    apiKey: "AIzaSyAwhwLzRksa18UiEoeL1uaLGOdSlnaxDA8",
+    authDomain: "projecto-tipp.firebaseapp.com",
+    databaseURL: "https://projecto-tipp.firebaseio.com",
+    projectId: "projecto-tipp",
+    storageBucket: "projecto-tipp.appspot.com",
+    messagingSenderId: "689892886644",
+    appId: "1:689892886644:web:5f0ab9492c729d827de921",
+    measurementId: "G-42TX61F5D9"
+  }
+
 };
 
 /*
