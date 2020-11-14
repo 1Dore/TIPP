@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
+import { UserColabCalificacionComponent } from '../user-colab-calificacion/user-colab-calificacion.component';
 
 
 class Citas{
@@ -29,11 +31,12 @@ export class UserCitasComponent implements OnInit {
 
   userDisplayName = '';
 
-  constructor(private router:Router, public auth:FormularioService) { }
+  constructor(private router:Router, public auth:FormularioService, public dialog:MatDialog) { }
 
   //variables globales constantes
   listaCitasAceptadas:Array<Citas> = new Array<Citas>();
   listaCitasEnviadas:Array<Citas> = new Array<Citas>();
+  listaCitasTerminadas:Array<Citas> = new Array<Citas>();
   citas = false;
   chatBool = false;
 
@@ -63,6 +66,7 @@ export class UserCitasComponent implements OnInit {
           let temp:Citas = new Citas();
 
           //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
+          console.log(row.estado);
           temp.estado = this.getEstado(row.estado);
 
           temp.nombre = "";
@@ -99,17 +103,29 @@ export class UserCitasComponent implements OnInit {
           if(temp.estado == "Aceptado"){
             this.listaCitasAceptadas.push(temp);
           }
+          else if (temp.estado == "No calificado"){
+            this.listaCitasTerminadas.push(temp);
+          }
           else{
             this.listaCitasEnviadas.push(temp);
           }
 
         });
 
-
       } 
 
     })
 
+  }
+
+  irACalificacion(id, con_id){
+    const diologRef = this.dialog.open(UserColabCalificacionComponent, {
+      width: '40%',
+      data: {con_id: con_id, CoU: false, id: id}
+      //CoU siempre falso porque soy usuario, no necesito verificar nada
+      //
+
+    });
   }
 
   irAlChat(contrato_id: number, c_id: number){
@@ -127,8 +143,12 @@ export class UserCitasComponent implements OnInit {
             temp = "Rechazado";
 
           }
+          else if(estado == "N"){
+            temp = "No calificado";
+
+          }
           else if(estado == "C"){
-            temp = "Completado";
+            temp = "Calificado";
 
           }
           else{

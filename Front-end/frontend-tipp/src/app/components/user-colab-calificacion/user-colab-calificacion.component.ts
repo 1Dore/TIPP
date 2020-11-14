@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 import { FormularioService } from 'src/app/services/formulario.service';
+import { UserCitasComponent } from '../user-citas/user-citas.component';
 import { UserCollabChatComponent } from '../user-collab-chat/user-collab-chat.component';
 
 
@@ -33,8 +34,9 @@ export class UserColabCalificacionComponent implements OnInit {
 
   formCalificacion:FormGroup;
 
-  constructor(private fb: FormBuilder, public collabAuth:ColaboradorService, public userAuth:FormularioService, 
-              public dialogRef:MatDialogRef<UserCollabChatComponent>, @Inject(MAT_DIALOG_DATA) public data, private router:Router)  { }
+  constructor(private fb: FormBuilder, public collabAuth:ColaboradorService, public userAuth:FormularioService,  
+              public dialogRef:MatDialogRef<UserCollabChatComponent>, @Inject(MAT_DIALOG_DATA) public data, private router:Router,
+              public dialgoRef:MatDialogRef<UserCitasComponent>)  { }
 
   elCalificado:Calificado
   calButton:number = 5;
@@ -52,8 +54,18 @@ export class UserColabCalificacionComponent implements OnInit {
     if(!this.data.CoU){  //true colabordor, false usuario
       this.elCalificado.CoU = "C";
 
-        this.userAuth.getColabData(this.elCalificado.id).subscribe(data => {
+        this.userAuth.getColabData({c_id:this.elCalificado.id}).subscribe(data => {
+          console.log(data);
           this.elCalificado.nombre = data.formularios.rows[0].nombre;
+          if(data.formularios.rows[0].total_estrellas == null){
+            this.elCalificado.totalContratos = 0;
+            this.elCalificado.totalEstrellas = 0;
+          }
+          else {
+            this.elCalificado.totalContratos = data.formularios.rows[0].total_contratos;
+            this.elCalificado.totalEstrellas = data.formularios.rows[0].total_estrellas;
+            this.promedio = true;
+          }
         });
 
     }
@@ -105,6 +117,32 @@ export class UserColabCalificacionComponent implements OnInit {
   
       });
 
-    }
+  }
+
+  calificacionUser(){
+    let temp:Contrato = new Contrato();
+    temp.id = this.data.con_id;
+    this.elCalificado.calificacion = Number(this.calButton);  //calificacion que da el boton del pop-up
+    console.log(this.elCalificado);
+    this.elCalificado.totalEstrellas = Number(this.elCalificado.totalEstrellas + this.elCalificado.calificacion);
+    this.elCalificado.totalContratos = this.elCalificado.totalContratos + 1;
+      this.userAuth.getFechayHora().subscribe(data => {
+
+        let tempFecha = new Date(data.formularios.rows[0].fyh);
+        temp.fecha = String(tempFecha);
+        this.userAuth.completarContrato({id:this.elCalificado.con_id}).subscribe(rows => {
+
+          this.userAuth.calificarColab(this.elCalificado).subscribe( tuples => {
+            alert(tuples.message);
+            alert(rows.message);
+            this.dialogRef.close();
+            this.router.navigateByUrl('/usermenu')
+          });
+
+        });
+
+  
+      });
+  }
 
 }

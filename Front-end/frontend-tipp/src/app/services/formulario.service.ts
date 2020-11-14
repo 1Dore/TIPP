@@ -56,6 +56,16 @@ export class FormularioService {
     let url = dominio + "getUserUbicacionByID";
     return this.http.post(url, data, httpHeaders);
   }  
+
+  calificarColab(data): Observable<any>{
+    let url = dominio + "calificarColab";
+    return this.http.post(url, data, httpHeaders);
+  }
+
+  completarContrato(data): Observable<any>{
+    let url = dominio+ "completarContrato";
+    return this.http.post(url, data, httpHeaders);
+  }
 //-----------loin-register---------------------------
   sentLogin(datos): Observable<any>{
     let url = dominio + 'getUsuarios';

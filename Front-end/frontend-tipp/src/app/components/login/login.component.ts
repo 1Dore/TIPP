@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit {
     contraseña = CryptoJS.enc.Utf16.parse(sha1HashToBase64);
     contraseña = CryptoJS.SHA1(contraseña).toString();
      //---------------------------------------encriptacion---------------------------------
+    console.log(contraseña);
     return contraseña;
   }
   

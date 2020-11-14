@@ -15,4 +15,8 @@
         <section *ngIf="data.CoU">
           <button  mat-raised-button (click)="onSubmit()" color="accent">Calificar</button>
         </section>
+
+        <section *ngIf="!data.CoU">
+          <button  mat-raised-button (click)="calificacionUser()" color="accent">Calificar</button>
+        </section>
 </div>

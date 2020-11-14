@@ -2,7 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GoogleMap, MapInfoWindow } from '@angular/google-maps';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormularioService } from 'src/app/services/formulario.service';
 import { ListaDeColaboradoresComponent } from '../lista-de-colaboradores/lista-de-colaboradores.component';
@@ -47,7 +47,7 @@ export class UserCreaContratoComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   contenido_contrato: FormGroup;
 
-  constructor(public dialogREf: MatDialogRef<ListaDeColaboradoresComponent>, private userService:FormularioService,
+  constructor(public dialogREf: MatDialogRef<ListaDeColaboradoresComponent>, private userService:FormularioService, public dialog:MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: Colaborador, private router: Router, private fb: FormBuilder, private _ngZone: NgZone) { }
 
   zoom = 12
@@ -96,8 +96,10 @@ export class UserCreaContratoComponent implements OnInit {
       if (data.message == "Se creo un contrato satisfactoriamente"){
         alert("Contrato creado");
         this.router.navigateByUrl("usermenu");
+        this.dialogREf.close(true);
       }
-    })
+    });
+
   }
 
   click(clicks){

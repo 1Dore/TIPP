@@ -102,6 +102,37 @@
 
                         </mat-card>
 
+                        <h2 >&nbsp;&nbsp;</h2>
+                        <h2>Citas Terminadas</h2>
+                        <mat-card *ngFor="let infoCita of listaCitasTerminadas">
+                            <mat-card-title><h2> Cita </h2></mat-card-title>
+                            <mat-card-content class="img">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="cuadrado" ></div>                            
+                                        </div>
+                                        <div class="col-4">
+                                            <p>Nombre del Colaborador: {{infoCita.nombre}}</p>
+                                            Descripcion:
+                                            <mat-list role="list">
+                                                <mat-list-item >telefono: {{infoCita.telefono}}</mat-list-item>
+                                                <mat-list-item >contrato id: {{infoCita.contrato_id}}</mat-list-item>
+                                                <mat-list-item >estado: {{infoCita.estado}}</mat-list-item>
+                                                <mat-list-item *ngFor="let etiqueta of infoCita.etiquetas">ocupacion: {{etiqueta.nombre}}</mat-list-item>
+                                            </mat-list>
+                                        </div>
+                                        <div class="col-2" >
+                                            <mat-card-actions >
+                                                <button mat-raised-button class="bottomcenter" (click)="irACalificacion(infoCita.c_id, infoCita.contrato_id)" color="warn" >Calificar</button>
+                                            </mat-card-actions>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-card-content>
+
+                        </mat-card>
+
 
                     </div>
                     

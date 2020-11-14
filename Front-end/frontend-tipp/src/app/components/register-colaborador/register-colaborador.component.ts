@@ -13,6 +13,8 @@ class formulario{
   correo:String;
   password:String;
   apellido:String;
+  total_contratos:number;
+  total_estrellas:number;
 }
 
 class Etiqueta{
@@ -72,6 +74,8 @@ export class RegisterColaboradorComponent implements OnInit {
     form.password = this.formulario.value.password;
     if(form.password == this.formulario.value.Rep_password) this.formulario.invalid;
     form.apellido = this.formulario.value.apellido;
+    form.total_contratos = 1;
+    form.total_estrellas = 5;
 
     //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(form.password);

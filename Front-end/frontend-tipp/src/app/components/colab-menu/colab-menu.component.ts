@@ -132,7 +132,7 @@ export class ColabMenuComponent implements OnInit {
 
             temp.telefono = data.formularios.rows[0].telefono;
 
-            let promedio = data.formuladios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
+            let promedio = data.formularios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
             temp.estrellas = promedio;
 
           });
@@ -146,7 +146,7 @@ export class ColabMenuComponent implements OnInit {
     });
 
     this.listaCitasNuevas = tempCitas;
-
+    this.obtenerCitasAgendadas()
 
   }
 
@@ -209,19 +209,29 @@ export class ColabMenuComponent implements OnInit {
   //como en la base de datos vienen los chars (a,e,r,c) transformarlo a (aceptado, enviado, rechazado, completado) respectivamente
   getEstado(estado){
     let temp;
-    if(estado == "E"){
-      temp = "Enviado";
-    }
-    else if(estado == "R"){
-      temp = "Rechazado";
-    }
-    else if(estado == "C"){
-      temp = "Completado";
-    }
-    else{
-      temp = "Aceptado";
-    }
-    return temp;
+          //como en la base de datos vienen los chars (a,e,r,t,n,c) transformarlo a (aceptado, enviado, rechazado, Terminado, No calificado, Calificado) respectivamente
+          if(estado == "E"){
+            temp = "Enviado";
+
+          }
+          else if(estado == "R"){
+            temp = "Rechazado";
+
+          }
+          else if(estado == "N"){
+            temp = "No calificado";
+
+          }
+          else if(estado == "C"){
+            temp = "Calificado";
+
+          }
+          else{
+            temp = "Aceptado";
+
+          }
+
+          return temp;
   }
 
   irA(ruta){

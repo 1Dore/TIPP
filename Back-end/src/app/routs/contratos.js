@@ -17,7 +17,7 @@ module.exports = (app) => {
 
     app.post('/terminarContrato', (req, res, next) => {
         let date = new Date(req.body.fecha);
-        let querry =  `Update contratos set f_end = $1, estado = 'T' where con_id = ${req.body.id}`;
+        let querry =  `Update contratos set f_end = $1, estado = 'N' where con_id = ${req.body.id}`;
         conn.query( querry, [date], (error, formularios) => {
             if (error) res.json({status: 0, message: `${error}`});  
             else res.json({status: 1, message: "Se termino un contrato satisfactoriamente", formularios});
@@ -99,7 +99,7 @@ module.exports = (app) => {
     
 
     app.post('/getCitasUser', (req, res, next) => {
-        let query = `Select * from contratos Where u_id = ${req.body.id} and (estado = 'A' or estado = 'E')`;
+        let query = `Select * from contratos Where u_id = ${req.body.id} and (estado = 'A' or estado = 'E' or estado = 'N')`;
         conn.query(query, (error, formularios, cols) => {
             if(error) res.json({status: 0, message: `${error}`});
             else res.json({status: 1, message: "Obtecion de los mensajes exitoso", formularios});
@@ -131,5 +131,15 @@ module.exports = (app) => {
             if (err) res.json({status: 0, message: `${err}`});  
             else res.json({status: 1, message: "Calificacion Enviada con exito"});
         });
+    });
+
+    app.post('/completarContrato', (req, res, next) => {
+        let querry =  `Update contratos set estado = 'C' where con_id = ${req.body.id}`;
+        conn.query( querry, (error, formularios) => {
+            if (error) res.json({status: 0, message: `${error}`});  
+            else res.json({status: 1, message: "Se Completo un contrato satisfactoriamente", formularios});
+
+        });
+
     });
 }

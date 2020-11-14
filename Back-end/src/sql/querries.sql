@@ -4,7 +4,7 @@ create table Usuarios (
 	Apellido varchar(100),
 	Correo varchar(100) unique,
 	contraseña varchar(100),
-	telefono integer,
+	telefono varchar(50),
 	total_contratos integer,
 	total_estrellas integer,
 	u_foto varchar(200),
@@ -18,12 +18,12 @@ create table Colaborador(
 	Apellido varchar(100),
 	Correo varchar(100),
 	c_contraseña varchar(100),
-	telefono integer,
+	telefono varchar(50),
 	total_contratos integer,
 	total_estrellas integer,
 	c_foto varchar(200),
 	ubicacion varchar(200),
-	estado char;
+	estado char,
 	primary key (c_id),
 	unique(Correo)
 );

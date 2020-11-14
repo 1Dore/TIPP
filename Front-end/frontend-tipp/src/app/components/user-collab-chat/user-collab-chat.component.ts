@@ -166,6 +166,14 @@ export class UserCollabChatComponent implements OnInit {
       width: '40%',
       data: {con_id: this.contrato_id, CoU: this.receptor.tipo, id: this.receptor.id}
     });
+    /*
+      | E | R
+      -------
+    U | T | F //usuario
+    C | F | T //colaborador
+
+    E: emisor, R: receptor
+    */
   } 
 
 
