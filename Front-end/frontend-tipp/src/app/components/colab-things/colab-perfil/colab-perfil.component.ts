@@ -71,7 +71,7 @@ export class ColabPerfilComponent implements OnInit {
           telefono:this.data.telefono
         });
 
-        if(this.data.foto == ""){
+        if(this.data.foto == "" || this.img == null){
           this.fotoForm.setValue({
             foto: this.imgSrc
           });

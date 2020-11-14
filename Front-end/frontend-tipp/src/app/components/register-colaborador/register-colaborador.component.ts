@@ -13,6 +13,7 @@ class formulario{
   correo:String;
   password:String;
   apellido:String;
+  foto: string;
 }
 
 class Etiqueta{
@@ -32,6 +33,9 @@ export class RegisterColaboradorComponent implements OnInit {
   correo: string;
   formulario: FormGroup;
   seleccionarEtiquetas: boolean = false;
+    
+  imgSrc: string = "../../../../assets/img/anonimo.jpg";
+
 
   constructor(private fb:FormBuilder, private router:Router, private service:ColaboradorService, public dialogRef:MatDialogRef<AdminMenuComponent>) { }
 
@@ -72,6 +76,7 @@ export class RegisterColaboradorComponent implements OnInit {
     form.password = this.formulario.value.password;
     if(form.password == this.formulario.value.Rep_password) this.formulario.invalid;
     form.apellido = this.formulario.value.apellido;
+    form.foto = this.imgSrc;
 
     //---------------------------------------encriptacion-------------------------------
     var passwordBytes = CryptoJS.enc.Utf16LE.parse(form.password);
