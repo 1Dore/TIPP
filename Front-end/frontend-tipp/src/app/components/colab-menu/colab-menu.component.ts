@@ -17,7 +17,7 @@ class citas{
   estado:String
   u_id:Number
   telefono:String
-  estrellas:number
+  estrellas:string
 }
 
 
@@ -30,8 +30,8 @@ export class ColabMenuComponent implements OnInit {
 
   constructor(private router:Router, public auth:ColaboradorService) { }
   userDisplayName = '';
-  listaCitasNuevas:Array<citas> = new Array<citas>();
-  listaCitasAgendadas:Array<citas> = new Array<citas>();
+  listaCitasNuevas:Array<citas>;
+  listaCitasAgendadas:Array<citas>;
   datosEstado:Estado;
   citas = false;
   aceptado = false;
@@ -41,6 +41,10 @@ export class ColabMenuComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.auth.isLogin()){
+
+      this.listaCitasNuevas= new Array<citas>();
+      this.listaCitasAgendadas= new Array<citas>();
+
       this.img = localStorage.getItem("img");
 
       this.datosEstado = new Estado();
@@ -135,7 +139,7 @@ export class ColabMenuComponent implements OnInit {
             temp.telefono = data.formularios.rows[0].telefono;
 
             let promedio = data.formularios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
-            temp.estrellas = promedio;
+            temp.estrellas = promedio.toFixed(1);
 
           });
 
@@ -154,7 +158,7 @@ export class ColabMenuComponent implements OnInit {
 
 
   obtenerCitasAgendadas(){
-
+    let tempCitas:Array<citas> = new Array<citas>();
     //obtengo las citas que tiene el colaborador asignaads
     this.auth.getCitasAgendadas( {id:this.datosEstado.id} ).subscribe(data => {
 
@@ -182,17 +186,20 @@ export class ColabMenuComponent implements OnInit {
             temp.telefono = data.formularios.rows[0].telefono;
             //sacar el promedio de estrellas estrellas = tot_estrellas / tot_contratos
             let promedio = data.formularios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
-            temp.estrellas = promedio;
+            temp.estrellas = promedio.toFixed(1);;
 
           });
 
-          this.listaCitasAgendadas.push(temp);
-
+          tempCitas.push(temp);
+          console.log("esto es temp",temp);
+          console.log("esto es citas", tempCitas);
         }
 
       });
 
     });
+
+    this.listaCitasAgendadas = tempCitas;
 
   }
 
