@@ -22,7 +22,7 @@ module.exports = (app) => {
     });
 
     app.post('/getUsuarioNombre', (req, res, next) => {
-        let querry =  `select nombre, apellido, telefono, total_contratos, total_estrellas from usuarios where u_id = ${req.body.u_id}`;
+        let querry =  `select nombre, apellido, telefono, total_contratos, total_estrellas, u_foto from usuarios where u_id = ${req.body.u_id}`;
         conn.query( querry, (error, formularios, cols) => {
             if (error) res.json({status: 0, message: `${error}`});  
             else res.json({status: 1, message: "Datos de usuario obtenidos", formularios});

@@ -253,6 +253,7 @@ export class UserCollabChatComponent implements OnInit {
   }
 
   addMarcador(ubicacion: Ubicacion){
+    console.log(this.receptor)
     if(this.markers.length == 1){
       this.markers.push({
         position: {

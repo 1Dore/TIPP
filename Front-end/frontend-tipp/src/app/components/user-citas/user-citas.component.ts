@@ -14,6 +14,7 @@ class Citas{
   telefono:String
   ocupacion:String
   etiquetas:Array<Etiqueta>
+  foto: string
 }
 
 
@@ -81,6 +82,7 @@ export class UserCitasComponent implements OnInit {
             temp.nombre = datos.formularios.rows[0].nombre + " " +datos.formularios.rows[0].apellido
 
             temp.telefono = datos.formularios.rows[0].telefono;
+            temp.foto = datos.formularios.rows[0].c_foto;
 
             //es un array porque hay muchas etiquetas
             temp.etiquetas = new Array<Etiqueta>();

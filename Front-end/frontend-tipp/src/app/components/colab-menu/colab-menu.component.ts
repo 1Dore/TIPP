@@ -18,6 +18,7 @@ class citas{
   u_id:Number
   telefono:String
   estrellas:string
+  foto: string
 }
 
 
@@ -137,6 +138,7 @@ export class ColabMenuComponent implements OnInit {
             temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
 
             temp.telefono = data.formularios.rows[0].telefono;
+            temp.foto = data.formularios.rows[0].u_foto;
 
             let promedio = data.formularios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
             temp.estrellas = promedio.toFixed(1);
@@ -184,6 +186,7 @@ export class ColabMenuComponent implements OnInit {
             temp.nombre = data.formularios.rows[0].nombre + " "+data.formularios.rows[0].apellido;
 
             temp.telefono = data.formularios.rows[0].telefono;
+            temp.foto = data.formularios.rows[0].u_foto;
             //sacar el promedio de estrellas estrellas = tot_estrellas / tot_contratos
             let promedio = data.formularios.rows[0].total_estrellas / data.formularios.rows[0].total_contratos;
             temp.estrellas = promedio.toFixed(1);;
