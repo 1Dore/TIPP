@@ -349,8 +349,6 @@ export class UsermenuComponent implements OnInit {
    getEtiquetas(){
 
     this.auth.getEtiquetas().subscribe(data => {
-
-
       let tempLista = new Array<Etiqueta2>();
       data.formularios.rows.forEach( row => {
         let temp:Etiqueta2 = new Etiqueta2();
@@ -366,6 +364,7 @@ export class UsermenuComponent implements OnInit {
    }
 
    buscarEtiqueta(nombre){
+    this.modo = "buscador";
     this.stringList = new Array<string>();
     if(nombre != ""){
       this.stringList.push(nombre);
