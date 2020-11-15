@@ -105,7 +105,7 @@ export class UsermenuComponent implements OnInit {
       window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
       this.beginSearch();
       this.ubicacionActual();
-      this.getEtiquetas();
+      this.getEtiquetas()
       this.ubicaciones = setTimeout(() => {
         this.getUbicacionColaboradores(); 
       }, 3000);
@@ -354,7 +354,7 @@ export class UsermenuComponent implements OnInit {
       let tempLista = new Array<Etiqueta2>();
       data.formularios.rows.forEach( row => {
         let temp:Etiqueta2 = new Etiqueta2();
-        temp.descripcion = row.descipcion;
+        temp.descripcion = row.descripcion;
         temp.id = row.e_id;
         temp.nombre = row.e_nombre;
         console.log(temp);
@@ -363,6 +363,15 @@ export class UsermenuComponent implements OnInit {
       this.lista_etiquetas = tempLista;
     });
 
+   }
+
+   buscarEtiqueta(nombre){
+    this.stringList = new Array<string>();
+    if(nombre != ""){
+      this.stringList.push(nombre);
+      this.generarConsulta();  
+    }
+    this.buscarCollabsIDs();
    }
 
   // -------------- FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES --------------
