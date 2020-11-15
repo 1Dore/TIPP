@@ -7,7 +7,7 @@ const http = require('http').Server(app);
 
 app.use(express.json());
 app.use(cors());
-app.set("port", 3030);
+app.set("port", 3030 || process.env.PORT );
 
 module.exports = app;
 

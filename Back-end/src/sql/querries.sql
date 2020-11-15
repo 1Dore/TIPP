@@ -7,6 +7,7 @@ create table Usuarios (
 	telefono varchar(50),
 	total_contratos integer,
 	total_estrellas integer,
+	ubicacion varchar(300),
 	u_foto varchar(200),
 	primary key (u_id),
 	unique(Correo)
@@ -75,8 +76,6 @@ create table mensajes(
     primary key (m_id),
     foreign key (con_id) references Contratos(con_id)
 );
-
-
 
 ------- indexes ------------
 create index idx_con on mensajes("con_id");
