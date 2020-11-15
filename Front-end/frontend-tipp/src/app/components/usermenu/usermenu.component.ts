@@ -11,6 +11,12 @@ class Etiqueta{
   id: number;
 }
 
+class Etiqueta2{
+  nombre: string;
+  descripcion:string;
+  id: number;
+}
+
 class Ubicacion{
   lat: number;
   lng: number;
@@ -63,6 +69,7 @@ export class UsermenuComponent implements OnInit {
   limitador: number = 0;
   ubicaciones;
 
+  lista_etiquetas: Array<Etiqueta2>;
 
   userDisplayName = '';
 
@@ -86,7 +93,7 @@ export class UsermenuComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.auth.isLogin()){
-
+      this.lista_etiquetas = new Array<Etiqueta2>();
       this.modo = "mapa";
       this.name_tags = this.fb.group({
         string: [""],
@@ -98,6 +105,7 @@ export class UsermenuComponent implements OnInit {
       window.history.replaceState({}, '', `${location.pathname}?${params.toString()}`);
       this.beginSearch();
       this.ubicacionActual();
+      this.getEtiquetas();
       this.ubicaciones = setTimeout(() => {
         this.getUbicacionColaboradores(); 
       }, 3000);
@@ -338,6 +346,24 @@ export class UsermenuComponent implements OnInit {
      console.log(this.query);
    }
 
+   getEtiquetas(){
+
+    this.auth.getEtiquetas().subscribe(data => {
+
+
+      let tempLista = new Array<Etiqueta2>();
+      data.formularios.rows.forEach( row => {
+        let temp:Etiqueta2 = new Etiqueta2();
+        temp.descripcion = row.descipcion;
+        temp.id = row.e_id;
+        temp.nombre = row.e_nombre;
+        console.log(temp);
+        tempLista.push(temp);
+      });
+      this.lista_etiquetas = tempLista;
+    });
+
+   }
 
   // -------------- FIN DEL CODIDIGO DE LA LISTA DE COLABORADORES --------------
 

@@ -104,6 +104,10 @@ export class FormularioService {
 
   //-----------buscar por categoria---------------------
 
+  getEtiquetas(): Observable<any>{
+    let url = dominio + 'getEtiquetas';
+    return this.http.post(url, httpHeaders);
+  }
 
   //----------Hacer un contrato ------------------------
   newContrato(data): Observable<any>{
