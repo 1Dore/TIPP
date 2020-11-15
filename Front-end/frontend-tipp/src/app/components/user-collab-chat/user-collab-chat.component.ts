@@ -154,6 +154,10 @@ export class UserCollabChatComponent implements OnInit {
     });
     
     this.mensajeList.push(mensaje_a_enviar);
+
+    this.mensajeForm.setValue({
+      string : " "
+    })
     
     this.chatService.sendMensajes(mensaje_a_enviar).subscribe();
   }

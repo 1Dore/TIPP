@@ -76,7 +76,6 @@ export class RegisterColaboradorComponent implements OnInit {
     form.correo = this.formulario.value.correo;
     this.correo = this.formulario.value.correo;
     form.password = this.formulario.value.password;
-    if(form.password == this.formulario.value.Rep_password) this.formulario.invalid;
     form.apellido = this.formulario.value.apellido;
     form.total_contratos = 1;
     form.total_estrellas = 5;
@@ -90,16 +89,19 @@ export class RegisterColaboradorComponent implements OnInit {
     form.password = CryptoJS.SHA1(form.password).toString();
     //---------------------------------------encriptacion---------------------------------
     
-    
-    this.service.sentColRegiser(form).subscribe(data => {
+    if(this.formulario.value.password == this.formulario.value.Rep_password){
+      this.service.sentColRegiser(form).subscribe(data => {
 
-      if (data.menssage == "Insercion realizada") {
-        alert("Se ha registrado exitosamente");
-      }
-      else alert("ha ocurrido un error");
+        if (data.menssage == "Insercion realizada") {
+          alert("Se ha registrado exitosamente");
+        }
+        else alert("ha ocurrido un error");
 
-    })
-    this.seleccionarEtiquetas = true;
+      })
+      this.seleccionarEtiquetas = true;
+    }else{
+      alert("Las contraseñas deben ser las mismas")
+    }
   }
 
   getEtiquetas(){

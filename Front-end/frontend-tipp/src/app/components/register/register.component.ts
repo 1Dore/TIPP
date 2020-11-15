@@ -53,19 +53,22 @@ export class RegisterComponent implements OnInit {
     //---------------------------------------encriptacion---------------------------------
     
 
+    if(this.formulario.value.Password == this.formulario.value.Rep_Password){
     
-
-    this.formularioService.sentRegister(formulario).subscribe((data) => {
-      console.log(data);
-      if(data.formularios.rowCount > 0){
-        alert("Nuevo usuario Creado");
-        this.router.navigateByUrl('/TIPP_Register');
-      }
-      else {
-        alert("Ha habido un error, por favor, pruebe otra vez en unos minutos");
-      }
-    });
-    this.formulario.reset();
+      this.formularioService.sentRegister(formulario).subscribe((data) => {
+        console.log(data);
+        if(data.formularios.rowCount > 0){
+          alert("Nuevo usuario Creado");
+          this.router.navigateByUrl('/TIPP_Register');
+        }
+        else {
+          alert("Ha habido un error, por favor, pruebe otra vez en unos minutos");
+        }
+      });
+      this.formulario.reset();
+    }else{
+      alert("Debe repetir la misma contraseña")
+    }
   }
 
   abrir(ruta:string){

@@ -40,7 +40,7 @@ module.exports = (app) => {
 
     app.post('/newColab', (req, res, next) => {
 
-        let query = `Insert into colaborador (nombre, apellido, correo, c_contraseña, c_foto) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.password}', '${req.body.foto})`;
+        let query = `Insert into colaborador (nombre, apellido, correo, c_contraseña, c_foto) values ('${req.body.nombre}', '${req.body.apellido}', '${req.body.correo}', '${req.body.password}', '${req.body.foto}')`;
         conn.query(query, (error, form, cols) => {
 
             if(error) res.status(500).json({status: 0, message: "No se pudo insertar el formulario"});
