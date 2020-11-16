@@ -1,0 +1,26 @@
+{
+  "name": "tip-backend",
+  "version": "1.0.0",
+  "description": "el backend de la app tipp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1Dore/TIPP.git"
+  },
+  "author": "1Dore",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1Dore/TIPP/issues"
+  },
+  "homepage": "https://github.com/1Dore/TIPP#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.3.3",
+    "socket.io": "^2.3.0"
+  }
+}
