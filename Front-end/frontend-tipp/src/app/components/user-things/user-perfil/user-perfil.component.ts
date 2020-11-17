@@ -129,6 +129,7 @@ export class UserPerfilComponent implements OnInit {
             console.log(url)
             this.imgSrc = url;
             datos.foto = url;
+            localStorage.setItem("img", url);
             this.auth.updateUserData(datos).subscribe(data => {
 
               if(data.message == "Datos de usuario Actualizados") alert("Datos actualizados satisfactoriamete");

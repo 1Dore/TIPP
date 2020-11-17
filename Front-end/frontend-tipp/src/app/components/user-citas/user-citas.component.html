@@ -21,10 +21,7 @@
                     <div class="d-flex justify-content-around">
                         <button mat-button class="center" (click) = "irA('/usermenu/citas')">Citas</button>
                     </div>
-    
-                    <div class="d-flex justify-content-around">
-                        <button mat-button class="center">About</button>
-                    </div>
+
                     
                     <div class="d-flex justify-content-around">
                         <button mat-button><mat-icon class="center" (click)="irA('/usermenu/perfil')">settings</mat-icon></button>
@@ -79,7 +76,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-4">
-                                            <div class="cuadrado" ></div>                            
+                                            <img [src]="infoCita.foto" class="cuadrado">                              
                                         </div>
                                         <div class="col-4">
                                             <p>Nombre del Colaborador: {{infoCita.nombre}}</p>
@@ -110,7 +107,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-4">
-                                            <div class="cuadrado" ></div>                            
+                                            <img [src]="infoCita.foto" class="cuadrado">                             
                                         </div>
                                         <div class="col-4">
                                             <p>Nombre del Colaborador: {{infoCita.nombre}}</p>
